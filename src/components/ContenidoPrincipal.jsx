@@ -17,7 +17,7 @@ const Contenido = () => {
         <Text style={style.text}>¡Echa un vistazo a tus futuras mascotas!</Text>
 
         {
-          ids.map((e)=><Mascota id={e}/>)
+          ids.map((e)=><Mascota key={e} id={e}/>)
         }
         
       </ScrollView>
