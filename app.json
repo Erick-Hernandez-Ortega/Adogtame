@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Adogtame",
+    "slug": "Adogtame",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/adogtame-icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/adogtame-logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f4a020"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        // "foregroundImage": "./assets/adogtame-logo.png",
+        "backgroundColor": "#f4a020"
+      }
+    },
+    "web": {
+      "favicon": "./assets/adogtame-icon.png"
+    }
+  }
+}
