@@ -18,7 +18,7 @@ const Navegador = () => {
     <Nav.Navigator
       initialRouteName="Principal"
       drawerContent={(props) => <MenuLateralContenido {...props} />}
-      screenOptions={{ title: <Logo />, drawerType:"front", overlayColor:"red"}}
+      screenOptions={{ title: <Logo />, drawerType:"back"}}
     >
       <Nav.Screen name="Principal" component={Principal} />
       <Nav.Screen name="Adopciones" component={MainAdopciones} />
