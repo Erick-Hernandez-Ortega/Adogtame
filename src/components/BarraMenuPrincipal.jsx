@@ -24,8 +24,7 @@ const BarraMenuIos = () => {
         centerTitle="true"
         color="#f4a020"
         tintColor="#000"
-        leading={BtnBuscar}
-        trailing={BtnMenu}
+        trailing={BtnBuscar}
       />
     </View>
   );
@@ -47,8 +46,7 @@ const BarraMenuAndroid = () => {
         placement="center"
         backgroundColor="#f4a020"
         centerComponent={<Logo />}
-        rightComponent={BtnMenu}
-        leftComponent={BtnBuscar}
+        rightComponent={BtnBuscar}
       />
     </View>
   );
@@ -63,7 +61,7 @@ const style = StyleSheet.create({
 
 const BtnBuscar = (
   <IconButton
-    icon={(props) => <Icon name="magnify" color="black" size={30} />}
+    icon={(props) => <Icon name="magnify" color="black" size={25} />}
   />
 );
 

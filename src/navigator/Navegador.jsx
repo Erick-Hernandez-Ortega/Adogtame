@@ -5,11 +5,13 @@ import {
 } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import { Text, StyleSheet, View, Image } from "react-native";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import logo from "./../../assets/adogtame-logo.png";
 import Principal from "../Principal";
 import CuentaMain from "../components/Cuenta/CuentaMain";
 import MainAdopciones from "../components/Adopciones/MainAdopcion";
 import MenuBtn from "./MenuBtn";
+import BarraMenuPrincipal from "../components/BarraMenuPrincipal";
 
 const Nav = createDrawerNavigator();
 
@@ -18,7 +20,7 @@ const Navegador = () => {
     <Nav.Navigator
       initialRouteName="Principal"
       drawerContent={(props) => <MenuLateralContenido {...props} />}
-      screenOptions={{ title: <Logo />, drawerType:"back"}}
+      screenOptions={{title:"", headerBackground:BarraCentral}}
     >
       <Nav.Screen name="Principal" component={Principal} />
       <Nav.Screen name="Adopciones" component={MainAdopciones} />
@@ -70,6 +72,12 @@ const LogoLateral = () => {
     </View>
   );
 };
+
+function BarraCentral () {
+  return (
+    <BarraMenuPrincipal />
+  );
+}
 
 const style = StyleSheet.create({
   container: {
