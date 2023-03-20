@@ -18,7 +18,7 @@ const Navegador = () => {
     <Nav.Navigator
       initialRouteName="Principal"
       drawerContent={(props) => <MenuLateralContenido {...props} />}
-      screenOptions={{title:<Logo />, drawerActiveBackgroundColor:"redred"}}
+      screenOptions={{ title: <Logo />, drawerType:"front", overlayColor:"red"}}
     >
       <Nav.Screen name="Principal" component={Principal} />
       <Nav.Screen name="Adopciones" component={MainAdopciones} />
@@ -31,25 +31,45 @@ const MenuLateralContenido = ({ navigator }) => {
   navigator = useNavigation();
   return (
     <DrawerContentScrollView style={style.container}>
-        <View>
-            <Logo />
-        </View>
+      <View>
+        <LogoLateral />
+      </View>
       <Text style={style.titulo}>Mi barra de navegacion</Text>
-      <MenuBtn icon="home" text="Inicio" onPress={() => navigator.navigate("Principal")} />
-      <MenuBtn icon="dog" text="Mis Adogciones" onPress={() => navigator.navigate("Adopciones")}/>
+      <MenuBtn
+        icon="home"
+        text="Inicio"
+        onPress={() => navigator.navigate("Principal")}
+      />
+      <MenuBtn
+        icon="dog"
+        text="Mis Adogciones"
+        onPress={() => navigator.navigate("Adopciones")}
+      />
       <Text style={style.txtConfig}>Configuracion</Text>
-      <MenuBtn icon="account-circle" text="Mi Cuenta" onPress={() => navigator.navigate("Cuenta")} />
+      <MenuBtn
+        icon="account-circle"
+        text="Mi Cuenta"
+        onPress={() => navigator.navigate("Cuenta")}
+      />
     </DrawerContentScrollView>
   );
 };
 
 const Logo = () => {
-    return (
-      <View>
-        <Image source={logo} style={{ width: 150, height: 50 }} />
-      </View>
-    );
-  };
+  return (
+    <View>
+      <Image source={logo} style={{ width: 200, height: 50 }} />
+    </View>
+  );
+};
+
+const LogoLateral = () => {
+  return (
+    <View>
+      <Image source={logo} style={{ width: 250, height: 50 }} />
+    </View>
+  );
+};
 
 const style = StyleSheet.create({
   container: {
@@ -62,12 +82,12 @@ const style = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
   },
-  txtConfig:{
+  txtConfig: {
     marginTop: 10,
     marginBottom: 10,
     fontSize: 15,
     fontWeight: "bold",
-  }
+  },
 });
 
 export default Navegador;
