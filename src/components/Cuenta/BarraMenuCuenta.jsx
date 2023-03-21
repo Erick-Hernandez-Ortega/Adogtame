@@ -15,21 +15,23 @@ const BarraMenuCuenta = () => {
 };
 
 const Titulo = () => {
-    const [fontsLoaded] = useFonts({
-        Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
-      });
-    
-      if (!fontsLoaded) return null;
+  const [fontsLoaded] = useFonts({
+    Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
+  });
 
-      return <Text style={{fontFamily: "Chewy", fontSize: 22}}>MI ADOGCUENTA</Text>
-}
+  if (!fontsLoaded) return null;
+
+  return (
+    <Text style={{ fontFamily: "Chewy", fontSize: 22 }}>MI ADOGCUENTA</Text>
+  );
+};
 
 const BarraMenuIos = () => {
   return (
     <View>
       <StatusBar barStyle={"dark-content"} />
       <AppBar
-        style={{ paddingTop: Constants.statusBarHeight + 10, paddingBottom: 5}}
+        style={{ paddingTop: Constants.statusBarHeight + 10, paddingBottom: 5 }}
         title={Titulo}
         centerTitle="true"
         color="#f4a020"
