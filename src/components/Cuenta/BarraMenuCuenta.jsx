@@ -4,7 +4,6 @@ import { AppBar, IconButton } from "@react-native-material/core";
 import Constants from "expo-constants";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { Header } from "react-native-elements";
-import { useFonts } from "expo-font";
 
 const BarraMenuCuenta = () => {
   return (
@@ -15,12 +14,7 @@ const BarraMenuCuenta = () => {
 };
 
 const Titulo = () => {
-  const [fontsLoaded] = useFonts({
-    Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
-  });
-
-  if (!fontsLoaded) return null;
-
+  
   return (
     <Text style={{ fontFamily: "Chewy", fontSize: 22 }}>MI ADOGCUENTA</Text>
   );
