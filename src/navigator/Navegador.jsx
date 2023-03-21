@@ -5,7 +5,6 @@ import {
 } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import { Text, StyleSheet, View, Image } from "react-native";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import logo from "./../../assets/adogtame-logo.png";
 import Principal from "../Principal";
 import CuentaMain from "../components/Cuenta/CuentaMain";
@@ -20,11 +19,11 @@ const Navegador = () => {
     <Nav.Navigator
       initialRouteName="Principal"
       drawerContent={(props) => <MenuLateralContenido {...props} />}
-      screenOptions={{title:"", headerBackground:BarraCentral}}
-    >
+      screenOptions={{title:"", headerBackground:BarraCentral, headerLeftContainerStyle: {marginTop: 20}, headerTintColor: "#000"}}
+>
       <Nav.Screen name="Principal" component={Principal} />
       <Nav.Screen name="Adopciones" component={MainAdopciones} />
-      <Nav.Screen name="Cuenta" component={CuentaMain} />
+      <Nav.Screen name="Cuenta" component={CuentaMain}/>
     </Nav.Navigator>
   );
 };
@@ -50,18 +49,10 @@ const MenuLateralContenido = ({ navigator }) => {
       <Text style={style.txtConfig}>Configuracion</Text>
       <MenuBtn
         icon="account-circle"
-        text="Mi Cuenta"
+        text="Mi Adogcuenta"
         onPress={() => navigator.navigate("Cuenta")}
       />
     </DrawerContentScrollView>
-  );
-};
-
-const Logo = () => {
-  return (
-    <View>
-      <Image source={logo} style={{ width: 200, height: 50 }} />
-    </View>
   );
 };
 
@@ -83,6 +74,7 @@ const style = StyleSheet.create({
   container: {
     paddingVertical: 20,
     paddingHorizontal: 20,
+    backgroundColor: "#f7f7f8"
   },
   titulo: {
     marginBottom: 10,

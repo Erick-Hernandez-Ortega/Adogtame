@@ -23,8 +23,8 @@ const BarraMenuIos = () => {
         title={<Logo />}
         centerTitle="true"
         color="#f4a020"
-        tintColor="#000"
         trailing={BtnBuscar}
+        contentContainerStyle={{justifyContent: "flex-end"}}
       />
     </View>
   );

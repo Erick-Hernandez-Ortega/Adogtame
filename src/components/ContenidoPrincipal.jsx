@@ -13,7 +13,7 @@ const Contenido = () => {
 
   return (
     <View style={style.container}>
-      <ScrollView contentContainerStyle={{width:"100%", paddingBottom: "85%"}}>
+      <ScrollView contentContainerStyle={{width:"100%", paddingBottom: "10%"}}>
         <Text style={style.text}>¡Echa un vistazo a tus futuras mascotas!</Text>
 
         {
