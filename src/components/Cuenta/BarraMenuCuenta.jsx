@@ -34,7 +34,6 @@ const BarraMenuIos = () => {
         centerTitle="true"
         color="#f4a020"
         tintColor="#000"
-        leading={BtnBuscar}
       />
     </View>
   );
@@ -47,7 +46,6 @@ const BarraMenuAndroid = () => {
         placement="center"
         backgroundColor="#f4a020"
         centerComponent={Titulo}
-        leftComponent={BtnBuscar}
       />
     </View>
   );

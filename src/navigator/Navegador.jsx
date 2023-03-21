@@ -11,6 +11,7 @@ import CuentaMain from "../components/Cuenta/CuentaMain";
 import MainAdopciones from "../components/Adopciones/MainAdopcion";
 import MenuBtn from "./MenuBtn";
 import BarraMenuPrincipal from "../components/BarraMenuPrincipal";
+import BarraMenuCuenta from "../components/Cuenta/BarraMenuCuenta";
 
 const Nav = createDrawerNavigator();
 
@@ -21,9 +22,9 @@ const Navegador = () => {
       drawerContent={(props) => <MenuLateralContenido {...props} />}
       screenOptions={{title:"", headerBackground:BarraCentral, headerLeftContainerStyle: {marginTop: 20}, headerTintColor: "#000"}}
 >
-      <Nav.Screen name="Principal" component={Principal} />
+      <Nav.Screen name="Principal" component={Principal}  />
       <Nav.Screen name="Adopciones" component={MainAdopciones} />
-      <Nav.Screen name="Cuenta" component={CuentaMain}/>
+      <Nav.Screen name="Cuenta" component={CuentaMain} options={{headerBackground: CuentaBarraMenu}} />
     </Nav.Navigator>
   );
 };
@@ -63,6 +64,10 @@ const LogoLateral = () => {
     </View>
   );
 };
+
+const CuentaBarraMenu = () => {
+  return <BarraMenuCuenta/>
+}
 
 function BarraCentral () {
   return (
