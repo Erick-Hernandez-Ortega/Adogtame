@@ -1,5 +1,6 @@
 import { Text, View, StyleSheet, Image } from "react-native";
 import Constants from "expo-constants";
+import MenuBtn from "../../navigator/MenuBtn";
 
 const CuentaMain = () => {
   // Falta estilos y un monton de cosas xd
@@ -13,9 +14,33 @@ const CuentaMain = () => {
           />
         </View>
         <View style={styles.textContainer}>
-        <Text style={styles.name}>Soy cuenta</Text>
-
+          <Text style={styles.subtitulo}>Username: </Text>
+          <Text style={styles.textPrincipal}>BolitaDeOdio</Text>
         </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.subtitulo}>Correo: </Text>
+          <Text style={styles.textPrincipal} numberOfLines={1} ellipsizeMode="tail">jose.castaneda@alumnos.udg.mx</Text>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.subtitulo}>Nombre: </Text>
+          <Text style={styles.textPrincipal}>Jóse Jaime Gpe.</Text>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.subtitulo}>Apellido: </Text>
+          <Text style={styles.textPrincipal}>Castañeda Ruiz</Text>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.subtitulo}>Celular: </Text>
+          <Text style={styles.textPrincipal}>3313197707</Text>
+        </View>
+
+        {/* <View style={{backgroundColor: "red", flex: 1, justifyContent: "flex-end"}}>
+        <MenuBtn
+        icon="account-circle"
+        text="Mi Adogcuenta"
+        onPress={() => navigator.navigate("Cuenta")}
+      />
+        </View> */}
       </View>
     </View>
   );
@@ -27,11 +52,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "100%",
-    backgroundColor: "#f2f2f2"
+    backgroundColor: "#f2f2f2",
   },
   container: {
-    backgroundColor: "red",
-    marginTop: Constants.statusBarHeight - 40,
     width: "90%",
     height: "90%",
     backgroundColor: "#fff",
@@ -45,15 +68,25 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 5,
     elevation: 5,
-    alignItems: "center"
+    alignItems: "center",
   },
-  name: {
+  subtitulo: {
     fontFamily: "Chewy",
+    fontSize: 24,
+    color: "#999999",
+  },
+  textPrincipal: {
+    fontFamily: "Chewy",
+    fontSize: 22,
+    letterSpacing: 0.3,
+    maxWidth: 200
   },
   textContainer: {
-    backgroundColor: "red",
     width: "100%",
-    marginTop: 20
+    marginTop: 20,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   imagen: {
     width: "100%",
