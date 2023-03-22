@@ -27,7 +27,7 @@ const Contenido = () => {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: "#f7f7f8",
+    backgroundColor: "#f2f2f2",
     alignItems: "center",
     height: "100%",
     width: "100%",

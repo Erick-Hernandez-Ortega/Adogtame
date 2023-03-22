@@ -25,16 +25,16 @@ const styles = StyleSheet.create({
   centrar: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
     width: "100%",
     height: "100%",
+    backgroundColor: "#f2f2f2"
   },
   container: {
     backgroundColor: "red",
     marginTop: Constants.statusBarHeight - 40,
     width: "90%",
     height: "90%",
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "#fff",
     borderRadius: 50,
     padding: 40,
     shadowColor: "#000000",
