@@ -1,9 +1,15 @@
 import { Text, View, StyleSheet, Image } from "react-native";
-import Constants from "expo-constants";
-import MenuBtn from "../../navigator/MenuBtn";
+import BtnCuenta from "./BtnCuenta";
+import TextoCuenta from "./TextoCuenta";
 
 const CuentaMain = () => {
-  // Falta estilos y un monton de cosas xd
+  const user = {
+    username: "Bolita",
+    correo: "jose.castaneda@alumnos.udg.mx",
+    nombre: "Jóse Jaime Gpe.",
+    apellidos: "Castañeda Ruiz",
+    celular: "3313197707",
+  };
   return (
     <View style={styles.centrar}>
       <View style={styles.container}>
@@ -13,34 +19,23 @@ const CuentaMain = () => {
             style={styles.imagen}
           />
         </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.subtitulo}>Username: </Text>
-          <Text style={styles.textPrincipal}>BolitaDeOdio</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.subtitulo}>Correo: </Text>
-          <Text style={styles.textPrincipal} numberOfLines={1} ellipsizeMode="tail">jose.castaneda@alumnos.udg.mx</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.subtitulo}>Nombre: </Text>
-          <Text style={styles.textPrincipal}>Jóse Jaime Gpe.</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.subtitulo}>Apellido: </Text>
-          <Text style={styles.textPrincipal}>Castañeda Ruiz</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.subtitulo}>Celular: </Text>
-          <Text style={styles.textPrincipal}>3313197707</Text>
-        </View>
 
-        {/* <View style={{backgroundColor: "red", flex: 1, justifyContent: "flex-end"}}>
-        <MenuBtn
-        icon="account-circle"
-        text="Mi Adogcuenta"
-        onPress={() => navigator.navigate("Cuenta")}
-      />
-        </View> */}
+        <TextoCuenta {...user} />
+
+        <View style={{ flex: 1, justifyContent: "flex-end", width: "90%" }}>
+          <BtnCuenta
+            name="Actualizar Cuenta"
+            icon="account-reactivate"
+            bgColor="#007f00"
+            color="#fff"
+          />
+          <BtnCuenta
+            name="Borrar Cuenta"
+            icon="account-remove"
+            bgColor="#8b0000"
+            color="#fff"
+          />
+        </View>
       </View>
     </View>
   );
@@ -79,7 +74,7 @@ const styles = StyleSheet.create({
     fontFamily: "Chewy",
     fontSize: 22,
     letterSpacing: 0.3,
-    maxWidth: 200
+    maxWidth: 200,
   },
   textContainer: {
     width: "100%",

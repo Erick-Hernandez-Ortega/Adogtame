@@ -37,7 +37,7 @@ const BarraMenuIos = () => {
 const BarraMenuAndroid = () => {
   return (
     <View style={style.BarraPrincipal}>
-      <StatusBar backgroundColor={"#f4a020"} barStyle={"dark-content"} />
+      <StatusBar backgroundColor={"#f4a020"} barStyle={"dark-content"}  />
       <Header
         placement="center"
         backgroundColor="#f4a020"
