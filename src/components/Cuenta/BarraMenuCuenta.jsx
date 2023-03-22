@@ -16,7 +16,7 @@ const BarraMenuCuenta = () => {
 const Titulo = () => {
   
   return (
-    <Text style={{ fontFamily: "Chewy", fontSize: 22 }}>MI ADOGCUENTA</Text>
+    <Text style={{ fontFamily: "Chewy", fontSize: 22,  }}>MI ADOGCUENTA</Text>
   );
 };
 
@@ -51,6 +51,7 @@ const style = StyleSheet.create({
   BarraPrincipal: {
     flexGrow: 1,
     backgroundColor: "#f4a020",
+    paddingTop: 13,
   },
 });
 

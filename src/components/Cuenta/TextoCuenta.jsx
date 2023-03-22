@@ -33,8 +33,6 @@ const TextoCuenta = (props) => {
   );
 };
 
-const TextoContenido = () => {};
-
 const styles = StyleSheet.create({
   subtitulo: {
     fontFamily: "Chewy",
