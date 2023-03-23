@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { useFonts } from "expo-font";
-import Mascota from "./Mascota";
+import Mascota from "./Mascotas";
 
 const Contenido = () => {
   const [fontsLoaded] = useFonts({
