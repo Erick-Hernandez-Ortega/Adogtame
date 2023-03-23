@@ -1,10 +1,10 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { useFonts } from "expo-font";
-import Mascota from "./Mascota";
+import Mascota from "../Mascota";
 
 const Contenido = () => {
   const [fontsLoaded] = useFonts({
-    Chewy: require("./../../assets/fonts/Chewy-Regular.ttf"),
+    Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
   });
 
   if (!fontsLoaded) return null;
