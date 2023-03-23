@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     fontFamily: "Chewy",
     fontSize: 22,
     letterSpacing: 0.3,
-    maxWidth: 200,
+    maxWidth: 220,
   },
   textContainer: {
     width: "100%",
