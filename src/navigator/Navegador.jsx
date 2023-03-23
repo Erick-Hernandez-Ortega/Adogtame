@@ -12,6 +12,7 @@ import MainAdopciones from "../components/Adopciones/MainAdopcion";
 import MenuBtn from "./MenuBtn";
 import BarraMenuPrincipal from "../components/BarraMenuPrincipal";
 import BarraMenuCuenta from "../components/Cuenta/BarraMenuCuenta";
+import Buscador from "../components/Buscador/Buscador";
 
 const Nav = createDrawerNavigator();
 
@@ -25,6 +26,7 @@ const Navegador = () => {
       <Nav.Screen name="Principal" component={Principal}  />
       <Nav.Screen name="Adopciones" component={MainAdopciones} />
       <Nav.Screen name="Cuenta" component={CuentaMain} options={{headerBackground: CuentaBarraMenu}} />
+      <Nav.Screen name="Buscar" component={Buscador} options={{headerShown:false}}/>
     </Nav.Navigator>
   );
 };
@@ -41,6 +43,11 @@ const MenuLateralContenido = ({ navigator }) => {
         icon="home"
         text="Inicio"
         onPress={() => navigator.navigate("Principal")}
+      />
+      <MenuBtn
+        icon="magnify"
+        text="Buscar"
+        onPress={() => navigator.navigate("Buscar")}
       />
       <MenuBtn
         icon="dog"
