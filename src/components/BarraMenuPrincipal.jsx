@@ -11,7 +11,7 @@ const BarraMenuPrincipal = (navigator) => {
   return (
     <View>
       {Platform.OS === "ios" ? (
-        <BarraMenuIos />
+        <BarraMenuIos {...navigator} />
       ) : (
         <BarraMenuAndroid {...navigator} />
       )}
@@ -19,7 +19,8 @@ const BarraMenuPrincipal = (navigator) => {
   );
 };
 
-const BarraMenuIos = () => {
+const BarraMenuIos = (navigator) => {
+  navigator = useNavigation();
   return (
     <View>
       <StatusBar barStyle={"dark-content"} />
@@ -28,7 +29,7 @@ const BarraMenuIos = () => {
         title={<Logo />}
         centerTitle="true"
         color="#f4a020"
-        trailing={BtnBuscar}
+        trailing={BtnBuscar(navigator)}
         contentContainerStyle={{ justifyContent: "flex-end" }}
       />
     </View>
@@ -81,9 +82,5 @@ const BtnBuscar = (navigator) => {
     />
   );
 };
-
-const BtnMenu = (
-  <IconButton icon={(props) => <Icon name="menu" color="black" size={30} />} />
-);
 
 export default BarraMenuPrincipal;
