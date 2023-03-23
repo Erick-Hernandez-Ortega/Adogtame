@@ -10,7 +10,7 @@ import Principal from "../Principal";
 import CuentaMain from "../components/Cuenta/CuentaMain";
 import MainAdopciones from "../components/Adopciones/MainAdopcion";
 import MenuBtn from "./MenuBtn";
-import BarraMenuPrincipal from "../components/BarraMenuPrincipal";
+import BarraMenuPrincipal from "../components/MenuPrincipal/BarraMenuPrincipal";
 import BarraMenuCuenta from "../components/Cuenta/BarraMenuCuenta";
 import Buscador from "../components/Buscador/Buscador";
 
