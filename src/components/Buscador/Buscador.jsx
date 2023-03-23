@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, StyleSheet, Keyboard } from "react-native";
+import { View, TextInput, StyleSheet, Keyboard, SafeAreaView, Platform } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
@@ -7,10 +7,12 @@ import Constants from "expo-constants";
 const Buscador = (navigator) => {
   const [busqueda, setBusqueda] = useState("");
   const [clic, setClic] = useState(false);
+  const [iphone] = useState(Platform.OS == "ios");
 
   navigator = useNavigation();
   return (
-    <View style={style.container}>
+    <SafeAreaView style={{backgroundColor: "#f4a020"}}>
+    <View style={iphone ? style.containerIOS : style.container}>
       <View style={style.containerInput}>
         <Icon
           name="arrow-left"
@@ -20,10 +22,10 @@ const Buscador = (navigator) => {
           }}
           style={{ marginStart: 10 }}
         />
-        <Icon name="magnify" size={25} style={{ marginStart: 15 }} />
+
         <TextInput
           style={style.input}
-          placeholder="Buscar chuchos"
+          placeholder="Buscar chuchos...🐶"
           onChangeText={setBusqueda}
           value={busqueda}
           onFocus={() => {
@@ -44,6 +46,7 @@ const Buscador = (navigator) => {
         )}
       </View>
     </View>
+    </SafeAreaView>
   );
 };
 
@@ -52,19 +55,30 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
     marginTop: Constants.statusBarHeight,
-    backgroundColor: "#b8b799",
+    backgroundColor: "#f4a020",
+  },
+  containerIOS: {
+    justifyContent: "center",
+    alignItems: "flex-start",
+    backgroundColor: "#f4a020",
   },
   containerInput: {
     flexDirection: "row",
     alignItems: "center",
+    height: 70
   },
   input: {
-    marginStart: 5,
+    marginStart: 8,
     fontSize: 20,
-    padding: 10,
+    padding: 8,
+    paddingLeft: 20,
+    width: "80%",
+    backgroundColor: "#fff",
+    borderRadius: 20,
   },
   cancelar: {
     alignItems: "flex-end",
+    marginLeft: 7
   },
 });
 

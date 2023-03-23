@@ -7,9 +7,7 @@ import CuentaMain from "./components/Cuenta/CuentaMain";
 const Principal = () => {
   return (
     <View>
-      {/* <BarraMenuPrincipal /> */}
       <Contenido />
-      {/* <CuentaMain/>*/}
     </View>
   );
 };
