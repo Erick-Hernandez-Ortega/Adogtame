@@ -4,8 +4,9 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useFonts } from "expo-font";
 
 const MenuBtn = ({ text, onPress, icon }) => {
+  
   const [fontsLoaded] = useFonts({
-    Chewy: require("./../../assets/fonts/Chewy-Regular.ttf"),
+    Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
   });
 
   if (!fontsLoaded) return null;

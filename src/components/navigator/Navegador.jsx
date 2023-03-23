@@ -5,14 +5,14 @@ import {
 } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import { Text, StyleSheet, View, Image } from "react-native";
-import logo from "./../../assets/adogtame-logo.png";
-import Principal from "../Principal";
-import CuentaMain from "../components/Cuenta/CuentaMain";
-import MainAdopciones from "../components/Adopciones/MainAdopcion";
+import logo from "./../../../assets/adogtame-logo.png";
+import Principal from "../../Principal";
+import CuentaMain from "../Cuenta/CuentaMain";
+import MainAdopciones from "../Adopciones/MainAdopcion";
 import MenuBtn from "./MenuBtn";
-import BarraMenuPrincipal from "../components/MenuPrincipal/BarraMenuPrincipal";
-import BarraMenuCuenta from "../components/Cuenta/BarraMenuCuenta";
-import Buscador from "../components/Buscador/Buscador";
+import BarraMenuPrincipal from "../MenuPrincipal/BarraMenuPrincipal";
+import BarraMenuCuenta from "../Cuenta/BarraMenuCuenta";
+import Buscador from "../Buscador/Buscador";
 
 const Nav = createDrawerNavigator();
 

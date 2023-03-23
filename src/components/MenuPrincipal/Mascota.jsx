@@ -6,7 +6,7 @@ const Mascota = (props) => {
   const [pokemonData, setPokemonData] = useState(null);
 
   const [fontsLoaded] = useFonts({
-    Chewy: require("./../../assets/fonts/Chewy-Regular.ttf"),
+    Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
   });
 
   useEffect(() => {
