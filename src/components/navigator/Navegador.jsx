@@ -14,13 +14,16 @@ import BarraMenuPrincipal from "../MenuPrincipal/BarraMenuPrincipal";
 import BarraMenuCuenta from "../Cuenta/BarraMenuCuenta";
 import Buscador from "../Buscador/Buscador";
 import MascotaMain from "../Mascota/MascotaMain";
+import MainLogin from "../Login/MainLogin";
+import Registro from "../Registro/Registro";
+import PreLogin from "../Login/PreLogin";
 
 const Nav = createDrawerNavigator();
 
 const Navegador = () => {
   return (
     <Nav.Navigator
-      initialRouteName="Principal"
+      initialRouteName="PreLogin"
       drawerContent={(props) => <MenuLateralContenido {...props} />}
       screenOptions={{
         title: "",
@@ -29,6 +32,17 @@ const Navegador = () => {
         headerTintColor: "#000",
       }}
     >
+      <Nav.Screen
+        name="PreLogin"
+        component={PreLogin}
+        options={{ headerShown: false }}
+      />
+      <Nav.Screen
+        name="Login"
+        component={MainLogin}
+        options={{ headerShown: false }}
+      />
+      <Nav.Screen name="Registro" component={Registro} />
       <Nav.Screen name="Principal" component={Principal} />
       <Nav.Screen name="Adopciones" component={MainAdopciones} />
       <Nav.Screen
@@ -41,7 +55,11 @@ const Navegador = () => {
         component={Buscador}
         options={{ headerShown: false }}
       />
-      <Nav.Screen name="Mascota" component={MascotaMain} options={{headerShown: false}} />
+      <Nav.Screen
+        name="Mascota"
+        component={MascotaMain}
+        options={{ headerShown: false }}
+      />
     </Nav.Navigator>
   );
 };
