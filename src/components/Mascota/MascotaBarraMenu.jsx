@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet, SafeAreaView, Platform, Text } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import BtnBuscar from "../MenuPrincipal/BtnBuscar";
 
@@ -19,7 +18,7 @@ const MascotaBarraMenu = () => {
           }}
           style={{ left: 10 }}
         />
-        <Text style={{ fontFamily: "Chewy", fontSize: 20 }}>Pepe</Text>
+        <Text style={{ fontFamily: "Chewy", fontSize: 22 }}>Pepe 🐱</Text>
         <BtnBuscar {...navigator} />
       </View>
     </SafeAreaView>
@@ -37,6 +36,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+    marginTop: Platform.OS === "android" ? 24 : 0
   },
   container: {
     paddingBottom: 10,

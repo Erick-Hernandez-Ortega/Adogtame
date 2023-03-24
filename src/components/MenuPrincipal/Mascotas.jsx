@@ -34,7 +34,7 @@ const Mascota = (props) => {
       />
       <View style={styles.cardContent}>
         <Text style={styles.title}>{pokemonData.name}</Text>
-        <Text style={styles.subtitle}>ID: {pokemonData.id}</Text>
+        <Text style={styles.subtitle}>Edad: {pokemonData.id}</Text>
         <Text style={styles.description}>
           Bulbasaur es un Pokémon de tipo planta/veneno. Es uno de los Pokémon
           iniciales en la región de Kanto y es muy popular entre los
