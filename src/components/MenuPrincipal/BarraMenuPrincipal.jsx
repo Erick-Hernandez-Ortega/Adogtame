@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet, StatusBar, Platform, Image } from "react-native";
-import { AppBar, IconButton } from "@react-native-material/core";
+import { AppBar } from "@react-native-material/core";
 import Constants from "expo-constants";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import BtnBuscar from "./BtnBuscar";
 import { useNavigation } from "@react-navigation/native";
 import logo from "./../../../assets/adogtame-logo.png";
 import { Header } from "react-native-elements";
@@ -65,22 +65,5 @@ const style = StyleSheet.create({
     backgroundColor: "#f4a020",
   },
 });
-
-const BtnBuscar = (navigator) => {
-  return (
-    <IconButton
-      icon={(props) => (
-        <Icon
-          name="magnify"
-          color="black"
-          size={25}
-          onPress={() => {
-            navigator.navigate("Buscar");
-          }}
-        />
-      )}
-    />
-  );
-};
 
 export default BarraMenuPrincipal;

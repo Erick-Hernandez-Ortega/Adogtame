@@ -1,14 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import MascotaBarraMenu from "./MascotaBarraMenu";
 
 const MascotaMain = () => {
   return (
-    <View>
-      <Text style={{marginTop: 433}}>MascotaMain</Text>
-    </View>
+      <View>
+      <MascotaBarraMenu/>
+
+      </View>
   );
 };
 
 export default MascotaMain;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+ 
+});

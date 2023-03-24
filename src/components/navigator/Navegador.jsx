@@ -41,7 +41,7 @@ const Navegador = () => {
         component={Buscador}
         options={{ headerShown: false }}
       />
-      <Nav.Screen name="Mascota" component={MascotaMain} />
+      <Nav.Screen name="Mascota" component={MascotaMain} options={{headerShown: false}} />
     </Nav.Navigator>
   );
 };
