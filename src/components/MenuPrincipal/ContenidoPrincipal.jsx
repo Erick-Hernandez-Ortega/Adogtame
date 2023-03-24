@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { useFonts } from "expo-font";
 import Mascota from "./Mascotas";
+import { useNavigation } from "@react-navigation/native";
 
 const Contenido = () => {
   const [fontsLoaded] = useFonts({
@@ -9,17 +10,27 @@ const Contenido = () => {
 
   if (!fontsLoaded) return null;
 
-  const ids = [1,2,4,5,6]
+  const ids = [1, 2, 4, 5, 6];
+  navigator = useNavigation();
 
   return (
     <View style={style.container}>
-      <ScrollView contentContainerStyle={{width:"100%", paddingBottom: "10%", paddingTop: "5%"}}>
+      <ScrollView
+        contentContainerStyle={{
+          width: "100%",
+          paddingBottom: "10%",
+          paddingTop: "5%",
+        }}
+      >
         <Text style={style.text}>¡Echa un vistazo a tus futuras mascotas!</Text>
 
-        {
-          ids.map((e)=><Mascota key={e} id={e}/>)
-        }
-        
+        {ids.map((e) => (
+          <Mascota
+            key={e}
+            id={e}
+            onPress={() => navigator.navigate("Mascota")}
+          />
+        ))}
       </ScrollView>
     </View>
   );

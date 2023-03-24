@@ -4,7 +4,7 @@ import React from "react";
 const MascotaMain = () => {
   return (
     <View>
-      <Text>MascotaMain</Text>
+      <Text style={{marginTop: 433}}>MascotaMain</Text>
     </View>
   );
 };

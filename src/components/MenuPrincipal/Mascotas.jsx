@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useFonts } from "expo-font";
 
 const Mascota = (props) => {
@@ -23,7 +23,11 @@ const Mascota = (props) => {
   const { name, height, weight, sprites } = pokemonData;
 
   return (
-    <View style={styles.card} key={props.id}>
+    <TouchableOpacity
+      style={styles.card}
+      key={props.id}
+      onPress={props.onPress}
+    >
       <Image
         source={{ uri: pokemonData.sprites.front_default }}
         style={styles.image}
@@ -34,10 +38,10 @@ const Mascota = (props) => {
         <Text style={styles.description}>
           Bulbasaur es un Pokémon de tipo planta/veneno. Es uno de los Pokémon
           iniciales en la región de Kanto y es muy popular entre los
-          entrenadores Pokémon. 
+          entrenadores Pokémon.
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -53,9 +57,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 4,
     elevation: 5,
-    width:"90%",
+    width: "90%",
     padding: 10,
-    alignItems: "center"
+    alignItems: "center",
   },
   image: {
     width: 100,

@@ -13,6 +13,7 @@ import MenuBtn from "./MenuBtn";
 import BarraMenuPrincipal from "../MenuPrincipal/BarraMenuPrincipal";
 import BarraMenuCuenta from "../Cuenta/BarraMenuCuenta";
 import Buscador from "../Buscador/Buscador";
+import MascotaMain from "../Mascota/MascotaMain";
 
 const Nav = createDrawerNavigator();
 
@@ -21,12 +22,26 @@ const Navegador = () => {
     <Nav.Navigator
       initialRouteName="Principal"
       drawerContent={(props) => <MenuLateralContenido {...props} />}
-      screenOptions={{title:"", headerBackground:BarraCentral, headerLeftContainerStyle: {marginTop: 20}, headerTintColor: "#000"}}
->
-      <Nav.Screen name="Principal" component={Principal}  />
+      screenOptions={{
+        title: "",
+        headerBackground: BarraCentral,
+        headerLeftContainerStyle: { marginTop: 20 },
+        headerTintColor: "#000",
+      }}
+    >
+      <Nav.Screen name="Principal" component={Principal} />
       <Nav.Screen name="Adopciones" component={MainAdopciones} />
-      <Nav.Screen name="Cuenta" component={CuentaMain} options={{headerBackground: CuentaBarraMenu}} />
-      <Nav.Screen name="Buscar" component={Buscador} options={{headerShown:false}}/>
+      <Nav.Screen
+        name="Cuenta"
+        component={CuentaMain}
+        options={{ headerBackground: CuentaBarraMenu }}
+      />
+      <Nav.Screen
+        name="Buscar"
+        component={Buscador}
+        options={{ headerShown: false }}
+      />
+      <Nav.Screen name="Mascota" component={MascotaMain} />
     </Nav.Navigator>
   );
 };
@@ -73,20 +88,18 @@ const LogoLateral = () => {
 };
 
 const CuentaBarraMenu = () => {
-  return <BarraMenuCuenta/>
-}
+  return <BarraMenuCuenta />;
+};
 
-function BarraCentral () {
-  return (
-    <BarraMenuPrincipal />
-  );
+function BarraCentral() {
+  return <BarraMenuPrincipal />;
 }
 
 const style = StyleSheet.create({
   container: {
     paddingVertical: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#f7f7f8"
+    backgroundColor: "#f7f7f8",
   },
   titulo: {
     marginBottom: 10,
