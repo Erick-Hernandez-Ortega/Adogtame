@@ -49,6 +49,7 @@ const ActualizarCuenta = () => {
             icon="delete-empty"
             bgColor="#8b0000"
             color="#fff"
+            onPress={() => navigator.navigate("Cuenta")}
           />
         </View>
       </View>
