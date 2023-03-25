@@ -1,14 +1,8 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
-import { useFonts } from "expo-font";
 import Mascota from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
 
 const Contenido = () => {
-  const [fontsLoaded] = useFonts({
-    Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
-  });
-
-  if (!fontsLoaded) return null;
 
   const ids = [1, 2, 4, 5, 6];
   navigator = useNavigation();
