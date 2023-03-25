@@ -4,7 +4,8 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const MascotaContenido = ({name, url, id}) => {
   return (
-    <ScrollView contentContainerStyle={{paddingBottom: "30%", paddingTop: "5%"}}>
+
+    <ScrollView contentContainerStyle={{paddingBottom: "30%", paddingTop: "5%", backgroundColor: "#f7f7f8",}}>
     <View style={styles.container}>
       <View style={styles.card}>
         <View style={styles.petImageContainer}>
@@ -62,7 +63,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#f7f7f8",
   },
   card: {
     backgroundColor: "#fff",
