@@ -4,7 +4,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import BtnBuscar from "../MenuPrincipal/BtnBuscar";
 
-const MascotaBarraMenu = () => {
+const MascotaBarraMenu = ({name}) => {
   navigator = useNavigation();
 
   return (
@@ -18,7 +18,7 @@ const MascotaBarraMenu = () => {
           }}
           style={{ left: 10 }}
         />
-        <Text style={{ fontFamily: "Chewy", fontSize: 22 }}>Pepe 🐱</Text>
+        <Text style={{ fontFamily: "Chewy", fontSize: 22 }}>{name} 🐱</Text>
         <BtnBuscar {...navigator} />
       </View>
     </SafeAreaView>

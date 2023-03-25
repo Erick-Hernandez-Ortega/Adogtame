@@ -2,14 +2,14 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 
-const MascotaContenido = () => {
+const MascotaContenido = ({name, url, id}) => {
   return (
     <ScrollView contentContainerStyle={{paddingBottom: "30%", paddingTop: "5%"}}>
     <View style={styles.container}>
       <View style={styles.card}>
         <View style={styles.petImageContainer}>
           <Image
-            source={{ uri: "http://placekitten.com/300/300" }}
+            source={{ uri: url }}
             style={styles.petImage}
           />
         </View>
@@ -17,11 +17,11 @@ const MascotaContenido = () => {
           <Text style={styles.petDate}>Fecha de registro: 22-12-2012</Text>
           <View style={styles.textContainer}>
             <Text style={styles.petName}>Nombre</Text>
-            <Text style={styles.petNameValue}>Pepe</Text>
+            <Text style={styles.petNameValue}>{name}</Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.petAge}>Edad</Text>
-            <Text style={styles.petAgeValue}>5 años</Text>
+            <Text style={styles.petAgeValue}>{id} años</Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.petBreed}>Raza</Text>

@@ -22,7 +22,7 @@ const Contenido = () => {
           <Mascota
             key={e}
             id={e}
-            onPress={() => navigator.navigate("Mascota")}
+            onPress={() => navigator.navigate("Mascota", {id: e})}
           />
         ))}
       </ScrollView>
