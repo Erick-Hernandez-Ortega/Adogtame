@@ -1,8 +1,12 @@
 import { View, StyleSheet, Image } from "react-native";
 import BtnCuenta from "./BtnCuenta";
 import TextoCuenta from "./TextoCuenta";
+import { useNavigation } from "@react-navigation/native";
 
 const CuentaMain = () => {
+
+  navigator = useNavigation();
+
   const user = {
     username: "Bolita",
     correo: "jose.castaneda@alumnos.udg.mx",
@@ -10,6 +14,7 @@ const CuentaMain = () => {
     apellidos: "Castañeda Ruiz",
     celular: "3313197707",
   };
+
   return (
     <View style={styles.centrar}>
       <View style={styles.container}>
@@ -28,6 +33,7 @@ const CuentaMain = () => {
             icon="account-reactivate"
             bgColor="#007f00"
             color="#fff"
+            onPress={() => navigator.navigate("ActualizarCuenta")}
           />
           <BtnCuenta
             name="Borrar Cuenta"

@@ -17,6 +17,7 @@ import MascotaMain from "../Mascota/MascotaMain";
 import MainLogin from "../Login/MainLogin";
 import Registro from "../Registro/Registro";
 import PreLogin from "../Login/PreLogin";
+import ActualizarCuenta from "../ActualizarCuenta/ActualizarCuenta";
 
 const Nav = createDrawerNavigator();
 
@@ -44,6 +45,7 @@ const Navegador = () => {
       />
       <Nav.Screen name="Registro" component={Registro} />
       <Nav.Screen name="Principal" component={Principal} />
+      <Nav.Screen name="ActualizarCuenta" component={ActualizarCuenta} options={{ headerBackground: CuentaBarraMenu }} />
       <Nav.Screen name="Adopciones" component={MainAdopciones} />
       <Nav.Screen
         name="Cuenta"

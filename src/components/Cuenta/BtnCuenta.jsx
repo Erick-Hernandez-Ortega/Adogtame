@@ -1,10 +1,11 @@
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
-const BtnCuenta = ({ name, icon, bgColor, color }) => {
+const BtnCuenta = ({ name, icon, bgColor, color, onPress }) => {
   return (
     <TouchableOpacity
       style={[style.btnContainer, { backgroundColor: bgColor }]}
+      onPress={onPress}
     >
       <Icon name={icon} size={28} style={{ color: color }} />
       <Text style={[style.labelBtn, { color: color }]}>{name}</Text>
