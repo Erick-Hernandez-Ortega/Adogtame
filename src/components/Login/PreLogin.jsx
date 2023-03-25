@@ -16,7 +16,7 @@ const PreLogin = (navigator) => {
 
   return (
     <View style={style.container}>
-    <StatusBar barStyle={"dark-content"}/>
+    <StatusBar barStyle={"dark-content"} backgroundColor={"#f4a020"}/>
       <View style={style.containerTitulo}>
         <Text style={style.titulo}>
           Inicia sesion con tu cuenta o crea una para conseguir tu futura
