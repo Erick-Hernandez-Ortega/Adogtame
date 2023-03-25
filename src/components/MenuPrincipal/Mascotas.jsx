@@ -15,9 +15,8 @@ const Mascota = (props) => {
       .then((data) => setPokemonData(data));
   }, []);
 
-  if (!pokemonData) {
-    return <Text>Loading...</Text>;
-  }
+  if (!pokemonData) return <Text>Loading...</Text>;
+  
   if (!fontsLoaded) return null;
 
   const { name, height, weight, sprites } = pokemonData;

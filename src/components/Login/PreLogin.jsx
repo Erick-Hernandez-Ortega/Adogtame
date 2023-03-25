@@ -1,13 +1,22 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from "react-native";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { useFonts } from "expo-font";
 
 const PreLogin = (navigator) => {
   navigator = useNavigation();
+
+  const [fontsLoaded] = useFonts({
+    Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
+  });
+
+  if (!fontsLoaded) return null;
+
   return (
     <View style={style.container}>
+    <StatusBar barStyle={"dark-content"}/>
       <View style={style.containerTitulo}>
         <Text style={style.titulo}>
           Inicia sesion con tu cuenta o crea una para conseguir tu futura
@@ -20,7 +29,7 @@ const PreLogin = (navigator) => {
             navigator.navigate("Login");
           }}
         >
-          <Text style={style.login}>Iniciar sesion</Text>
+          <Text style={style.login}>Iniciar sesión</Text>
         </TouchableOpacity>
       </View>
       <View style={style.irRegistro}>
@@ -50,11 +59,12 @@ const style = StyleSheet.create({
   titulo: {
     fontSize: 20,
     textAlign: "center",
+    fontFamily: "Chewy"
   },
   irLogin: {
     position: "absolute",
     bottom: 170,
-    backgroundColor: "#FFBB77",
+    backgroundColor: "#FF8C00",
     borderRadius: 15,
     width: "65%",
   },
@@ -62,6 +72,8 @@ const style = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     textAlign: "center",
+    fontFamily: "Chewy",
+    letterSpacing: 0.5,
   },
   irRegistro: {
     position: "absolute",
@@ -74,6 +86,8 @@ const style = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     textAlign: "center",
+    fontFamily: "Chewy",
+    letterSpacing: 0.5
   },
   divider: {
     position: "absolute",
