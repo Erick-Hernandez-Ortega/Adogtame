@@ -92,7 +92,7 @@ const MainLogin = (navigator) => {
             navigator.navigate("Principal");
           }}
         >
-          <Text style={style.btn}>Iniciar Sesion</Text>
+          <Text style={style.btn}>Iniciar Sesión 🐈</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -147,17 +147,30 @@ const style = StyleSheet.create({
   pregunta: {
     fontSize: 16,
     marginEnd: 10,
+    fontFamily: "Chewy",
+    letterSpacing: 0.4,
   },
   containerBtn: {
     marginTop: 80,
     backgroundColor: "#f4a020",
     borderRadius: 25,
     width: "70%",
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 3.65,
+    elevation: 6,
   },
   btn: {
     fontSize: 23,
     padding: 10,
     textAlign: "center",
+    fontFamily: "Chewy",
+    letterSpacing: 0.7,
+
   },
 });
 
