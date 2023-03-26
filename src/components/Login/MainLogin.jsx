@@ -28,8 +28,6 @@ const MainLogin = (navigator) => {
         <TextInput
           placeholder="Nombre de usuario"
           style={style.input}
-          placeholderTextColor="#654321"
-          textAlign="center"
           onChangeText={setUsuario}
           value={usuario}
           onFocus={() => {
@@ -53,8 +51,6 @@ const MainLogin = (navigator) => {
         <TextInput
           placeholder="Contraseña"
           style={style.inputC}
-          placeholderTextColor="#654321"
-          textAlign="center"
           onChangeText={setContra}
           value={contra}
           onFocus={() => {
@@ -117,28 +113,28 @@ const style = StyleSheet.create({
   containerInput: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#FFBB77",
-    borderRadius: 25,
+    borderBottomColor: "black",
+    borderBottomWidth : 1,
     marginTop: 80,
+    width: "65%",
   },
   input: {
     fontSize: 20,
     padding: 10,
-    width: "65%",
+    width: "90%",
   },
   containerInputC: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#FFBB77",
-    borderRadius: 25,
+    borderBottomColor: "black",
+    borderBottomWidth : 1,
     marginTop: 20,
+    width: "65%",
   },
   inputC: {
     fontSize: 20,
-    backgroundColor: "#FFBB77",
     padding: 10,
-    borderRadius: 25,
-    width: "65%",
+    width: "90%",
   },
   cancelar: {
     marginEnd: 10,
