@@ -14,9 +14,8 @@ const BarraMenuCuenta = () => {
 };
 
 const Titulo = () => {
-  
   return (
-    <Text style={{ fontFamily: "Chewy", fontSize: 22,  }}>MI ADOGCUENTA</Text>
+    <Text style={{ fontFamily: "Chewy", fontSize: 22, height: 30 }}>MI ADOGCUENTA</Text>
   );
 };
 
