@@ -51,25 +51,14 @@ const styles = StyleSheet.create({
   centrar: {
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
-    height: "100%",
-    backgroundColor: "#f2f2f2",
   },
   container: {
-    width: "90%",
-    height: "90%",
-    minHeight: 610,
-    backgroundColor: "#fff",
-    borderRadius: 50,
+    width: "100%",
+    height: "100%",
     padding: 25,
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 5,
-    elevation: 5,
+    paddingTop: "10%",
+    backgroundColor: "#f7f7f8",
+    
     alignItems: "center",
   },
   subtitulo: {
