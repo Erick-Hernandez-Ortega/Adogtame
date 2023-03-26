@@ -2,7 +2,6 @@ import React from "react";
 import { View, StyleSheet, StatusBar, Platform, Text } from "react-native";
 import { AppBar, IconButton } from "@react-native-material/core";
 import Constants from "expo-constants";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { Header } from "react-native-elements";
 
 const BarraMenuCuenta = () => {
@@ -51,13 +50,15 @@ const style = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: "#f4a020",
     paddingTop: 13,
+    shadowColor: "#000000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 5,
+        elevation: 5,
   },
 });
-
-const BtnBuscar = (
-  <IconButton
-    icon={(props) => <Icon name="magnify" color="black" size={30} />}
-  />
-);
 
 export default BarraMenuCuenta;
