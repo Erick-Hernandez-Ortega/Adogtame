@@ -1,12 +1,16 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import Adoptados from "./Adoptados";
 
 const ContenidoAdopciones = () => {
+  
   return (
-    <View>
-      <Text>Aquí se mostrarán los animales adoptados</Text>
-    </View>
+    <Adoptados/>
   );
 };
+
+const styles = StyleSheet.create({
+  
+});
 
 export default ContenidoAdopciones;

@@ -1,13 +1,23 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import ContenidoAdopciones from "./ContenidoAdopciones";
 
 const MainAdopciones = () => {
   return (
-    <View>
+    <ScrollView contentContainerStyle={styles.container} style={{backgroundColor: "#f7f7f8"}}>
       <ContenidoAdopciones />
-    </View>
+    </ScrollView>
   );
 };
 
 export default MainAdopciones;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#f7f7f8",
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+  },
+});
