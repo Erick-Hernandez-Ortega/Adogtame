@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
-import Mascota from "./Mascotas";
+import Mascotas from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
 
 const Contenido = () => {
@@ -19,7 +19,7 @@ const Contenido = () => {
         <Text style={style.text}>¡Echa un vistazo a tus futuras mascotas!</Text>
 
         {ids.map((e) => (
-          <Mascota
+          <Mascotas
             key={e}
             id={e}
             onPress={() => navigator.navigate("Mascota", {id: e})}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useFonts } from "expo-font";
 
-const Mascota = (props) => {
+const Mascotas = (props) => {
   const [pokemonData, setPokemonData] = useState(null);
 
   const [fontsLoaded] = useFonts({
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Mascota;
+export default Mascotas;
