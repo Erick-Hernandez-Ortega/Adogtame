@@ -12,6 +12,7 @@ import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import AnimatedLottieView from "lottie-react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 const MainLogin = (navigator) => {
   navigator = useNavigation();
@@ -20,6 +21,7 @@ const MainLogin = (navigator) => {
   const [contra, setContra] = useState("");
   const [clic2, setClic2] = useState(false);
   return (
+    <ScrollView contentContainerStyle={{paddingBottom: "40%", paddingTop: "15%"}}>
     <View style={style.container}>
       <View style={style.animacion}>
         <AnimatedLottieView
@@ -104,6 +106,7 @@ const MainLogin = (navigator) => {
         </TouchableOpacity>
       </View>
     </View>
+    </ScrollView>
   );
 };
 
