@@ -18,6 +18,7 @@ import MainLogin from "../Login/MainLogin";
 import Registro from "../Registro/Registro";
 import PreLogin from "../Login/PreLogin";
 import ActualizarCuenta from "../ActualizarCuenta/ActualizarCuenta";
+import BarraMenuAdopciones from "../Adopciones/BarraMenuAdopciones";
 
 const Nav = createDrawerNavigator();
 
@@ -46,7 +47,7 @@ const Navegador = () => {
       <Nav.Screen name="Registro" component={Registro} />
       <Nav.Screen name="Principal" component={Principal} />
       <Nav.Screen name="ActualizarCuenta" component={ActualizarCuenta} options={{ headerBackground: CuentaBarraMenu }} />
-      <Nav.Screen name="Adopciones" component={MainAdopciones} />
+      <Nav.Screen name="Adopciones" component={MainAdopciones} options={{headerBackground: BarraMenuAdopciones}} />
       <Nav.Screen
         name="Cuenta"
         component={CuentaMain}

@@ -4,7 +4,7 @@ import { AppBar } from "@react-native-material/core";
 import Constants from "expo-constants";
 import { Header } from "react-native-elements";
 
-const BarraMenuCuenta = () => {
+const BarraMenuAdopciones = () => {
   return (
     <View>
       {Platform.OS === "ios" ? <BarraMenuIos /> : <BarraMenuAndroid />}
@@ -14,7 +14,7 @@ const BarraMenuCuenta = () => {
 
 const Titulo = () => {
   return (
-    <Text style={{ fontFamily: "Chewy", fontSize: 22, height: 30 }}>MI ADOGCUENTA</Text>
+    <Text style={{ fontFamily: "Chewy", fontSize: 22, height: 30 }}>🐱 MIS ADOGCIONES 🐶</Text>
   );
 };
 
@@ -61,4 +61,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default BarraMenuCuenta;
+export default BarraMenuAdopciones;
