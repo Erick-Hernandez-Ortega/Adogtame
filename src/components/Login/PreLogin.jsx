@@ -1,8 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  StatusBar,
+} from "react-native";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import AnimatedLottieView from "lottie-react-native";
 import { useFonts } from "expo-font";
 
 const PreLogin = (navigator) => {
@@ -16,12 +22,19 @@ const PreLogin = (navigator) => {
 
   return (
     <View style={style.container}>
-    <StatusBar barStyle={"dark-content"} backgroundColor={"#f4a020"}/>
+      <StatusBar barStyle={"dark-content"} backgroundColor={"#f4a020"} />
       <View style={style.containerTitulo}>
         <Text style={style.titulo}>
           Inicia sesion con tu cuenta o crea una para conseguir tu futura
           mascota
         </Text>
+      </View>
+      <View style={style.animacion}>
+        <AnimatedLottieView
+          source={require("../../../assets/fonts/AnimacionPreLogin.json")}
+          autoPlay
+          loop
+        />
       </View>
       <View style={style.irLogin}>
         <TouchableOpacity
@@ -59,7 +72,7 @@ const style = StyleSheet.create({
   titulo: {
     fontSize: 20,
     textAlign: "center",
-    fontFamily: "Chewy"
+    fontFamily: "Chewy",
   },
   irLogin: {
     position: "absolute",
@@ -87,7 +100,7 @@ const style = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     fontFamily: "Chewy",
-    letterSpacing: 0.5
+    letterSpacing: 0.5,
   },
   divider: {
     position: "absolute",
@@ -95,6 +108,10 @@ const style = StyleSheet.create({
     borderBottomColor: "black",
     borderBottomWidth: 1,
     width: "80%",
+  },
+  animacion: {
+    width: "80%",
+    height: "45%",
   },
 });
 

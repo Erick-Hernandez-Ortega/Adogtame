@@ -11,6 +11,7 @@ import {
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import AnimatedLottieView from "lottie-react-native";
 
 const MainLogin = (navigator) => {
   navigator = useNavigation();
@@ -20,6 +21,13 @@ const MainLogin = (navigator) => {
   const [clic2, setClic2] = useState(false);
   return (
     <View style={style.container}>
+      <View style={style.animacion}>
+        <AnimatedLottieView
+          source={require("../../../assets/fonts/AnimacionLogin.json")}
+          autoPlay
+          loop
+        />
+      </View>
       <Image
         source={require("../../../assets/adogtame-logo.png")}
         style={style.image}
@@ -108,14 +116,13 @@ const style = StyleSheet.create({
   image: {
     width: 350,
     height: 100,
-    marginTop: 130,
   },
   containerInput: {
     flexDirection: "row",
     alignItems: "center",
     borderBottomColor: "black",
-    borderBottomWidth : 1,
-    marginTop: 80,
+    borderBottomWidth: 1,
+    marginTop: 70,
     width: "65%",
   },
   input: {
@@ -127,7 +134,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderBottomColor: "black",
-    borderBottomWidth : 1,
+    borderBottomWidth: 1,
     marginTop: 20,
     width: "65%",
   },
@@ -155,7 +162,7 @@ const style = StyleSheet.create({
     backgroundColor: "#f4a020",
     borderRadius: 25,
     width: "70%",
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 3,
@@ -170,7 +177,10 @@ const style = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Chewy",
     letterSpacing: 0.7,
-
+  },
+  animacion: {
+    width: "80%",
+    height: "30%",
   },
 });
 
