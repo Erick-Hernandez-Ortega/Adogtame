@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useFonts } from "expo-font";
-import AnimatedLottieView from "lottie-react-native";
+import DogLoading from "../DogLoading/DogLoading";
 
 const Mascotas = (props) => {
   const [pokemonData, setPokemonData] = useState(null);
@@ -17,16 +17,7 @@ const Mascotas = (props) => {
   }, []);
 
   if (!pokemonData)
-    return (
-      <View style={{justifyContent: "center", alignItems: "center", }}>
-      <AnimatedLottieView
-        source={require("../../../assets/fonts/DogLoading.json")}
-        autoPlay
-        style={{width: "40%", marginBottom: 5}}
-        loop
-      />
-      </View>
-    );
+    return <DogLoading/>;
 
   if (!fontsLoaded) return null;
 
