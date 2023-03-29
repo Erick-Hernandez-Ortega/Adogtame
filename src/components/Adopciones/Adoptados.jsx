@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import DogLoading from "../DogLoading/DogLoading";
 import { useEffect, useState } from "react";
 
-const Adoptados = ({ id }) => {
+const Adoptados = ({ id , onPress}) => {
   const [pokemonData, setPokemonData] = useState(null);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Adoptados = ({ id }) => {
   if (!pokemonData) return <DogLoading />;
 
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       <Image
         source={{ uri: pokemonData.sprites.front_default }}
         style={styles.image}
