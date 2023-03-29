@@ -5,7 +5,10 @@ import ContenidoAdopciones from "./ContenidoAdopciones";
 
 const MainAdopciones = () => {
   return (
-    <ScrollView contentContainerStyle={styles.container} style={{backgroundColor: "#f7f7f8"}}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      style={{ backgroundColor: "#f7f7f8" }}
+    >
       <ContenidoAdopciones />
     </ScrollView>
   );
@@ -17,7 +20,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#f7f7f8",
     width: "100%",
-    height: "100%",
     alignItems: "center",
+    paddingTop: "5%",
   },
 });

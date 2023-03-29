@@ -1,24 +1,22 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import DogLoading from "../DogLoading/DogLoading";
+import { useEffect, useState } from "react";
 
-const Adoptados = () => {
+const Adoptados = ({ id }) => {
   const [pokemonData, setPokemonData] = useState(null);
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${2}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
       .then((response) => response.json())
       .then((data) => setPokemonData(data));
   }, []);
 
-  if (!pokemonData)
-    return (
-      <DogLoading/>
-    );
+  if (!pokemonData) return <DogLoading />;
 
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.card} key={id}>
       <Image
         source={{ uri: pokemonData.sprites.front_default }}
         style={styles.image}
