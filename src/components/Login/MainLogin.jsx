@@ -113,7 +113,7 @@ const MainLogin = (navigator) => {
               navigator.navigate("PreLogin");
             }}
           >
-            <Text style={style.btn}>Volver</Text>
+            <Text style={style.btn}>Volver 🔙</Text>
           </TouchableOpacity>
         </View>
       </View>
