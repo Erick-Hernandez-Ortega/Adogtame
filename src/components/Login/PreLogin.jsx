@@ -80,6 +80,14 @@ const style = StyleSheet.create({
     backgroundColor: "#f4c272",
     borderRadius: 10,
     width: "65%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 3.65,
+    elevation: 6,
   },
   login: {
     padding: 10,
@@ -94,6 +102,14 @@ const style = StyleSheet.create({
     backgroundColor: "#f4c272",
     borderRadius: 10,
     width: "65%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 3.65,
+    elevation: 6,
   },
   registro: {
     padding: 10,
