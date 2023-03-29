@@ -7,9 +7,9 @@ import {
   Keyboard,
   Text,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 
 const Registro = (navigator) => {
@@ -31,185 +31,190 @@ const Registro = (navigator) => {
   navigator = useNavigation();
   return (
     <ScrollView style={style.container}>
-      <View style={style.containerChido}>
-        <Text style={style.label}>Informacion peronal</Text>
-        <View style={style.containerInput}>
-          <TextInput
-            placeholder="Nombre"
-            style={style.input}
-            onChangeText={setNombre}
-            value={nombre}
-            onFocus={() => {
-              setClicN(true);
-            }}
-          />
-          {clicN && (
-            <Icon
-              name="close"
-              size={25}
-              onPress={() => {
-                setNombre("");
-                setClicN(false);
-                Keyboard.dismiss();
+      <SafeAreaView>
+        <View style={style.containerChido}>
+          <Text style={style.label}>Información personal</Text>
+          <View style={style.containerInput}>
+            <TextInput
+              placeholder="Nombre"
+              style={style.input}
+              onChangeText={setNombre}
+              value={nombre}
+              onFocus={() => {
+                setClicN(true);
               }}
             />
-          )}
-        </View>
-        <View style={style.containerInput}>
-          <TextInput
-            placeholder="Edad"
-            style={style.input}
-            onChangeText={setEdad}
-            value={edad}
-            onFocus={() => {
-              setClicE(true);
-            }}
-            keyboardType="number-pad"
-          />
-          {clicE && (
-            <Icon
-              name="close"
-              size={25}
-              onPress={() => {
-                setEdad("");
-                setClicE(false);
-                Keyboard.dismiss();
+            {clicN && (
+              <Icon
+                name="close"
+                size={25}
+                onPress={() => {
+                  setNombre("");
+                  setClicN(false);
+                  Keyboard.dismiss();
+                }}
+              />
+            )}
+          </View>
+          <View style={style.containerInput}>
+            <TextInput
+              placeholder="Edad"
+              style={style.input}
+              onChangeText={setEdad}
+              value={edad}
+              onFocus={() => {
+                setClicE(true);
+              }}
+              keyboardType="number-pad"
+            />
+            {clicE && (
+              <Icon
+                name="close"
+                size={25}
+                onPress={() => {
+                  setEdad("");
+                  setClicE(false);
+                  Keyboard.dismiss();
+                }}
+              />
+            )}
+          </View>
+          <View style={style.containerInput}>
+            <TextInput
+              placeholder="Nombre de usuario"
+              style={style.input}
+              onChangeText={setUserN}
+              value={userN}
+              onFocus={() => {
+                setClicUN(true);
               }}
             />
-          )}
-        </View>
-        <View style={style.containerInput}>
-          <TextInput
-            placeholder="Nombre de usuario"
-            style={style.input}
-            onChangeText={setUserN}
-            value={userN}
-            onFocus={() => {
-              setClicUN(true);
-            }}
-          />
-          {clicUN && (
-            <Icon
-              name="close"
-              size={25}
-              onPress={() => {
-                setUserN("");
-                setClicUN(false);
-                Keyboard.dismiss();
+            {clicUN && (
+              <Icon
+                name="close"
+                size={25}
+                onPress={() => {
+                  setUserN("");
+                  setClicUN(false);
+                  Keyboard.dismiss();
+                }}
+              />
+            )}
+          </View>
+          <Text style={style.label}>Información de contacto</Text>
+          <View style={style.containerInput}>
+            <TextInput
+              placeholder="Correo"
+              style={style.input}
+              onChangeText={setCorreo}
+              keyboardType={"email-address"}
+              value={correo}
+              onFocus={() => {
+                setClicC(true);
               }}
             />
-          )}
-        </View>
-        <Text style={style.label}>Informacion de contacto</Text>
-        <View style={style.containerInput}>
-          <TextInput
-            placeholder="Correo"
-            style={style.input}
-            onChangeText={setCorreo}
-            value={correo}
-            onFocus={() => {
-              setClicC(true);
-            }}
-          />
-          {clicC && (
-            <Icon
-              name="close"
-              size={25}
-              onPress={() => {
-                setCorreo("");
-                setClicC(false);
-                Keyboard.dismiss();
+            {clicC && (
+              <Icon
+                name="close"
+                size={25}
+                onPress={() => {
+                  setCorreo("");
+                  setClicC(false);
+                  Keyboard.dismiss();
+                }}
+              />
+            )}
+          </View>
+          <View style={style.containerInput}>
+            <TextInput
+              placeholder="Numero de celular"
+              style={style.input}
+              onChangeText={setCelular}
+              value={celular}
+              onFocus={() => {
+                setClicT(true);
+              }}
+              keyboardType="numeric"
+            />
+            {clicT && (
+              <Icon
+                name="close"
+                size={25}
+                onPress={() => {
+                  setCelular("");
+                  setClicT(false);
+                  Keyboard.dismiss();
+                }}
+              />
+            )}
+          </View>
+          <Text style={style.label}>Seguridad</Text>
+          <View style={style.containerInput}>
+            <TextInput
+              placeholder="Contraseña"
+              style={style.input}
+              onChangeText={setContrasena}
+              value={contrasena}
+              secureTextEntry={true}
+              onFocus={() => {
+                setClicCon(true);
               }}
             />
-          )}
-        </View>
-        <View style={style.containerInput}>
-          <TextInput
-            placeholder="Numero de celular"
-            style={style.input}
-            onChangeText={setCelular}
-            value={celular}
-            onFocus={() => {
-              setClicT(true);
-            }}
-            keyboardType="numeric"
-          />
-          {clicT && (
-            <Icon
-              name="close"
-              size={25}
-              onPress={() => {
-                setCelular("");
-                setClicT(false);
-                Keyboard.dismiss();
+            {clicCon && (
+              <Icon
+                name="close"
+                size={25}
+                onPress={() => {
+                  setContrasena("");
+                  setClicCon(false);
+                  Keyboard.dismiss();
+                }}
+              />
+            )}
+          </View>
+          <View style={style.containerInput}>
+            <TextInput
+              placeholder="Confirmar contraseña"
+              style={style.input}
+              onChangeText={setConfirmContrasena}
+              value={confirmContrasena}
+              secureTextEntry={true}
+              onFocus={() => {
+                setClicCC(true);
               }}
             />
-          )}
+            {clicCC && (
+              <Icon
+                name="close"
+                size={25}
+                onPress={() => {
+                  setConfirmContrasena("");
+                  setClicCC(false);
+                  Keyboard.dismiss();
+                }}
+              />
+            )}
+          </View>
         </View>
-        <Text style={style.label}>Seguridad</Text>
-        <View style={style.containerInput}>
-          <TextInput
-            placeholder="Contraseña"
-            style={style.input}
-            onChangeText={setContrasena}
-            value={contrasena}
-            onFocus={() => {
-              setClicCon(true);
+        <View style={style.containerBtn}>
+          <TouchableOpacity
+            style={style.btn}
+            onPress={() => {
+              navigator.navigate("Principal");
             }}
-          />
-          {clicCon && (
-            <Icon
-              name="close"
-              size={25}
-              onPress={() => {
-                setContrasena("");
-                setClicCon(false);
-                Keyboard.dismiss();
-              }}
-            />
-          )}
-        </View>
-        <View style={style.containerInput}>
-          <TextInput
-            placeholder="Confirmar contraseña"
-            style={style.input}
-            onChangeText={setConfirmContrasena}
-            value={confirmContrasena}
-            onFocus={() => {
-              setClicCC(true);
+          >
+            <Text style={style.btnText}>Crear Cuenta 🐾</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={style.btn}
+            onPress={() => {
+              navigator.navigate("PreLogin");
             }}
-          />
-          {clicCC && (
-            <Icon
-              name="close"
-              size={25}
-              onPress={() => {
-                setConfirmContrasena("");
-                setClicCC(false);
-                Keyboard.dismiss();
-              }}
-            />
-          )}
+          >
+            <Text style={style.btnText}>Volver 🔙</Text>
+          </TouchableOpacity>
         </View>
-      </View>
-      <View style={style.containerBtn}>
-        <TouchableOpacity
-          style={style.btn}
-          onPress={() => {
-            navigator.navigate("Principal");
-          }}
-        >
-          <Text style={style.btnText}>Crear Cuenta</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={style.btn}
-          onPress={() => {
-            navigator.navigate("PreLogin");
-          }}
-        >
-          <Text style={style.btnText}>Volver</Text>
-        </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     </ScrollView>
   );
 };
@@ -231,7 +236,7 @@ const style = StyleSheet.create({
     marginTop: 10,
   },
   input: {
-    fontSize: 20,
+    fontSize: 17,
     padding: 10,
     width: "90%",
   },
@@ -243,15 +248,23 @@ const style = StyleSheet.create({
     letterSpacing: 0.5,
   },
   containerBtn: {
-    marginTop: 15,
+    marginTop: 60,
     alignItems: "center",
   },
   btn: {
     backgroundColor: "#f4c272",
-    marginVertical: 20,
+    marginBottom: 15,
     width: "80%",
     alignItems: "center",
     borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 3.65,
+    elevation: 6,
   },
   btnText: {
     fontSize: 25,
