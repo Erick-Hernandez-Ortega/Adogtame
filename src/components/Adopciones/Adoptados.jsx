@@ -16,7 +16,7 @@ const Adoptados = ({ id }) => {
   if (!pokemonData) return <DogLoading />;
 
   return (
-    <TouchableOpacity style={styles.card} key={id}>
+    <TouchableOpacity style={styles.card}>
       <Image
         source={{ uri: pokemonData.sprites.front_default }}
         style={styles.image}

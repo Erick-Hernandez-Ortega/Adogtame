@@ -8,7 +8,7 @@ const ContenidoAdopciones = () => {
   return (
     <View style={styles.container}>
       {ids.map((e) => (
-        <Adoptados id={e} />
+        <Adoptados id={e} key={e} />
       ))}
     </View>
   );

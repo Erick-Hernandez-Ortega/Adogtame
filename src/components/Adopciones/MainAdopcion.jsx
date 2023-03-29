@@ -8,6 +8,7 @@ const MainAdopciones = () => {
     <ScrollView
       contentContainerStyle={styles.container}
       style={{ backgroundColor: "#f7f7f8" }}
+      showsVerticalScrollIndicator={false}
     >
       <ContenidoAdopciones />
     </ScrollView>
