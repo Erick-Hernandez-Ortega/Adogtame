@@ -21,91 +21,102 @@ const MainLogin = (navigator) => {
   const [contra, setContra] = useState("");
   const [clic2, setClic2] = useState(false);
   return (
-    <ScrollView contentContainerStyle={{paddingBottom: "40%", paddingTop: "15%"}}>
-    <View style={style.container}>
-      <View style={style.animacion}>
-        <AnimatedLottieView
-          source={require("../../../assets/fonts/AnimacionLogin.json")}
-          autoPlay
-          loop
+    <ScrollView
+      contentContainerStyle={{ paddingBottom: "40%", paddingTop: "15%" }}
+    >
+      <View style={style.container}>
+        <View style={style.animacion}>
+          <AnimatedLottieView
+            source={require("../../../assets/fonts/AnimacionLogin.json")}
+            autoPlay
+            loop
+          />
+        </View>
+        <Image
+          source={require("../../../assets/adogtame-logo.png")}
+          style={style.image}
         />
-      </View>
-      <Image
-        source={require("../../../assets/adogtame-logo.png")}
-        style={style.image}
-      />
-      <View style={style.containerInput}>
-        <TextInput
-          placeholder="Nombre de usuario"
-          style={style.input}
-          onChangeText={setUsuario}
-          value={usuario}
-          onFocus={() => {
-            setClic(true);
-          }}
-        />
-        {clic && (
-          <Icon
-            name="close"
-            size={25}
-            style={style.cancelar}
-            onPress={() => {
-              setUsuario("");
-              setClic(false);
-              Keyboard.dismiss();
+        <View style={style.containerInput}>
+          <TextInput
+            placeholder="Nombre de usuario"
+            style={style.input}
+            onChangeText={setUsuario}
+            value={usuario}
+            onFocus={() => {
+              setClic(true);
             }}
           />
-        )}
-      </View>
-      <View style={style.containerInputC}>
-        <TextInput
-          placeholder="Contraseña"
-          style={style.inputC}
-          onChangeText={setContra}
-          value={contra}
-          onFocus={() => {
-            setClic2(true);
-          }}
-        />
-        {clic2 && (
-          <Icon
-            name="close"
-            size={25}
-            style={style.cancelar}
-            onPress={() => {
-              setContra("");
-              setClic2(false);
-              Keyboard.dismiss();
+          {clic && (
+            <Icon
+              name="close"
+              size={25}
+              style={style.cancelar}
+              onPress={() => {
+                setUsuario("");
+                setClic(false);
+                Keyboard.dismiss();
+              }}
+            />
+          )}
+        </View>
+        <View style={style.containerInputC}>
+          <TextInput
+            placeholder="Contraseña"
+            style={style.inputC}
+            onChangeText={setContra}
+            value={contra}
+            onFocus={() => {
+              setClic2(true);
             }}
           />
-        )}
+          {clic2 && (
+            <Icon
+              name="close"
+              size={25}
+              style={style.cancelar}
+              onPress={() => {
+                setContra("");
+                setClic2(false);
+                Keyboard.dismiss();
+              }}
+            />
+          )}
+        </View>
+        <View style={style.containerPregunta}>
+          <TouchableOpacity
+            onPress={() => {
+              navigator.navigate("Registro");
+            }}
+          >
+            <Text style={style.pregunta}>¿No tienes cuenta?</Text>
+          </TouchableOpacity>
+          <Icon
+            name="arrow-expand-right"
+            size={20}
+            onPress={() => {
+              navigator.navigate("Registro");
+            }}
+          />
+        </View>
+        <View style={style.containerBtn}>
+          <TouchableOpacity
+            onPress={() => {
+              navigator.navigate("Principal");
+            }}
+          >
+            <Text style={style.btn}>Iniciar Sesión 🐈</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={style.containerBtn2}>
+          <TouchableOpacity
+            onPress={() => {
+              navigator.navigate("PreLogin");
+            }}
+          >
+            <Text style={style.btn}>Volver</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={style.containerPregunta}>
-        <TouchableOpacity
-          onPress={() => {
-            navigator.navigate("Registro");
-          }}
-        >
-          <Text style={style.pregunta}>¿No tienes cuenta?</Text>
-        </TouchableOpacity>
-        <Icon
-          name="arrow-expand-right"
-          size={20}
-          onPress={() => {
-            navigator.navigate("Registro");
-          }}
-        />
-      </View>
-      <View style={style.containerBtn}>
-        <TouchableOpacity
-          onPress={() => {
-            navigator.navigate("Principal");
-          }}
-        >
-          <Text style={style.btn}>Iniciar Sesión 🐈</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
     </ScrollView>
   );
 };
@@ -162,8 +173,22 @@ const style = StyleSheet.create({
   },
   containerBtn: {
     marginTop: 80,
-    backgroundColor: "#f4a020",
-    borderRadius: 25,
+    backgroundColor: "#f4c272",
+    borderRadius: 10,
+    width: "70%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 3.65,
+    elevation: 6,
+  },
+  containerBtn2: {
+    marginTop: 20,
+    backgroundColor: "#f4c272",
+    borderRadius: 10,
     width: "70%",
     shadowColor: "#000",
     shadowOffset: {

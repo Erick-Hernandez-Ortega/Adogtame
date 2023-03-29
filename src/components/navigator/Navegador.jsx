@@ -44,10 +44,22 @@ const Navegador = () => {
         component={MainLogin}
         options={{ headerShown: false }}
       />
-      <Nav.Screen name="Registro" component={Registro} />
+      <Nav.Screen
+        name="Registro"
+        component={Registro}
+        options={{ headerShown: false }}
+      />
       <Nav.Screen name="Principal" component={Principal} />
-      <Nav.Screen name="ActualizarCuenta" component={ActualizarCuenta} options={{ headerBackground: CuentaBarraMenu }} />
-      <Nav.Screen name="Adopciones" component={MainAdopciones} options={{headerBackground: BarraMenuAdopciones}} />
+      <Nav.Screen
+        name="ActualizarCuenta"
+        component={ActualizarCuenta}
+        options={{ headerBackground: CuentaBarraMenu }}
+      />
+      <Nav.Screen
+        name="Adopciones"
+        component={MainAdopciones}
+        options={{ headerBackground: BarraMenuAdopciones }}
+      />
       <Nav.Screen
         name="Cuenta"
         component={CuentaMain}

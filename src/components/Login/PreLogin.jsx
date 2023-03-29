@@ -77,13 +77,13 @@ const style = StyleSheet.create({
   irLogin: {
     position: "absolute",
     bottom: 170,
-    backgroundColor: "#FF8C00",
-    borderRadius: 15,
+    backgroundColor: "#f4c272",
+    borderRadius: 10,
     width: "65%",
   },
   login: {
     padding: 10,
-    fontSize: 18,
+    fontSize: 20,
     textAlign: "center",
     fontFamily: "Chewy",
     letterSpacing: 0.5,
@@ -91,13 +91,13 @@ const style = StyleSheet.create({
   irRegistro: {
     position: "absolute",
     bottom: 90,
-    backgroundColor: "#FFBB77",
-    borderRadius: 15,
+    backgroundColor: "#f4c272",
+    borderRadius: 10,
     width: "65%",
   },
   registro: {
     padding: 10,
-    fontSize: 18,
+    fontSize: 20,
     textAlign: "center",
     fontFamily: "Chewy",
     letterSpacing: 0.5,
