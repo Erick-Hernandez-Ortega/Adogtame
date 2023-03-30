@@ -12,6 +12,7 @@ import {
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
+import firebase from "../../DataBase/firebase";
 
 const Registro = (navigator) => {
   // Navegador
@@ -41,22 +42,30 @@ const Registro = (navigator) => {
   const animContra = useRef();
   const animConfirmContra = useRef();
   // Funcion al dar clic en Crear Cuenta
-  const handlerCrearCuenta = (navigator) => {
+  const handlerCrearCuenta = async (navigator) => {
     if (nombre === "") {
       animNombre.current.bounce();
     } else if (edad === "") {
       animEdad.current.bounce();
-    }else if(userN === ""){
+    } else if (userN === "") {
       animUsuario.current.bounce();
-    }else if(correo === ""){
+    } else if (correo === "") {
       animCorreo.current.bounce();
-    }else if(celular === ""){
+    } else if (celular === "") {
       animCelular.current.bounce();
-    }else if(contrasena === ""){
+    } else if (contrasena === "") {
       animContra.current.bounce();
-    }else if(confirmContrasena === ""){
+    } else if (confirmContrasena === "" || confirmContrasena != contrasena) {
       animConfirmContra.current.bounce();
-    }else{
+    } else {
+      await firebase.db.collection("Usuarios").add({
+        NombreCompleto: nombre,
+        Edad: edad,
+        NombreUsuario: userN,
+        Correo: correo,
+        Telefono: celular,
+        Contrasena: contrasena,
+      });
       navigator.navigate("Login");
     }
   };
