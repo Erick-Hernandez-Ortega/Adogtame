@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -13,13 +13,31 @@ import { useNavigation } from "@react-navigation/native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import AnimatedLottieView from "lottie-react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import * as Animatable from "react-native-animatable";
 
 const MainLogin = (navigator) => {
+  // Navegador
   navigator = useNavigation();
+  // Evento para cancelar busqueda
   const [clic, setClic] = useState(false);
+  const [clic2, setClic2] = useState(false);
+  // Guardar texto de input
   const [usuario, setUsuario] = useState("");
   const [contra, setContra] = useState("");
-  const [clic2, setClic2] = useState(false);
+  // Animacion
+  const animNombre = useRef();
+  const animContra = useRef();
+  // Funcion al dar clic a Iniciar Sesion
+  const handlerLogin = (navigator) => {
+    if (usuario === "") {
+      animNombre.current.bounce();
+    }else if(contra === ""){
+      animContra.current.bounce();
+    }else{
+      navigator.navigate("Principal");
+    }
+  };
+
   return (
     <ScrollView
       contentContainerStyle={{ paddingBottom: "40%", paddingTop: "15%" }}
@@ -36,7 +54,7 @@ const MainLogin = (navigator) => {
           source={require("../../../assets/adogtame-logo.png")}
           style={style.image}
         />
-        <View style={style.containerInput}>
+        <Animatable.View style={style.containerInput} ref={animNombre}>
           <TextInput
             placeholder="Nombre de usuario"
             style={style.input}
@@ -58,8 +76,8 @@ const MainLogin = (navigator) => {
               }}
             />
           )}
-        </View>
-        <View style={style.containerInputC}>
+        </Animatable.View>
+        <Animatable.View style={style.containerInputC} ref={animContra}>
           <TextInput
             placeholder="Contraseña"
             style={style.inputC}
@@ -81,7 +99,7 @@ const MainLogin = (navigator) => {
               }}
             />
           )}
-        </View>
+        </Animatable.View>
         <View style={style.containerPregunta}>
           <TouchableOpacity
             onPress={() => {
@@ -101,7 +119,7 @@ const MainLogin = (navigator) => {
         <View style={style.containerBtn}>
           <TouchableOpacity
             onPress={() => {
-              navigator.navigate("Principal");
+              handlerLogin(navigator);
             }}
           >
             <Text style={style.btn}>Iniciar Sesión 🐈</Text>

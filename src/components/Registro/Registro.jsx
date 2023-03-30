@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -11,8 +11,12 @@ import {
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
+import * as Animatable from "react-native-animatable";
 
 const Registro = (navigator) => {
+  // Navegador
+  navigator = useNavigation();
+  // Evento onFocus para eliminar Texto del input
   const [clicN, setClicN] = useState(false);
   const [clicE, setClicE] = useState(false);
   const [clicUN, setClicUN] = useState(false);
@@ -20,6 +24,7 @@ const Registro = (navigator) => {
   const [clicT, setClicT] = useState(false);
   const [clicCon, setClicCon] = useState(false);
   const [clicCC, setClicCC] = useState(false);
+  // Guardar la informacion de los inputs
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
   const [userN, setUserN] = useState("");
@@ -27,14 +32,41 @@ const Registro = (navigator) => {
   const [celular, setCelular] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [confirmContrasena, setConfirmContrasena] = useState("");
+  // Animaciones
+  const animNombre = useRef();
+  const animEdad = useRef();
+  const animUsuario = useRef();
+  const animCorreo = useRef();
+  const animCelular = useRef();
+  const animContra = useRef();
+  const animConfirmContra = useRef();
+  // Funcion al dar clic en Crear Cuenta
+  const handlerCrearCuenta = (navigator) => {
+    if (nombre === "") {
+      animNombre.current.bounce();
+    } else if (edad === "") {
+      animEdad.current.bounce();
+    }else if(userN === ""){
+      animUsuario.current.bounce();
+    }else if(correo === ""){
+      animCorreo.current.bounce();
+    }else if(celular === ""){
+      animCelular.current.bounce();
+    }else if(contrasena === ""){
+      animContra.current.bounce();
+    }else if(confirmContrasena === ""){
+      animConfirmContra.current.bounce();
+    }else{
+      navigator.navigate("Login");
+    }
+  };
 
-  navigator = useNavigation();
   return (
     <ScrollView style={style.container}>
       <SafeAreaView>
         <View style={style.containerChido}>
           <Text style={style.label}>Información personal</Text>
-          <View style={style.containerInput}>
+          <Animatable.View style={style.containerInput} ref={animNombre}>
             <TextInput
               placeholder="Nombre"
               style={style.input}
@@ -55,8 +87,8 @@ const Registro = (navigator) => {
                 }}
               />
             )}
-          </View>
-          <View style={style.containerInput}>
+          </Animatable.View>
+          <Animatable.View style={style.containerInput} ref={animEdad}>
             <TextInput
               placeholder="Edad"
               style={style.input}
@@ -78,8 +110,8 @@ const Registro = (navigator) => {
                 }}
               />
             )}
-          </View>
-          <View style={style.containerInput}>
+          </Animatable.View>
+          <Animatable.View style={style.containerInput} ref={animUsuario}>
             <TextInput
               placeholder="Nombre de usuario"
               style={style.input}
@@ -100,9 +132,9 @@ const Registro = (navigator) => {
                 }}
               />
             )}
-          </View>
+          </Animatable.View>
           <Text style={style.label}>Información de contacto</Text>
-          <View style={style.containerInput}>
+          <Animatable.View style={style.containerInput} ref={animCorreo}>
             <TextInput
               placeholder="Correo"
               style={style.input}
@@ -124,8 +156,8 @@ const Registro = (navigator) => {
                 }}
               />
             )}
-          </View>
-          <View style={style.containerInput}>
+          </Animatable.View>
+          <Animatable.View style={style.containerInput} ref={animCelular}>
             <TextInput
               placeholder="Numero de celular"
               style={style.input}
@@ -147,9 +179,9 @@ const Registro = (navigator) => {
                 }}
               />
             )}
-          </View>
+          </Animatable.View>
           <Text style={style.label}>Seguridad</Text>
-          <View style={style.containerInput}>
+          <Animatable.View style={style.containerInput} ref={animContra}>
             <TextInput
               placeholder="Contraseña"
               style={style.input}
@@ -171,8 +203,8 @@ const Registro = (navigator) => {
                 }}
               />
             )}
-          </View>
-          <View style={style.containerInput}>
+          </Animatable.View>
+          <Animatable.View style={style.containerInput} ref={animConfirmContra}>
             <TextInput
               placeholder="Confirmar contraseña"
               style={style.input}
@@ -194,13 +226,13 @@ const Registro = (navigator) => {
                 }}
               />
             )}
-          </View>
+          </Animatable.View>
         </View>
         <View style={style.containerBtn}>
           <TouchableOpacity
             style={style.btn}
             onPress={() => {
-              navigator.navigate("Principal");
+              handlerCrearCuenta(navigator);
             }}
           >
             <Text style={style.btnText}>Crear Cuenta 🐾</Text>

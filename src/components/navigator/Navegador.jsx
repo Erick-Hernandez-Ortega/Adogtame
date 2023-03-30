@@ -35,21 +35,6 @@ const Navegador = () => {
         headerTintColor: "#000",
       }}
     >
-      <Nav.Screen
-        name="PreLogin"
-        component={PreLogin}
-        options={{ headerShown: false }}
-      />
-      <Nav.Screen
-        name="Login"
-        component={MainLogin}
-        options={{ headerShown: false }}
-      />
-      <Nav.Screen
-        name="Registro"
-        component={Registro}
-        options={{ headerShown: false }}
-      />
       <Nav.Screen name="Principal" component={Principal} />
       <Nav.Screen
         name="ActualizarCuenta"
@@ -79,6 +64,21 @@ const Navegador = () => {
       <Nav.Screen
         name="Adoptado"
         component={MainAdoptado}
+        options={{ headerShown: false }}
+      />
+      <Nav.Screen
+        name="PreLogin"
+        component={PreLogin}
+        options={{ headerShown: false }}
+      />
+      <Nav.Screen
+        name="Login"
+        component={MainLogin}
+        options={{ headerShown: false }}
+      />
+      <Nav.Screen
+        name="Registro"
+        component={Registro}
         options={{ headerShown: false }}
       />
     </Nav.Navigator>
