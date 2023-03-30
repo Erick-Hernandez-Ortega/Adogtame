@@ -10,7 +10,7 @@ const ContenidoAdopciones = () => {
   return (
     <View style={styles.container}>
       {ids.map((e) => (
-        <Adoptados id={e} key={e} onPress={() => navigator.navigate("Adoptado")} />
+        <Adoptados id={e} key={e} onPress={() => navigator.navigate("Adoptado", {id: e})} />
       ))}
     </View>
   );

@@ -1,23 +1,23 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const ContenidoAdoptado = () => {
+const ContenidoAdoptado = ({name, id, url}) => {
   return (
     <View>
       <View style={{ alignItems: "center", marginBottom: 20 }}>
         <Image
-          source={{ uri: "http://placekitten.com/300/300" }}
+          source={{ uri: url }}
           style={{ height: 150, width: 150, borderRadius: 150 / 2 }}
         />
       </View>
       <Text style={styles.date}>Fecha de adopción: 22-12-2012</Text>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Nombre</Text>
-        <Text style={styles.textValue}>Milaneso</Text>
+        <Text style={styles.textValue}>{name}</Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Edad</Text>
-        <Text style={styles.textValue}>1 año</Text>
+        <Text style={styles.textValue}>{id} años</Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Raza</Text>

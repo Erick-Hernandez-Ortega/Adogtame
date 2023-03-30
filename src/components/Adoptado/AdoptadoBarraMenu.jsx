@@ -14,11 +14,11 @@ const AdoptadoBarraMenu = ({name}) => {
           name="arrow-left"
           size={25}
           onPress={() => {
-            navigator.navigate("Principal");
+            navigator.navigate("Adopciones");
           }}
           style={{ left: 10 }}
         />
-        <Text style={{ fontFamily: "Chewy", fontSize: 22 }}>{name} 🐱ccfcf</Text>
+        <Text style={{ fontFamily: "Chewy", fontSize: 22 }}>🎉 {name} 🎉</Text>
         <BtnBuscar {...navigator} />
       </View>
     </SafeAreaView>

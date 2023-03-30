@@ -1,16 +1,27 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import AdoptadoBarraMenu from "./AdoptadoBarraMenu";
+import DogLoading from "../DogLoading/DogLoading";
 import ContenidoAdoptado from "./ContenidoAdoptado";
 
-const MainAdoptado = () => {
+const MainAdoptado = ({route}) => {
+  const {id} = route.params;
+  const [pokemonData, setPokemonData] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      .then((response) => response.json())
+      .then((data) => setPokemonData(data));
+  });
+
+  if (!pokemonData) return <DogLoading />;
+
   return (
     <View>
-      <AdoptadoBarraMenu />
+      <AdoptadoBarraMenu name={pokemonData.name} />
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
-        <ContenidoAdoptado />
+        <ContenidoAdoptado name={pokemonData.name} id={id} url={pokemonData.sprites.front_default} />
       </ScrollView>
     </View>
   );
