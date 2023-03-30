@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     height: "100%",
     width: "100%",
-    padding: 15,
+    padding: 20,
   },
   scrollView: {
     backgroundColor: "#f7f7f8",

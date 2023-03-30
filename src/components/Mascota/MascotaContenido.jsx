@@ -2,17 +2,14 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 
-const MascotaContenido = ({name, url, id}) => {
+const MascotaContenido = ({ name, url, id }) => {
   return (
-
-    <ScrollView contentContainerStyle={{paddingBottom: "30%", paddingTop: "5%", backgroundColor: "#f7f7f8",}}>
-    <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container} style={{ backgroundColor: "#f7f7f8" }}
+    >
       <View style={styles.card}>
         <View style={styles.petImageContainer}>
-          <Image
-            source={{ uri: url }}
-            style={styles.petImage}
-          />
+          <Image source={{ uri: url }} style={styles.petImage} />
         </View>
         <View style={styles.petDetails}>
           <Text style={styles.petDate}>Fecha de registro: 22-12-2012</Text>
@@ -52,7 +49,6 @@ const MascotaContenido = ({name, url, id}) => {
           <Text style={styles.ownerPhoneValue}>3323986735</Text>
         </View>
       </View>
-    </View>
     </ScrollView>
   );
 };
@@ -61,15 +57,15 @@ export default MascotaContenido;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#f7f7f8",
+    width: "100%",
+    height: "100%",
   },
   card: {
     backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 30,
-    width: "90%",
-
+    padding: 20,
+    width: "100%",
+    height: "100%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
