@@ -66,6 +66,20 @@ const Registro = (navigator) => {
         Telefono: celular,
         Contrasena: contrasena,
       });
+      setNombre("");
+      setEdad("");
+      setUserN("");
+      setCorreo("");
+      setCelular("");
+      setContrasena("");
+      setConfirmContrasena("");
+      setClicN(false);
+      setClicE(false);
+      setClicUN(false);
+      setClicC(false);
+      setClicT(false);
+      setClicCon(false);
+      setClicCC(false);
       navigator.navigate("Login");
     }
   };
