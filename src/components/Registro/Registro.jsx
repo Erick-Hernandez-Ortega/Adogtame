@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
@@ -83,6 +84,7 @@ const Registro = (navigator) => {
       setClicT(false);
       setClicCon(false);
       setClicCC(false);
+      Alert.alert("🐶 Adogcuenta 🐶",  "¡Tu Adogcuenta fue creada con exito!")
       navigator.navigate("Login");
     }
   };
