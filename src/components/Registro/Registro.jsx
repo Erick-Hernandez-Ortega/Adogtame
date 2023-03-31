@@ -13,8 +13,10 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
 import firebase from "../../DataBase/firebase";
+import AnimatedLottieView from "lottie-react-native";
 
 const Registro = (navigator) => {
+  const [Isloading, setIsLoading] = useState(false);
   // Navegador
   navigator = useNavigation();
   // Evento onFocus para eliminar Texto del input
@@ -58,6 +60,7 @@ const Registro = (navigator) => {
     } else if (confirmContrasena === "" || confirmContrasena != contrasena) {
       animConfirmContra.current.bounce();
     } else {
+      setIsLoading(true);
       await firebase.db.collection("Usuarios").add({
         NombreCompleto: nombre,
         Edad: edad,
@@ -87,7 +90,13 @@ const Registro = (navigator) => {
   return (
     <ScrollView style={style.container}>
       <SafeAreaView>
-        <View style={style.containerChido}>
+        <AnimatedLottieView
+          source={require("../../../assets/fonts/AcountLoading.json")}
+          autoPlay
+          loop
+          style={{ opacity: Isloading ? 1 : 0 }}
+        />
+        <View style={[style.containerChido, { opacity: Isloading ? 0 : 1 }]}>
           <Text style={style.label}>Información personal</Text>
           <Animatable.View style={style.containerInput} ref={animNombre}>
             <TextInput
@@ -251,7 +260,7 @@ const Registro = (navigator) => {
             )}
           </Animatable.View>
         </View>
-        <View style={style.containerBtn}>
+        <View style={[style.containerBtn, { opacity: Isloading ? 0 : 1 }]}>
           <TouchableOpacity
             style={style.btn}
             onPress={() => {
