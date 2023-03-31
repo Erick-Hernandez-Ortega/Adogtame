@@ -28,6 +28,14 @@ const Registro = (navigator) => {
   const [clicT, setClicT] = useState(false);
   const [clicCon, setClicCon] = useState(false);
   const [clicCC, setClicCC] = useState(false);
+  // Mostrar mensaje de error
+  const [errorNombre, setErrorNombre] = useState(false);
+  const [errorEdad, setErrorEdad] = useState(false);
+  const [errorUserName, setErrorUserName] = useState(false);
+  const [errorCorreo, setErrorCorreo] = useState(false);
+  const [errorCelular, setErrorCelular] = useState(false);
+  const [errorContra, setErrorContra] = useState(false);
+  const [errorCContra, setErrorCContra] = useState(false);
   // Guardar la informacion de los inputs
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
@@ -46,21 +54,35 @@ const Registro = (navigator) => {
   const animConfirmContra = useRef();
   // Funcion al dar clic en Crear Cuenta
   const handlerCrearCuenta = async (navigator) => {
-    if (nombre === "") {
+    if (nombre === "" || nombre.length < 6) {
       animNombre.current.bounce();
-    } else if (edad === "") {
+      setErrorNombre(true);
+    } else if (edad === "" || parseInt(edad) > 99) {
+      setErrorNombre(false);
       animEdad.current.bounce();
-    } else if (userN === "") {
+      setErrorEdad(true);
+    } else if (userN === "" || userN.length < 6) {
+      setErrorEdad(false);
       animUsuario.current.bounce();
+      setErrorUserName(true);
     } else if (correo === "") {
+      setErrorUserName(false);
       animCorreo.current.bounce();
-    } else if (celular === "") {
+      setErrorCorreo(true);
+    } else if (celular === "" || celular.length != 10) {
+      setErrorCorreo(false);
       animCelular.current.bounce();
-    } else if (contrasena === "") {
+      setErrorCelular(true);
+    } else if (contrasena === "" || contrasena.length < 6) {
+      setErrorCelular(false);
       animContra.current.bounce();
+      setErrorContra(true);
     } else if (confirmContrasena === "" || confirmContrasena != contrasena) {
+      setErrorContra(false);
       animConfirmContra.current.bounce();
+      setErrorCContra(true);
     } else {
+      setErrorCContra(false);
       setIsLoading(true);
       await firebase.db.collection("Usuarios").add({
         NombreCompleto: nombre,
@@ -84,7 +106,7 @@ const Registro = (navigator) => {
       setClicT(false);
       setClicCon(false);
       setClicCC(false);
-      Alert.alert("🐶 Adogcuenta 🐶",  "¡Tu Adogcuenta fue creada con exito!")
+      Alert.alert("🐶 Adogcuenta 🐶", "¡Tu Adogcuenta fue creada con exito!");
       navigator.navigate("Login");
       setIsLoading(false);
     }
@@ -103,7 +125,8 @@ const Registro = (navigator) => {
           <Text style={style.label}>Información personal</Text>
           <Animatable.View style={style.containerInput} ref={animNombre}>
             <TextInput
-              placeholder="Nombre"
+              placeholder="Nombre completo"
+              maxLength={30}
               style={style.input}
               onChangeText={setNombre}
               value={nombre}
@@ -123,6 +146,13 @@ const Registro = (navigator) => {
               />
             )}
           </Animatable.View>
+          <View style={style.containerError}>
+            {errorNombre && (
+              <Text style={style.error}>
+                Este campo debe tener entre 6 y 30 caracteres.
+              </Text>
+            )}
+          </View>
           <Animatable.View style={style.containerInput} ref={animEdad}>
             <TextInput
               placeholder="Edad"
@@ -146,6 +176,11 @@ const Registro = (navigator) => {
               />
             )}
           </Animatable.View>
+          <View style={style.containerError}>
+            {errorEdad && (
+              <Text style={style.error}>Ingrese una edad válida</Text>
+            )}
+          </View>
           <Animatable.View style={style.containerInput} ref={animUsuario}>
             <TextInput
               placeholder="Nombre de usuario"
@@ -168,6 +203,13 @@ const Registro = (navigator) => {
               />
             )}
           </Animatable.View>
+          <View style={style.containerError}>
+            {errorUserName && (
+              <Text style={style.error}>
+                Este campo debe tener entre 6 y 30 caracteres.
+              </Text>
+            )}
+          </View>
           <Text style={style.label}>Información de contacto</Text>
           <Animatable.View style={style.containerInput} ref={animCorreo}>
             <TextInput
@@ -192,6 +234,11 @@ const Registro = (navigator) => {
               />
             )}
           </Animatable.View>
+          <View style={style.containerError}>
+            {errorCorreo && (
+              <Text style={style.error}>Ingrese un correo válido</Text>
+            )}
+          </View>
           <Animatable.View style={style.containerInput} ref={animCelular}>
             <TextInput
               placeholder="Numero de celular"
@@ -215,6 +262,11 @@ const Registro = (navigator) => {
               />
             )}
           </Animatable.View>
+          <View style={style.containerError}>
+            {errorCelular && (
+              <Text style={style.error}>Ingrese un numéro de 10 dígitos</Text>
+            )}
+          </View>
           <Text style={style.label}>Seguridad</Text>
           <Animatable.View style={style.containerInput} ref={animContra}>
             <TextInput
@@ -239,6 +291,13 @@ const Registro = (navigator) => {
               />
             )}
           </Animatable.View>
+          <View style={style.containerError}>
+            {errorContra && (
+              <Text style={style.error}>
+                Este campo debe tener mínimo 6 caracteres.
+              </Text>
+            )}
+          </View>
           <Animatable.View style={style.containerInput} ref={animConfirmContra}>
             <TextInput
               placeholder="Confirmar contraseña"
@@ -262,6 +321,11 @@ const Registro = (navigator) => {
               />
             )}
           </Animatable.View>
+          <View style={style.containerError}>
+            {errorCContra && (
+              <Text style={style.error}>Las contraseñas no coinciden</Text>
+            )}
+          </View>
         </View>
         <View style={[style.containerBtn, { opacity: Isloading ? 0 : 1 }]}>
           <TouchableOpacity
@@ -338,6 +402,12 @@ const style = StyleSheet.create({
     padding: 10,
     fontFamily: "Chewy",
     letterSpacing: 0.7,
+  },
+  containerError: {
+    width: "90%",
+  },
+  error: {
+    color: "red",
   },
 });
 
