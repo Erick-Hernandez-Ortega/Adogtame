@@ -86,6 +86,7 @@ const Registro = (navigator) => {
       setClicCC(false);
       Alert.alert("🐶 Adogcuenta 🐶",  "¡Tu Adogcuenta fue creada con exito!")
       navigator.navigate("Login");
+      setIsLoading(false);
     }
   };
 
