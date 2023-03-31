@@ -1,4 +1,9 @@
 import firebase from "firebase/compat/app";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -20,4 +25,9 @@ const db = firebase.firestore();
 export default {
   firebase,
   db,
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  firebaseConfig,
+  app,
 };

@@ -52,8 +52,10 @@ const Registro = (navigator) => {
   const animCelular = useRef();
   const animContra = useRef();
   const animConfirmContra = useRef();
+  // Variables para autenticar
+  const auth = firebase.getAuth(firebase.app);
   // Funcion al dar clic en Crear Cuenta
-  const handlerCrearCuenta = async (navigator) => {
+  const handlerCrearCuenta = (navigator) => {
     if (nombre === "" || nombre.length < 6) {
       animNombre.current.bounce();
       setErrorNombre(true);
@@ -84,31 +86,42 @@ const Registro = (navigator) => {
     } else {
       setErrorCContra(false);
       setIsLoading(true);
-      await firebase.db.collection("Usuarios").add({
-        NombreCompleto: nombre,
-        Edad: edad,
-        NombreUsuario: userN,
-        Correo: correo,
-        Telefono: celular,
-        Contrasena: contrasena,
-      });
-      setNombre("");
-      setEdad("");
-      setUserN("");
-      setCorreo("");
-      setCelular("");
-      setContrasena("");
-      setConfirmContrasena("");
-      setClicN(false);
-      setClicE(false);
-      setClicUN(false);
-      setClicC(false);
-      setClicT(false);
-      setClicCon(false);
-      setClicCC(false);
-      Alert.alert("🐶 Adogcuenta 🐶", "¡Tu Adogcuenta fue creada con exito!");
-      navigator.navigate("Login");
+      firebase
+        .createUserWithEmailAndPassword(auth, correo, contrasena)
+        .then(async () => {
+          await firebase.db.collection("Usuarios").add({
+            NombreCompleto: nombre,
+            Edad: edad,
+            NombreUsuario: userN,
+            Correo: correo,
+            Telefono: celular,
+            Contrasena: contrasena,
+          });
+          setNombre("");
+          setEdad("");
+          setUserN("");
+          setCorreo("");
+          setCelular("");
+          setContrasena("");
+          setConfirmContrasena("");
+          setClicN(false);
+          setClicE(false);
+          setClicUN(false);
+          setClicC(false);
+          setClicT(false);
+          setClicCon(false);
+          setClicCC(false);
+        })
+        .catch((error) => {
+          Alert.alert("¡El correo ya tiene una cuenta, ingresa otro!");
+          setIsLoading(false);
+        })
+        .then(() => {});
+    }
+    if (Isloading) {
+      Alert.alert("🐶 Adogcuenta 🐶", "¡Tu Adogcuenta fue creada con éxito!");
       setIsLoading(false);
+      navigator.navigate("Login");
     }
   };
 
