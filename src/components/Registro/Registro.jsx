@@ -111,17 +111,17 @@ const Registro = (navigator) => {
           setClicT(false);
           setClicCon(false);
           setClicCC(false);
+          Alert.alert(
+            "🐶 Adogcuenta 🐶",
+            "¡Tu Adogcuenta fue creada con éxito!"
+          );
+          setIsLoading(false);
+          navigator.navigate("Login");
         })
         .catch((error) => {
           Alert.alert("¡El correo ya tiene una cuenta, ingresa otro!");
           setIsLoading(false);
-        })
-        .then(() => {});
-    }
-    if (Isloading) {
-      Alert.alert("🐶 Adogcuenta 🐶", "¡Tu Adogcuenta fue creada con éxito!");
-      setIsLoading(false);
-      navigator.navigate("Login");
+        });
     }
   };
 

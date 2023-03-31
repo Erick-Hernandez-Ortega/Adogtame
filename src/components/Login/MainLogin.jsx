@@ -7,6 +7,7 @@ import {
   Keyboard,
   Text,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
@@ -14,6 +15,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import AnimatedLottieView from "lottie-react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import * as Animatable from "react-native-animatable";
+import firebase from "../../DataBase/firebase";
 
 const MainLogin = (navigator) => {
   // Navegador
@@ -22,19 +24,36 @@ const MainLogin = (navigator) => {
   const [clic, setClic] = useState(false);
   const [clic2, setClic2] = useState(false);
   // Guardar texto de input
-  const [usuario, setUsuario] = useState("");
+  const [correo, setCorreo] = useState("");
   const [contra, setContra] = useState("");
   // Animacion
-  const animNombre = useRef();
+  const animCorreo = useRef();
   const animContra = useRef();
+  // Mensaje de error
+  const [errorCorreo, setErrorCorreo] = useState(false);
+  const [errorContra, setErrorContra] = useState(false);
+  // Variable para autenticar
+  const auth = firebase.getAuth(firebase.app);
   // Funcion al dar clic a Iniciar Sesion
   const handlerLogin = (navigator) => {
-    if (usuario === "") {
-      animNombre.current.bounce();
-    }else if(contra === ""){
+    if (correo === "") {
+      setErrorCorreo(true);
+      animCorreo.current.bounce();
+    } else if (contra === "" || contra.length < 6) {
+      setErrorCorreo(false);
       animContra.current.bounce();
-    }else{
-      navigator.navigate("Principal");
+      setErrorContra(true);
+    } else {
+      setErrorContra(false);
+      firebase
+        .signInWithEmailAndPassword(auth, correo, contra)
+        .then(() => {
+          Alert.alert("Sesion iniciada correctamente");
+          navigator.navigate("Principal");
+        })
+        .catch((error) => {
+          Alert.alert("Las credenciales no coinciden");
+        });
     }
   };
 
@@ -54,12 +73,12 @@ const MainLogin = (navigator) => {
           source={require("../../../assets/adogtame-logo.png")}
           style={style.image}
         />
-        <Animatable.View style={style.containerInput} ref={animNombre}>
+        <Animatable.View style={style.containerInput} ref={animCorreo}>
           <TextInput
-            placeholder="Nombre de usuario"
+            placeholder="Correo"
             style={style.input}
-            onChangeText={setUsuario}
-            value={usuario}
+            onChangeText={setCorreo}
+            value={correo}
             onFocus={() => {
               setClic(true);
             }}
@@ -70,13 +89,18 @@ const MainLogin = (navigator) => {
               size={25}
               style={style.cancelar}
               onPress={() => {
-                setUsuario("");
+                setCorreo("");
                 setClic(false);
                 Keyboard.dismiss();
               }}
             />
           )}
         </Animatable.View>
+        {errorCorreo && (
+          <View style={style.conatinerError}>
+            <Text style={style.error}>Ingrese un correo válido</Text>
+          </View>
+        )}
         <Animatable.View style={style.containerInputC} ref={animContra}>
           <TextInput
             placeholder="Contraseña"
@@ -100,6 +124,11 @@ const MainLogin = (navigator) => {
             />
           )}
         </Animatable.View>
+        {errorContra && (
+          <View style={style.conatinerError}>
+            <Text style={style.error}>La contraseña no coincide</Text>
+          </View>
+        )}
         <View style={style.containerPregunta}>
           <TouchableOpacity
             onPress={() => {
@@ -227,6 +256,12 @@ const style = StyleSheet.create({
   animacion: {
     width: "80%",
     height: "30%",
+  },
+  conatinerError: {
+    alignItems: "center",
+  },
+  error: {
+    color: "red",
   },
 });
 
