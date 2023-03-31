@@ -107,6 +107,8 @@ const MainLogin = (navigator) => {
             style={style.inputC}
             onChangeText={setContra}
             value={contra}
+            keyboardType={"email-address"}
+            secureTextEntry={true}
             onFocus={() => {
               setClic2(true);
             }}
