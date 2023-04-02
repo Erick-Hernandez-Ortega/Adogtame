@@ -2,26 +2,35 @@ import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useFonts } from "expo-font";
 import DogLoading from "../DogLoading/DogLoading";
+import firebase from "../../DataBase/firebase";
 
 const Mascotas = (props) => {
-  const [pokemonData, setPokemonData] = useState(null);
+  const [mascotaData, setMascotaData] = useState(null);
 
   const [fontsLoaded] = useFonts({
     Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
   });
 
+  async function resquest() {
+    try {
+      const mascota = await firebase.db
+        .collection("Mascotas No Adoptadas")
+        .get();
+      setMascotaData(mascota.docs[props.id].data());
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${props.id}`)
-      .then((response) => response.json())
-      .then((data) => setPokemonData(data));
+    resquest();
   }, []);
 
-  if (!pokemonData)
-    return <DogLoading/>;
+  if (!mascotaData) return <DogLoading />;
 
   if (!fontsLoaded) return null;
 
-  const { name, height, weight, sprites } = pokemonData;
+  const { nombre, imagen, edad, genero, tipo } = mascotaData;
 
   return (
     <TouchableOpacity
@@ -29,18 +38,19 @@ const Mascotas = (props) => {
       key={props.id}
       onPress={props.onPress}
     >
-      <Image
-        source={{ uri: pokemonData.sprites.front_default }}
-        style={styles.image}
-      />
+      <Image source={{ uri: imagen }} style={styles.image} />
       <View style={styles.cardContent}>
-        <Text style={styles.title}>{pokemonData.name}</Text>
-        <Text style={styles.subtitle}>Edad: {pokemonData.id}</Text>
-        <Text style={styles.description}>
-          Bulbasaur es un Pokémon de tipo planta/veneno. Es uno de los Pokémon
-          iniciales en la región de Kanto y es muy popular entre los
-          entrenadores Pokémon.
+        <Text style={styles.title}>{nombre}</Text>
+
+        <Text style={styles.subtitle}>
+          Es un {tipo ? "Chucho 🐕" : "Michi 🐈"}
         </Text>
+        <Text style={styles.subtitle}>Tiene {edad} años</Text>
+        <Text style={styles.subtitle}>
+          {genero ? "Es un Machito Opresor " : "Es una señora"}
+        </Text>
+
+        <Text style={styles.description}>Tonalá, Jalisco, México.</Text>
       </View>
     </TouchableOpacity>
   );
@@ -80,10 +90,13 @@ const styles = StyleSheet.create({
     fontFamily: "Chewy",
     fontSize: 14,
     color: "#888",
-    marginBottom: 5,
+    marginVertical: 3,
   },
   description: {
+    fontFamily: "Chewy",
+    marginTop: 3,
     fontSize: 14,
+    letterSpacing: 0.4,
   },
 });
 
