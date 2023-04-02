@@ -4,25 +4,43 @@ import MascotaBarraMenu from "./MascotaBarraMenu";
 import MascotaContenido from "./MascotaContenido";
 import { useEffect, useState } from "react";
 import DogLoading from "../DogLoading/DogLoading";
+import firebase from "../../DataBase/firebase";
 
 const MascotaMain = ({ route }) => {
-  const [pokemonData, setPokemonData] = useState(null);
+  const [mascotaData, setMascotaData] = useState(null);
   const { id } = route.params;
 
-  useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-      .then((response) => response.json())
-      .then((data) => setPokemonData(data));
-  });
+  async function resquest() {
+    try {
+      const mascota = await firebase.db
+        .collection("Mascotas No Adoptadas")
+        .doc(`${id}`)
+        .get();
+      setMascotaData(mascota.data());
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  if (!pokemonData) return <DogLoading />;
+  useEffect(() => {
+    resquest();
+  }, []);
+
+  if (!mascotaData) return <DogLoading />;
+
+  const { nombre, imagen, descripcion, edad, genero, raza, tipo } = mascotaData;
 
   return (
     <View>
-      <MascotaBarraMenu name={pokemonData.name} />
+      <MascotaBarraMenu name={nombre} />
       <MascotaContenido
-        name={pokemonData.name}
-        url={pokemonData.sprites.front_default}
+        name={nombre}
+        descripcion={descripcion}
+        edad={edad}
+        genero={genero}
+        raza={raza}
+        tipo={tipo}
+        url={imagen}
         id={id}
       />
     </View>

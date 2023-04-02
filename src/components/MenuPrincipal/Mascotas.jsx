@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
 import DogLoading from "../DogLoading/DogLoading";
 import firebase from "../../DataBase/firebase";
 
@@ -10,7 +9,8 @@ const Mascotas = (props) => {
   async function resquest() {
     try {
       const mascota = await firebase.db
-        .collection("Mascotas No Adoptadas").doc("" +props.id)
+        .collection("Mascotas No Adoptadas")
+        .doc("" + props.id)
         .get();
       setMascotaData(mascota.data());
     } catch (e) {

@@ -2,10 +2,20 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 
-const MascotaContenido = ({ name, url, id }) => {
+const MascotaContenido = ({
+  name,
+  url,
+  id,
+  descripcion,
+  edad,
+  genero,
+  raza,
+  tipo,
+}) => {
   return (
     <ScrollView
-      contentContainerStyle={styles.container} style={{ backgroundColor: "#f7f7f8" }}
+      contentContainerStyle={styles.container}
+      style={{ backgroundColor: "#f7f7f8" }}
     >
       <View style={styles.card}>
         <View style={styles.petImageContainer}>
@@ -19,21 +29,32 @@ const MascotaContenido = ({ name, url, id }) => {
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.petAge}>Edad</Text>
-            <Text style={styles.petAgeValue}>{id} años</Text>
+            <Text style={styles.petAgeValue}>{edad} años</Text>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.petAge}>¿Es chucho o michi?</Text>
+            <Text style={styles.petAgeValue}>
+              Es un {tipo ? "Chucho 🐕" : "Michi 🐈"}
+            </Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.petBreed}>Raza</Text>
-            <Text style={styles.petBreedValue}>Gato Persa</Text>
+            <Text style={styles.petBreedValue}>{raza}</Text>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.petBreed}>Genero</Text>
+            <Text style={styles.petBreedValue}>
+              {genero ? "Es un Machito Opresor " : "Es una señora"}
+            </Text>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.petBreed}>¿Onta Ubicado?</Text>
+            <Text style={styles.petBreedValue}>Tonalá, Jalisco, México.</Text>
           </View>
           <View style={{ marginTop: 10 }}>
             <Text style={styles.petDescription}>Descripción</Text>
           </View>
-          <Text style={styles.petDescriptionValue}>
-            El gato American Shorthair es una raza de gatos domésticos de tamaño
-            mediano con un pelaje corto y grueso en una variedad de colores y
-            patrones. Son conocidos por su temperamento tranquilo y amigable, y
-            son excelentes compañeros de familia.
-          </Text>
+          <Text style={styles.petDescriptionValue}>{descripcion}</Text>
         </View>
         <View
           style={{ height: 1, backgroundColor: "#ccc", marginVertical: 20 }}
@@ -57,9 +78,7 @@ export default MascotaContenido;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f7f7f8",
     width: "100%",
-    height: "100%",
   },
   card: {
     backgroundColor: "#fff",
@@ -74,6 +93,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
     elevation: 4,
+    paddingBottom: "35%"
   },
   petImageContainer: {
     alignItems: "center",
