@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const Contenido = () => {
 
-  const ids = [1];
+  const ids = [1, 2];
   navigator = useNavigation();
 
   return (

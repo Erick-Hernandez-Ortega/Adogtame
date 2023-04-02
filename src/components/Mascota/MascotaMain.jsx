@@ -24,7 +24,7 @@ const MascotaMain = ({ route }) => {
 
   useEffect(() => {
     resquest();
-  }, []);
+  });
 
   if (!mascotaData) return <DogLoading />;
 
