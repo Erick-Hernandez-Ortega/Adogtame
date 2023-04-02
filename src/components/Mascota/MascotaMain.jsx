@@ -32,7 +32,7 @@ const MascotaMain = ({ route }) => {
 
   return (
     <View>
-      <MascotaBarraMenu name={nombre} />
+      <MascotaBarraMenu name={nombre} tipo={tipo} />
       <MascotaContenido
         name={nombre}
         descripcion={descripcion}
