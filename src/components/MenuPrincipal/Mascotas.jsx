@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useFonts } from "expo-font";
+
 import DogLoading from "../DogLoading/DogLoading";
 import firebase from "../../DataBase/firebase";
 
 const Mascotas = (props) => {
   const [mascotaData, setMascotaData] = useState(null);
-
-  const [fontsLoaded] = useFonts({
-    Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
-  });
 
   async function resquest() {
     try {
@@ -27,8 +23,6 @@ const Mascotas = (props) => {
   }, []);
 
   if (!mascotaData) return <DogLoading />;
-
-  if (!fontsLoaded) return null;
 
   const { nombre, imagen, edad, genero, tipo } = mascotaData;
 
