@@ -14,9 +14,9 @@ const Mascotas = (props) => {
   async function resquest() {
     try {
       const mascota = await firebase.db
-        .collection("Mascotas No Adoptadas")
+        .collection("Mascotas No Adoptadas").doc("" +props.id)
         .get();
-      setMascotaData(mascota.docs[props.id].data());
+      setMascotaData(mascota.data());
     } catch (e) {
       console.log(e);
     }
