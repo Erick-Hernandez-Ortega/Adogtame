@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Adoptados from "./Adoptados";
 
-const ContenidoAdopciones = () => {
+const ContenidoAdopciones = React.memo(() => {
   navigator = useNavigation();
   const ids = [45, 14, 22, 38, 31, 48, 27, 20, 42, 16];
 
@@ -14,7 +14,7 @@ const ContenidoAdopciones = () => {
       ))}
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

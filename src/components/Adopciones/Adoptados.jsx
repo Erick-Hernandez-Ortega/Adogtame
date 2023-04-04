@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import DogLoading from "../DogLoading/DogLoading";
 import { useEffect, useState } from "react";
 
-const Adoptados = ({ id , onPress}) => {
+const Adoptados = React.memo(({ id , onPress}) => {
   const [pokemonData, setPokemonData] = useState(null);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Adoptados = ({ id , onPress}) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 export default Adoptados;
 

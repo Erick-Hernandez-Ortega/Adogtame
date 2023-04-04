@@ -4,7 +4,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import BtnBuscar from "../MenuPrincipal/BtnBuscar";
 
-const MascotaBarraMenu = ({ name, tipo }) => {
+const MascotaBarraMenu = React.memo(({ name, tipo }) => {
   navigator = useNavigation();
 
   return (
@@ -25,7 +25,7 @@ const MascotaBarraMenu = ({ name, tipo }) => {
       </View>
     </SafeAreaView>
   );
-};
+});
 
 const styles = StyleSheet.create({
   header: {

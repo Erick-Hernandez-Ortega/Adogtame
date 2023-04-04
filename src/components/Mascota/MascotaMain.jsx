@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import DogLoading from "../DogLoading/DogLoading";
 import firebase from "../../DataBase/firebase";
 
-const MascotaMain = ({ route }) => {
+const MascotaMain = React.memo(({ route }) => {
   const [mascotaData, setMascotaData] = useState(null);
   const { id } = route.params;
 
@@ -28,7 +28,7 @@ const MascotaMain = ({ route }) => {
 
   if (!mascotaData) return <DogLoading />;
 
-  const { nombre, imagen, descripcion, edad, genero, raza, tipo } = mascotaData;
+  const { nombre, imagen, descripcion, edad, genero, raza, tipo, idDuenno } = mascotaData;
 
   return (
     <View>
@@ -41,11 +41,11 @@ const MascotaMain = ({ route }) => {
         raza={raza}
         tipo={tipo}
         url={imagen}
-        id={id}
+        idDuenno={idDuenno}
       />
     </View>
   );
-};
+});
 
 export default MascotaMain;
 

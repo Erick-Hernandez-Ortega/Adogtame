@@ -1,17 +1,43 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
+import firebase from "../../DataBase/firebase";
+import { useEffect } from "react";
+import DogLoading from "../DogLoading/DogLoading";
 
-const MascotaContenido = ({
+const MascotaContenido = React.memo(({
   name,
   url,
-  id,
   descripcion,
   edad,
   genero,
   raza,
   tipo,
+  idDuenno,
 }) => {
+  const [duenno, setDuenno] = useState(null);
+
+  async function requestOwner() {
+    try {
+      const query = await firebase.db
+        .collection("Usuarios")
+        .where("Correo", "==", "" + idDuenno)
+        .get();
+
+      setDuenno(query.docs[0].data());
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    requestOwner();
+  });
+
+  if (!duenno) return <DogLoading />;
+
+  const { NombreCompleto, Edad, Telefono, Correo } = duenno;
+
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -62,17 +88,25 @@ const MascotaContenido = ({
 
         <Text style={styles.ownerLabel}>Dueño actual</Text>
         <View style={styles.textContainer}>
-          <Text style={styles.ownerName}>Nombre del dueño</Text>
-          <Text style={styles.ownerNameValue}>Bolita</Text>
+          <Text style={styles.ownerName}>Nombre</Text>
+          <Text style={styles.ownerNameValue}>{NombreCompleto}</Text>
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.ownerPhone}>Teléfono del dueño</Text>
-          <Text style={styles.ownerPhoneValue}>3323986735</Text>
+          <Text style={styles.ownerPhone}>Teléfono</Text>
+          <Text style={styles.ownerPhoneValue}>{Telefono}</Text>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.ownerPhone}>Edad</Text>
+          <Text style={styles.ownerPhoneValue}>{Edad} años</Text>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.ownerPhone}>Correo</Text>
+          <Text style={styles.ownerPhoneValue}>{Correo}</Text>
         </View>
       </View>
     </ScrollView>
   );
-};
+});
 
 export default MascotaContenido;
 
@@ -93,7 +127,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
     elevation: 4,
-    paddingBottom: "35%"
+    paddingBottom: "35%",
   },
   petImageContainer: {
     alignItems: "center",

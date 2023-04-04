@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import DogLoading from "../DogLoading/DogLoading";
 import firebase from "../../DataBase/firebase";
+import React from "react";
 
-const Mascotas = (props) => {
+const Mascotas = React.memo((props) => {
   const [mascotaData, setMascotaData] = useState(null);
 
   async function resquest() {
@@ -48,7 +49,7 @@ const Mascotas = (props) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 const styles = StyleSheet.create({
   card: {
@@ -78,7 +79,6 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Chewy",
     fontSize: 19,
-    fontWeight: "bold",
   },
   subtitle: {
     fontFamily: "Chewy",
