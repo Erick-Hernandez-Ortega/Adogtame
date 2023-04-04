@@ -1,2 +1,2 @@
 # Adogtame
-Adogtame revive ya que valio el otro repo
+Adogtame app para adoptar chuchos y michis, proyecto escolar, hecho con react native
