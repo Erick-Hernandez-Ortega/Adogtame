@@ -23,7 +23,7 @@ import MainAdoptado from "../Adoptado/MainAdoptado";
 
 const Nav = createDrawerNavigator();
 
-const Navegador = () => {
+const Navegador = React.memo(() => {
   return (
     <Nav.Navigator
       initialRouteName="PreLogin"
@@ -83,9 +83,9 @@ const Navegador = () => {
       />
     </Nav.Navigator>
   );
-};
+});
 
-const MenuLateralContenido = ({ navigator }) => {
+const MenuLateralContenido = React.memo(({ navigator }) => {
   navigator = useNavigation();
   return (
     <DrawerContentScrollView style={style.container}>
@@ -116,7 +116,7 @@ const MenuLateralContenido = ({ navigator }) => {
       />
     </DrawerContentScrollView>
   );
-};
+});
 
 const LogoLateral = () => {
   return (

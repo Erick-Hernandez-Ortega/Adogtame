@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import AnimatedLottieView from "lottie-react-native";
 
-const DogLoading = () => {
+const DogLoading = React.memo(() => {
   return (
     <View style={{ justifyContent: "center", alignItems: "center" }}>
         <AnimatedLottieView
@@ -13,7 +13,7 @@ const DogLoading = () => {
         />
       </View>
   )
-}
+})
 
 export default DogLoading
 

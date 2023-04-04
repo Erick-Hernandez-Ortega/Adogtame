@@ -1,8 +1,9 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import Mascotas from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
+import React from "react";
 
-const Contenido = () => {
+const Contenido = React.memo(() => {
 
   const ids = [1, 2];
   navigator = useNavigation();
@@ -28,7 +29,7 @@ const Contenido = () => {
       </ScrollView>
     </View>
   );
-};
+});
 
 const style = StyleSheet.create({
   container: {
