@@ -23,7 +23,7 @@ const Registro = (navigator) => {
   // Evento onFocus para eliminar Texto del input
   const [clicN, setClicN] = useState(false);
   const [clicE, setClicE] = useState(false);
-  const [clicUN, setClicUN] = useState(false);
+  const [clicAp, setClicAp] = useState(false);
   const [clicC, setClicC] = useState(false);
   const [clicT, setClicT] = useState(false);
   const [clicCon, setClicCon] = useState(false);
@@ -31,7 +31,7 @@ const Registro = (navigator) => {
   // Mostrar mensaje de error
   const [errorNombre, setErrorNombre] = useState(false);
   const [errorEdad, setErrorEdad] = useState(false);
-  const [errorUserName, setErrorUserName] = useState(false);
+  const [errorApellido, setErrorApellido] = useState(false);
   const [errorCorreo, setErrorCorreo] = useState(false);
   const [errorCelular, setErrorCelular] = useState(false);
   const [errorContra, setErrorContra] = useState(false);
@@ -39,7 +39,7 @@ const Registro = (navigator) => {
   // Guardar la informacion de los inputs
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
-  const [userN, setUserN] = useState("");
+  const [apellido, setApellido] = useState("");
   const [correo, setCorreo] = useState("");
   const [celular, setCelular] = useState("");
   const [contrasena, setContrasena] = useState("");
@@ -47,7 +47,7 @@ const Registro = (navigator) => {
   // Animaciones
   const animNombre = useRef();
   const animEdad = useRef();
-  const animUsuario = useRef();
+  const animApellido = useRef();
   const animCorreo = useRef();
   const animCelular = useRef();
   const animContra = useRef();
@@ -63,12 +63,12 @@ const Registro = (navigator) => {
       setErrorNombre(false);
       animEdad.current.bounce();
       setErrorEdad(true);
-    } else if (userN === "" || userN.length < 6) {
+    } else if (apellido === "" || apellido.length < 6) {
       setErrorEdad(false);
       animUsuario.current.bounce();
-      setErrorUserName(true);
+      setErrorApellido(true);
     } else if (correo === "") {
-      setErrorUserName(false);
+      setErrorApellido(false);
       animCorreo.current.bounce();
       setErrorCorreo(true);
     } else if (celular === "" || celular.length != 10) {
@@ -90,23 +90,23 @@ const Registro = (navigator) => {
         .createUserWithEmailAndPassword(auth, correo, contrasena)
         .then(async () => {
           await firebase.db.collection("Usuarios").add({
-            NombreCompleto: nombre,
+            Nombres: nombre,
             Edad: edad,
-            NombreUsuario: userN,
+            Apellidos: apellido,
             Correo: correo,
             Telefono: celular,
             Contrasena: contrasena,
           });
           setNombre("");
           setEdad("");
-          setUserN("");
+          setApellido("");
           setCorreo("");
           setCelular("");
           setContrasena("");
           setConfirmContrasena("");
           setClicN(false);
           setClicE(false);
-          setClicUN(false);
+          setClicAp(false);
           setClicC(false);
           setClicT(false);
           setClicCon(false);
@@ -138,7 +138,7 @@ const Registro = (navigator) => {
           <Text style={style.label}>Información personal</Text>
           <Animatable.View style={style.containerInput} ref={animNombre}>
             <TextInput
-              placeholder="Nombre completo"
+              placeholder="Nombres"
               maxLength={30}
               style={style.input}
               onChangeText={setNombre}
@@ -161,6 +161,35 @@ const Registro = (navigator) => {
           </Animatable.View>
           <View style={style.containerError}>
             {errorNombre && (
+              <Text style={style.error}>
+                Este campo debe tener entre 6 y 30 caracteres.
+              </Text>
+            )}
+          </View>
+          <Animatable.View style={style.containerInput} ref={animApellido}>
+            <TextInput
+              placeholder="Apellidos"
+              style={style.input}
+              onChangeText={setApellido}
+              value={apellido}
+              onFocus={() => {
+                setClicAp(true);
+              }}
+            />
+            {clicAp && (
+              <Icon
+                name="close"
+                size={25}
+                onPress={() => {
+                  setApellido("");
+                  setClicAp(false);
+                  Keyboard.dismiss();
+                }}
+              />
+            )}
+          </Animatable.View>
+          <View style={style.containerError}>
+            {errorApellido && (
               <Text style={style.error}>
                 Este campo debe tener entre 6 y 30 caracteres.
               </Text>
@@ -192,35 +221,6 @@ const Registro = (navigator) => {
           <View style={style.containerError}>
             {errorEdad && (
               <Text style={style.error}>Ingrese una edad válida</Text>
-            )}
-          </View>
-          <Animatable.View style={style.containerInput} ref={animUsuario}>
-            <TextInput
-              placeholder="Nombre de usuario"
-              style={style.input}
-              onChangeText={setUserN}
-              value={userN}
-              onFocus={() => {
-                setClicUN(true);
-              }}
-            />
-            {clicUN && (
-              <Icon
-                name="close"
-                size={25}
-                onPress={() => {
-                  setUserN("");
-                  setClicUN(false);
-                  Keyboard.dismiss();
-                }}
-              />
-            )}
-          </Animatable.View>
-          <View style={style.containerError}>
-            {errorUserName && (
-              <Text style={style.error}>
-                Este campo debe tener entre 6 y 30 caracteres.
-              </Text>
             )}
           </View>
           <Text style={style.label}>Información de contacto</Text>
