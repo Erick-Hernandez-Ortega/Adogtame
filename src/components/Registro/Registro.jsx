@@ -122,6 +122,7 @@ const Registro = (navigator) => {
           setClicT(false);
           setClicCon(false);
           setClicCC(false);
+          setErrorContra(false);
           Alert.alert(
             "🐶 Adogcuenta 🐶",
             "¡Tu Adogcuenta fue creada con éxito!"
