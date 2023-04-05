@@ -13,12 +13,23 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import firebase from "../../DataBase/firebase";
 
 const Buscador = (navigator) => {
   const [busqueda, setBusqueda] = useState("");
   const [clic, setClic] = useState(false);
   const [botonStyle, setBotonStyle] = useState(null);
   const [iphone] = useState(Platform.OS == "ios");
+
+  async function request() {
+    const db = firebase.db.collection("Mascotas No Adoptadas");
+
+    if (botonStyle == "boton1") {
+      const query = db.where("nombre", "==", "pepe");
+    } else if (botonStyle == "boton2") {
+      const query = db.where("raza", "==", "pepe");
+    }
+  }
 
   navigator = useNavigation();
   return (
@@ -44,7 +55,7 @@ const Buscador = (navigator) => {
                   ? "Buscar por raza 🐶..."
                   : "Seleccionar por que buscar 🐶..."
               }
-              onChangeText={setBusqueda}
+              onChangeText={(e) => setBusqueda(e)}
               value={busqueda}
               onFocus={() => {
                 setClic(true);
