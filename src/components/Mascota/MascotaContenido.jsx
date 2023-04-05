@@ -1,8 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { useEffect } from "react";
-import DogLoading from "../DogLoading/DogLoading";
 
 const MascotaContenido = React.memo(({
   name,
