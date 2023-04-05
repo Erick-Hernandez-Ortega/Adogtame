@@ -1,11 +1,25 @@
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Modal, Text, Alert } from "react-native";
+import React, { useState } from "react";
 import BtnCuenta from "./BtnCuenta";
 import TextoCuenta from "./TextoCuenta";
 import { useNavigation } from "@react-navigation/native";
 
 const CuentaMain = () => {
-
   navigator = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
+
+  const toggleModalVisible = () => {
+    setModalVisible(!modalVisible);
+  };
+
+  const toggleModalVisible2 = () => {
+    setModalVisible2(!modalVisible2);
+  };
+
+  const borrarCuenta = () => {
+    Alert.alert("Cuenta borrada con exito :(");
+  };
 
   const user = {
     username: "Bolita",
@@ -26,6 +40,70 @@ const CuentaMain = () => {
         </View>
 
         <TextoCuenta {...user} />
+        <Modal visible={modalVisible2} animationType="slide" transparent={true}>
+          <View style={styles.modalContainerCenter}>
+            <View style={styles.modalView}>
+              <Text
+                style={{ fontFamily: "Chewy", fontSize: 18, paddingBottom: 20 }}
+              >
+                ¿De verdad quieres hacerlo?
+              </Text>
+              <View style={{ marginTop: 0 }}>
+                <BtnCuenta
+                  name="Confirmar"
+                  icon="check-circle-outline"
+                  bgColor="#006400"
+                  color="#fff"
+                  onPress={() => {
+                    borrarCuenta();
+                    toggleModalVisible2();
+                    toggleModalVisible();
+                  }}
+                />
+                <BtnCuenta
+                  name="Cancelar"
+                  icon="emoticon-poop"
+                  bgColor="#8b0000"
+                  color="#fff"
+                  onPress={() => {
+                    toggleModalVisible2();
+                    toggleModalVisible();
+                  }}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
+
+        <Modal visible={modalVisible} animationType="slide" transparent={true}>
+          <View style={styles.modalContainerCenter}>
+            <View style={styles.modalView}>
+              <Text
+                style={{ fontFamily: "Chewy", fontSize: 18, paddingBottom: 20 }}
+              >
+                ¿Estas seguro que quieres borrar tu Adogcuenta?
+              </Text>
+              <View style={{ marginTop: 0 }}>
+                <BtnCuenta
+                  name="Confirmar"
+                  icon="check-circle-outline"
+                  bgColor="#006400"
+                  color="#fff"
+                  onPress={() => {
+                    toggleModalVisible2();
+                  }}
+                />
+                <BtnCuenta
+                  name="Cancelar"
+                  icon="emoticon-poop"
+                  bgColor="#8b0000"
+                  color="#fff"
+                  onPress={() => toggleModalVisible()}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
 
         <View style={{ flex: 1, justifyContent: "flex-end", width: "90%" }}>
           <BtnCuenta
@@ -40,6 +118,7 @@ const CuentaMain = () => {
             icon="account-remove"
             bgColor="#8b0000"
             color="#fff"
+            onPress={() => toggleModalVisible()}
           />
         </View>
       </View>
@@ -58,7 +137,7 @@ const styles = StyleSheet.create({
     padding: 25,
     paddingTop: "10%",
     backgroundColor: "#f7f7f8",
-    
+
     alignItems: "center",
   },
   subtitulo: {
@@ -88,6 +167,26 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 100, // La mitad del ancho y alto para crear un círculo perfecto
     overflow: "hidden", // Esto es importante para que la imagen se recorte en forma de círculo
+  },
+  modalContainerCenter: {
+    justifyContent: "flex-end",
+    alignItems: "center",
+    flex: 1,
+  },
+  modalView: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    marginBottom: 22,
+    width: "92%",
   },
 });
 
