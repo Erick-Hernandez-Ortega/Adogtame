@@ -37,7 +37,13 @@ const Buscador = (navigator) => {
 
             <TextInput
               style={style.input}
-              placeholder="Buscar chuchos...🐶"
+              placeholder={
+                botonStyle === "boton1"
+                  ? "Buscar por nombre 🐶..."
+                  : botonStyle === "boton2"
+                  ? "Buscar por raza 🐶..."
+                  : "Seleccionar por que buscar 🐶..."
+              }
               onChangeText={setBusqueda}
               value={busqueda}
               onFocus={() => {
@@ -96,6 +102,7 @@ const Buscador = (navigator) => {
           </Text>
         </TouchableOpacity>
       </View>
+      <Text>aaca se mostraran los chuchos</Text>
     </View>
   );
 };
@@ -170,7 +177,7 @@ const style = StyleSheet.create({
   },
   input: {
     marginStart: 8,
-    fontSize: 20,
+    fontSize: 18,
     padding: 8,
     paddingLeft: 20,
     width: "80%",
