@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
 import firebase from "../../DataBase/firebase";
 import AnimatedLottieView from "lottie-react-native";
+import { RadioButton } from "react-native-paper";
 
 const Registro = (navigator) => {
   const [Isloading, setIsLoading] = useState(false);
@@ -40,6 +41,7 @@ const Registro = (navigator) => {
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
   const [apellido, setApellido] = useState("");
+  const [radio, setRadio] = useState("");
   const [correo, setCorreo] = useState("");
   const [celular, setCelular] = useState("");
   const [contrasena, setContrasena] = useState("");
@@ -48,25 +50,33 @@ const Registro = (navigator) => {
   const animNombre = useRef();
   const animEdad = useRef();
   const animApellido = useRef();
+  const animRadio = useRef();
   const animCorreo = useRef();
   const animCelular = useRef();
   const animContra = useRef();
   const animConfirmContra = useRef();
   // Variables para autenticar
   const auth = firebase.getAuth(firebase.app);
+  // Funcion para el radiobutton
+  const handleRadio = (rValor) => {
+    setRadio(rValor);
+  };
   // Funcion al dar clic en Crear Cuenta
   const handlerCrearCuenta = (navigator) => {
     if (nombre === "" || nombre.length < 6) {
       animNombre.current.bounce();
       setErrorNombre(true);
-    } else if (edad === "" || parseInt(edad) > 99) {
+    } else if (apellido === "" || apellido.length < 6) {
       setErrorNombre(false);
+      animApellido.current.bounce();
+      setErrorApellido(true);
+    } else if (edad === "" || parseInt(edad) > 99) {
+      setErrorApellido(false);
       animEdad.current.bounce();
       setErrorEdad(true);
-    } else if (apellido === "" || apellido.length < 6) {
+    } else if (radio === "") {
       setErrorEdad(false);
-      animUsuario.current.bounce();
-      setErrorApellido(true);
+      animRadio.current.bounce();
     } else if (correo === "") {
       setErrorApellido(false);
       animCorreo.current.bounce();
@@ -96,6 +106,7 @@ const Registro = (navigator) => {
             Correo: correo,
             Telefono: celular,
             Contrasena: contrasena,
+            Preferencia: radio,
           });
           setNombre("");
           setEdad("");
@@ -223,6 +234,19 @@ const Registro = (navigator) => {
               <Text style={style.error}>Ingrese una edad válida</Text>
             )}
           </View>
+          <Text style={style.labelR}>¿Qué prefieres?</Text>
+          <Animatable.View style={style.containerRadio} ref={animRadio}>
+            <RadioButton.Group onValueChange={handleRadio} value={radio}>
+              <View style={style.containerRadio1}>
+                <Text>Perros</Text>
+                <RadioButton value="Perros" />
+              </View>
+              <View style={style.containerRadio2}>
+                <Text>Gatos</Text>
+                <RadioButton value="Gatos" />
+              </View>
+            </RadioButton.Group>
+          </Animatable.View>
           <Text style={style.label}>Información de contacto</Text>
           <Animatable.View style={style.containerInput} ref={animCorreo}>
             <TextInput
@@ -391,8 +415,15 @@ const style = StyleSheet.create({
     color: "darkgray",
     letterSpacing: 0.5,
   },
+  labelR: {
+    fontSize: 18,
+    marginTop: 18,
+    fontFamily: "Chewy",
+    color: "darkgray",
+    letterSpacing: 0.5,
+  },
   containerBtn: {
-    marginTop: 60,
+    marginTop: 40,
     alignItems: "center",
   },
   btn: {
@@ -421,6 +452,21 @@ const style = StyleSheet.create({
   },
   error: {
     color: "red",
+  },
+  containerRadio1: {
+    flexDirection: "row",
+    alignItems: "center",
+    position: "absolute",
+    left: -170,
+  },
+  containerRadio2: {
+    flexDirection: "row",
+    alignItems: "center",
+    position: "absolute",
+    left: -70,
+  },
+  containerRadio: {
+    marginBottom: 20,
   },
 });
 
