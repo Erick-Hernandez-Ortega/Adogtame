@@ -15,7 +15,7 @@ const MascotaMain = React.memo(({ route }) => {
       const mascota = await firebase.db
         .collection("Mascotas No Adoptadas")
         .doc(`${id}`)
-        .get(["nombre", "imagen", "descripcion", "edad", "genero", "raza", "tipo", "idDuenno"]);
+        .get();
       setMascotaData(mascota.data());
     } catch (e) {
       console.log(e);
@@ -28,7 +28,19 @@ const MascotaMain = React.memo(({ route }) => {
 
   if (!mascotaData) return <DogLoading />;
 
-  const { nombre, imagen, descripcion, edad, genero, raza, tipo, idDuenno, nombreDuenno, telefonoDuenno, edadDuenno } = mascotaData;
+  const {
+    nombre,
+    imagen,
+    descripcion,
+    edad,
+    genero,
+    raza,
+    tipo,
+    idDuenno,
+    nombreDuenno,
+    telefonoDuenno,
+    edadDuenno,
+  } = mascotaData;
 
   return (
     <View>

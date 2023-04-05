@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 
 const MascotaContenido = React.memo(({
