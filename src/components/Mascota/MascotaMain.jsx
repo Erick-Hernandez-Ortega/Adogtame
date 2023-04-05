@@ -28,7 +28,7 @@ const MascotaMain = React.memo(({ route }) => {
 
   if (!mascotaData) return <DogLoading />;
 
-  const { nombre, imagen, descripcion, edad, genero, raza, tipo, idDuenno } = mascotaData;
+  const { nombre, imagen, descripcion, edad, genero, raza, tipo, idDuenno, nombreDuenno, telefonoDuenno, edadDuenno } = mascotaData;
 
   return (
     <View>
@@ -42,6 +42,9 @@ const MascotaMain = React.memo(({ route }) => {
         tipo={tipo}
         url={imagen}
         idDuenno={idDuenno}
+        nombreDuenno={nombreDuenno}
+        telefonoDuenno={telefonoDuenno}
+        edadDuenno={edadDuenno}
       />
     </View>
   );

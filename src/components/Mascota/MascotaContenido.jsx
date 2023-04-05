@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React, { useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import firebase from "../../DataBase/firebase";
 import { useEffect } from "react";
 import DogLoading from "../DogLoading/DogLoading";
 
@@ -14,30 +13,10 @@ const MascotaContenido = React.memo(({
   raza,
   tipo,
   idDuenno,
+  nombreDuenno,
+  telefonoDuenno,
+  edadDuenno
 }) => {
-  const [duenno, setDuenno] = useState(null);
-
-  async function requestOwner() {
-    try {
-      const query = await firebase.db
-        .collection("Usuarios")
-        .where("Correo", "==", "" + idDuenno)
-        .get();
-
-      setDuenno(query.docs[0].data());
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  useEffect(() => {
-    requestOwner();
-  });
-
-  if (!duenno) return <DogLoading />;
-
-  const { NombreCompleto, Edad, Telefono, Correo } = duenno;
-
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -89,19 +68,19 @@ const MascotaContenido = React.memo(({
         <Text style={styles.ownerLabel}>Dueño actual</Text>
         <View style={styles.textContainer}>
           <Text style={styles.ownerName}>Nombre</Text>
-          <Text style={styles.ownerNameValue}>{NombreCompleto}</Text>
+          <Text style={styles.ownerNameValue}>{nombreDuenno}</Text>
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.ownerPhone}>Teléfono</Text>
-          <Text style={styles.ownerPhoneValue}>{Telefono}</Text>
+          <Text style={styles.ownerPhoneValue}>{telefonoDuenno}</Text>
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.ownerPhone}>Edad</Text>
-          <Text style={styles.ownerPhoneValue}>{Edad} años</Text>
+          <Text style={styles.ownerPhoneValue}>{edadDuenno} años</Text>
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.ownerPhone}>Correo</Text>
-          <Text style={styles.ownerPhoneValue}>{Correo}</Text>
+          <Text style={styles.ownerPhoneValue}>{idDuenno}</Text>
         </View>
       </View>
     </ScrollView>
