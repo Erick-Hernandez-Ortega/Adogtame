@@ -18,7 +18,7 @@ import MascotasBuscadas from "./MascotasBuscadas";
 const Buscador = (navigator) => {
   const [busqueda, setBusqueda] = useState("");
   const [clic, setClic] = useState(false);
-  const [botonStyle, setBotonStyle] = useState(null);
+  const [botonStyle, setBotonStyle] = useState("boton1");
   const [iphone] = useState(Platform.OS == "ios");
   const [mascotas, setMascotas] = useState(null);
 
@@ -27,11 +27,11 @@ const Buscador = (navigator) => {
 
     if (botonStyle == "boton1") {
       const query = db.where("nombre", "==", `${busqueda}`);
-      setMascotas((await query.get()).docs)
+      setMascotas((await query.get()).docs);
     } else if (botonStyle == "boton2") {
       const query = db.where("raza", "==", `${busqueda}`);
-      setMascotas((await query.get()).docs)
-    }
+      setMascotas((await query.get()).docs);
+    } 
   }
 
   navigator = useNavigation();
@@ -117,18 +117,17 @@ const Buscador = (navigator) => {
         </TouchableOpacity>
       </View>
 
-      <FlatList 
+      <FlatList
         data={mascotas}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
+        style={{height: "100%"}}
       />
     </View>
   );
 };
 
-const renderItem = ({item}) => (
-  <MascotasBuscadas item={item.data()} />
-)
+const renderItem = ({ item }) => <MascotasBuscadas item={item.data()} />;
 
 const style = StyleSheet.create({
   textFiltro: {
