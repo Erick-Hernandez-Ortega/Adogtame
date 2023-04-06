@@ -31,7 +31,7 @@ const Buscador = (navigator) => {
     } else if (botonStyle == "boton2") {
       const query = db.where("raza", "==", `${busqueda}`);
       setMascotas((await query.get()).docs);
-    } 
+    }
   }
 
   navigator = useNavigation();
@@ -54,9 +54,7 @@ const Buscador = (navigator) => {
               placeholder={
                 botonStyle === "boton1"
                   ? "Buscar por nombre 🐶..."
-                  : botonStyle === "boton2"
-                  ? "Buscar por raza 🐶..."
-                  : "Seleccionar por que buscar 🐶..."
+                  : "Buscar por raza 🐶..."
               }
               onChangeText={(e) => setBusqueda(e)}
               value={busqueda}
@@ -121,7 +119,7 @@ const Buscador = (navigator) => {
         data={mascotas}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        style={{height: "100%"}}
+        style={{ height: "100%" }}
       />
     </View>
   );
