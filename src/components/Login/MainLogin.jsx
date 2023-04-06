@@ -48,7 +48,6 @@ const MainLogin = (navigator) => {
       firebase
         .signInWithEmailAndPassword(auth, correo, contra)
         .then(() => {
-          Alert.alert("Sesion iniciada correctamente");
           navigator.navigate("Principal");
         })
         .catch((error) => {
