@@ -238,13 +238,15 @@ const Registro = (navigator) => {
           <Text style={style.labelR}>¿Qué prefieres?</Text>
           <Animatable.View style={style.containerRadio} ref={animRadio}>
             <RadioButton.Group onValueChange={handleRadio} value={radio}>
-              <View style={style.containerRadio1}>
-                <Text>Perros</Text>
-                <RadioButton value="Perros" />
-              </View>
-              <View style={style.containerRadio2}>
-                <Text>Gatos</Text>
-                <RadioButton value="Gatos" />
+              <View style={style.containerRadio}>
+                <View style={style.containerRadio1}>
+                  <Text>Perros</Text>
+                  <RadioButton value="Perros" />
+                </View>
+                <View style={style.containerRadio2}>
+                  <Text>Gatos</Text>
+                  <RadioButton value="Gatos" />
+                </View>
               </View>
             </RadioButton.Group>
           </Animatable.View>
@@ -457,17 +459,14 @@ const style = StyleSheet.create({
   containerRadio1: {
     flexDirection: "row",
     alignItems: "center",
-    position: "absolute",
-    left: -170,
   },
   containerRadio2: {
     flexDirection: "row",
     alignItems: "center",
-    position: "absolute",
-    left: -70,
   },
   containerRadio: {
-    marginBottom: 20,
+    flexDirection: "row",
+    marginVertical: 10,
   },
 });
 
