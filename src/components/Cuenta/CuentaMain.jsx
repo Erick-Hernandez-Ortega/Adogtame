@@ -32,7 +32,7 @@ const CuentaMain = () => {
   return (
     <View style={styles.centrar}>
       <View style={{...styles.container, backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#f7f7f8"}}>
-        <View style={{...styles.circulo, opacity: modalVisible ? "0.8" : "1"}}>
+        <View style={{...styles.circulo, opacity: modalVisible ? 0.8 : 1.0}}>
           <Image
             source={{ uri: "http://placekitten.com/300/300" }}
             style={styles.imagen}
