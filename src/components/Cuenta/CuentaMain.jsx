@@ -31,8 +31,8 @@ const CuentaMain = () => {
 
   return (
     <View style={styles.centrar}>
-      <View style={styles.container}>
-        <View style={styles.circulo}>
+      <View style={{...styles.container, backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#f7f7f8"}}>
+        <View style={{...styles.circulo, opacity: modalVisible ? "0.8" : "1"}}>
           <Image
             source={{ uri: "http://placekitten.com/300/300" }}
             style={styles.imagen}
@@ -130,14 +130,12 @@ const styles = StyleSheet.create({
   centrar: {
     justifyContent: "center",
     alignItems: "center",
-  },
+    },
   container: {
     width: "100%",
     height: "100%",
     padding: 25,
     paddingTop: "10%",
-    backgroundColor: "#f7f7f8",
-
     alignItems: "center",
   },
   subtitulo: {
