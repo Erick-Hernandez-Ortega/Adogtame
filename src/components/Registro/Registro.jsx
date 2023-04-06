@@ -461,8 +461,11 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   containerRadio2: {
+    paddingLeft: 5,
     flexDirection: "row",
     alignItems: "center",
+    borderLeftColor: "black",
+    borderLeftWidth: 1,
   },
   containerRadio: {
     flexDirection: "row",
