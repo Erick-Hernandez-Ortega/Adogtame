@@ -7,27 +7,30 @@ import {
   SafeAreaView,
   Platform,
   Text,
-  Alert,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import firebase from "../../DataBase/firebase";
+import MascotasBuscadas from "./MascotasBuscadas";
 
 const Buscador = (navigator) => {
   const [busqueda, setBusqueda] = useState("");
   const [clic, setClic] = useState(false);
   const [botonStyle, setBotonStyle] = useState(null);
   const [iphone] = useState(Platform.OS == "ios");
+  const [mascotas, setMascotas] = useState(null);
 
   async function request() {
     const db = firebase.db.collection("Mascotas No Adoptadas");
 
     if (botonStyle == "boton1") {
-      const query = db.where("nombre", "==", "pepe");
+      const query = db.where("nombre", "==", `${busqueda}`);
+      setMascotas((await query.get()).docs)
     } else if (botonStyle == "boton2") {
-      const query = db.where("raza", "==", "pepe");
+      const query = db.where("raza", "==", `${busqueda}`);
+      setMascotas((await query.get()).docs)
     }
   }
 
@@ -60,7 +63,7 @@ const Buscador = (navigator) => {
               onFocus={() => {
                 setClic(true);
               }}
-              onSubmitEditing={() => Alert.alert("Di click")}
+              onSubmitEditing={() => request()}
             />
             {clic && (
               <Icon
@@ -113,10 +116,19 @@ const Buscador = (navigator) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <Text>aaca se mostraran los chuchos</Text>
+
+      <FlatList 
+        data={mascotas}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
     </View>
   );
 };
+
+const renderItem = ({item}) => (
+  <MascotasBuscadas item={item.data()} />
+)
 
 const style = StyleSheet.create({
   textFiltro: {
