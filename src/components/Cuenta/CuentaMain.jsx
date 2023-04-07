@@ -1,22 +1,62 @@
 import { View, StyleSheet, Image, Modal, Text, Alert } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BtnCuenta from "./BtnCuenta";
 import TextoCuenta from "./TextoCuenta";
 import { useNavigation } from "@react-navigation/native";
+import { getAuth } from "firebase/auth";
+import firebase from "../../DataBase/firebase";
 
 const CuentaMain = () => {
   navigator = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
-
+  // Guardamos la info del usuario
+  const [user, setUsuario] = useState({
+    id: "",
+    nombres: "",
+    apellidos: "",
+    edad: "",
+    correo: "",
+    telefono: "",
+  });
+  // Funcion para jalar la info
+  useEffect(() => {
+    const auth = getAuth();
+    const usuario = auth.currentUser;
+    if (usuario !== null) {
+      const userCollectionRef = firebase.db.collection("Usuarios");
+      userCollectionRef
+        .where("Correo", "==", usuario.email)
+        .get()
+        .then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+            const userDoc = querySnapshot.docs[0];
+            const userData = userDoc.data();
+            setUsuario({
+              nombres: userData.Nombres,
+              apellidos: userData.Apellidos,
+              edad: userData.Edad,
+              correo: userData.Correo,
+              telefono: userData.Telefono,
+            });
+          } else {
+            Alert.alert("El documento no existe");
+          }
+        })
+        .catch((e) => {
+          Alert.alert(e);
+        });
+    } else {
+      Alert.alert("Hubo un error al autenticar el usuario");
+    }
+  }, []);
+  // funciones de los modales
   const toggleModalVisible = () => {
     setModalVisible(!modalVisible);
   };
-
   const toggleModalVisible2 = () => {
     setModalVisible2(!modalVisible2);
   };
-
   const borrarCuenta = () => {
     Alert.alert("Cuenta borrada con exito :(");
   };
@@ -36,7 +76,7 @@ const CuentaMain = () => {
           />
         </View>
 
-        <TextoCuenta />
+        <TextoCuenta {...user} />
         <Modal visible={modalVisible2} animationType="slide" transparent={true}>
           <View style={styles.modalContainerCenter}>
             <View style={styles.modalView}>
