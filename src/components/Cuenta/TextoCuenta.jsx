@@ -39,7 +39,7 @@ const TextoCuenta = () => {
               nombres: userData.Nombres,
               apellidos: userData.Apellidos,
               edad: userData.Edad,
-              correo: userData.Correo,
+              correo: userData.CorreoOriginal,
               telefono: userData.Telefono,
             });
           } else {
