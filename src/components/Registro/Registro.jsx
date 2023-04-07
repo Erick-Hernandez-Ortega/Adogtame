@@ -103,7 +103,7 @@ const Registro = (navigator) => {
             Nombres: nombre,
             Edad: edad,
             Apellidos: apellido,
-            Correo: correo.toLowerCase,
+            Correo: correo.toLowerCase(),
             Telefono: celular,
             Contrasena: contrasena,
             Preferencia: radio,
