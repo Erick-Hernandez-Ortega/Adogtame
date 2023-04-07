@@ -1,13 +1,11 @@
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { Text, View, StyleSheet, ScrollView, Alert } from "react-native";
 import Mascotas from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
 const Contenido = React.memo(() => {
-
   const ids = [1, 2];
   navigator = useNavigation();
-
   return (
     <View style={style.container}>
       <ScrollView
@@ -23,7 +21,7 @@ const Contenido = React.memo(() => {
           <Mascotas
             key={e}
             id={e}
-            onPress={() => navigator.navigate("Mascota", {id: e})}
+            onPress={() => navigator.navigate("Mascota", { id: e })}
           />
         ))}
       </ScrollView>

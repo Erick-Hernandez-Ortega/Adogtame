@@ -21,25 +21,22 @@ const CuentaMain = () => {
     Alert.alert("Cuenta borrada con exito :(");
   };
 
-  const user = {
-    username: "Bolita",
-    correo: "jose.castaneda@alumnos.udg.mx",
-    nombre: "Jóse Jaime Gpe.",
-    apellidos: "Castañeda Ruiz",
-    celular: "3313197707",
-  };
-
   return (
     <View style={styles.centrar}>
-      <View style={{...styles.container, backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#f7f7f8"}}>
-        <View style={{...styles.circulo, opacity: modalVisible ? 0.8 : 1.0}}>
+      <View
+        style={{
+          ...styles.container,
+          backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#f7f7f8",
+        }}
+      >
+        <View style={{ ...styles.circulo, opacity: modalVisible ? 0.8 : 1.0 }}>
           <Image
             source={{ uri: "http://placekitten.com/300/300" }}
             style={styles.imagen}
           />
         </View>
 
-        <TextoCuenta {...user} />
+        <TextoCuenta />
         <Modal visible={modalVisible2} animationType="slide" transparent={true}>
           <View style={styles.modalContainerCenter}>
             <View style={styles.modalView}>
@@ -130,7 +127,7 @@ const styles = StyleSheet.create({
   centrar: {
     justifyContent: "center",
     alignItems: "center",
-    },
+  },
   container: {
     width: "100%",
     height: "100%",
