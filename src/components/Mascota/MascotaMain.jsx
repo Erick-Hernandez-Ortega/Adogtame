@@ -5,6 +5,7 @@ import MascotaContenido from "./MascotaContenido";
 import { useEffect, useState } from "react";
 import DogLoading from "../DogLoading/DogLoading";
 import firebase from "../../DataBase/firebase";
+import BotonFlotante from "../BotonFlotante/BotonFlotante";
 
 const MascotaMain = React.memo(({ route }) => {
   const [mascotaData, setMascotaData] = useState(null);
@@ -58,6 +59,7 @@ const MascotaMain = React.memo(({ route }) => {
         telefonoDuenno={telefonoDuenno}
         edadDuenno={edadDuenno}
       />
+      <BotonFlotante/>
     </View>
   );
 });
