@@ -47,7 +47,7 @@ const MascotaContenido = React.memo(({
           <View style={styles.textContainer}>
             <Text style={styles.petBreed}>Genero</Text>
             <Text style={styles.petBreedValue}>
-              {genero ? "Es un Machito Opresor " : "Es una señora"}
+              {genero ? "Es un señor" : "Es una señora"}
             </Text>
           </View>
           <View style={styles.textContainer}>

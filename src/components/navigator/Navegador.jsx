@@ -20,6 +20,7 @@ import PreLogin from "../Login/PreLogin";
 import ActualizarCuenta from "../ActualizarCuenta/ActualizarCuenta";
 import BarraMenuAdopciones from "../Adopciones/BarraMenuAdopciones";
 import MainAdoptado from "../Adoptado/MainAdoptado";
+import MascotaResultado from "../Buscador/MascotaResultado";
 
 const Nav = createDrawerNavigator();
 
@@ -79,6 +80,11 @@ const Navegador = React.memo(() => {
       <Nav.Screen
         name="Registro"
         component={Registro}
+        options={{ headerShown: false }}
+      />
+      <Nav.Screen
+        name="MascotaResultado"
+        component={MascotaResultado}
         options={{ headerShown: false }}
       />
     </Nav.Navigator>

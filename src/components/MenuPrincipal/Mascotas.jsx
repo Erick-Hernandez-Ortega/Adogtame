@@ -11,7 +11,7 @@ const Mascotas = React.memo((props) => {
     try {
       const mascota = await firebase.db
         .collection("Mascotas No Adoptadas")
-        .doc("" + props.id)
+        .doc(`${props.id}`)
         .get(["nombre", "imagen", "edad", "genero", "tipo"]);
       setMascotaData(mascota.data());
     } catch (e) {
@@ -42,7 +42,7 @@ const Mascotas = React.memo((props) => {
         </Text>
         <Text style={styles.subtitle}>Tiene {edad} años</Text>
         <Text style={styles.subtitle}>
-          {genero ? "Es un Machito Opresor " : "Es una señora"}
+          {genero ? "Es un señor" : "Es una señora"}
         </Text>
 
         <Text style={styles.description}>Tonalá, Jalisco, México.</Text>

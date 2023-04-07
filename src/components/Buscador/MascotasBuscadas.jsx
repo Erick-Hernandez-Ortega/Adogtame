@@ -1,26 +1,26 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from "@react-navigation/native";
 
 const MascotasBuscadas = ({item}) => {
-
+  navigator = useNavigation();
   const { nombre, imagen, edad, genero, tipo } = item;
 
   return (
     <TouchableOpacity
       style={styles.card}
-      onPress={{}}
+      onPress={() => navigator.navigate("MascotaResultado", {...item})}
     >
       <Image source={{ uri: imagen }} style={styles.image} />
       <View style={styles.cardContent}>
         <Text style={styles.title}>{nombre}</Text>
-
         <Text style={styles.subtitle}>
           Es un {tipo ? "Chucho 🐕" : "Michi 🐈"}
         </Text>
         <Text style={styles.subtitle}>Tiene {edad} años</Text>
         <Text style={styles.subtitle}>
-          {genero ? "Es un Machito Opresor " : "Es una señora"}
+          {genero ? "Es un señor" : "Es una señora"}
         </Text>
 
         <Text style={styles.description}>Tonalá, Jalisco, México.</Text>
