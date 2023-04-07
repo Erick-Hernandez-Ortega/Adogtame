@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import MascotaResultadoBarra from './MascotaResultadoBarra'
 import MascotaContenido from '../Mascota/MascotaContenido'
+import BotonFlotante from '../BotonFlotante/BotonFlotante'
 
 const MascotaResultado = ({route}) => {
   const item = route.params
@@ -21,6 +22,7 @@ const MascotaResultado = ({route}) => {
         telefonoDuenno={item.telefonoDuenno}
         edadDuenno={item.edadDuenno}
       />
+      <BotonFlotante/>
     </View>
   )
 }
