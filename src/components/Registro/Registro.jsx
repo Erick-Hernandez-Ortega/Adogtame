@@ -104,7 +104,6 @@ const Registro = (navigator) => {
             Edad: edad,
             Apellidos: apellido,
             Correo: correo.toLowerCase,
-            CorreoOriginal: correo,
             Telefono: celular,
             Contrasena: contrasena,
             Preferencia: radio,
