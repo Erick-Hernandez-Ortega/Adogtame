@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
-const BotonFlotante = () => {
+const BotonFlotante = ({onPress, modalVisible}) => {
   return (
-    <TouchableOpacity style={styles.boton}>
+    <TouchableOpacity style={{...styles.boton, display: modalVisible ? "none" : null}} onPress={onPress}>
       <View style={styles.icono}>
             <Icon name={'plus'} size={30} style={{color: "#fff"}} />
             <Icon name={'dog-service'} size={30} style={{color: "#fff"}} />
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
       height: "100%",
       alignItems: 'center',
       justifyContent: 'center',
-        flexDirection: "row"
+        flexDirection: "row",
     },
   });
   

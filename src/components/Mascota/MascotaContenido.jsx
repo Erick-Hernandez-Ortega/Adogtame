@@ -15,17 +15,17 @@ const MascotaContenido = React.memo(({
   telefonoDuenno,
   edadDuenno,
   ubicacion,
-  fechaRegistro
+  fechaRegistro,
+  modalVisible
 }) => {
   const date = new Date()
   return (
     <ScrollView
       contentContainerStyle={styles.container}
-      style={{ backgroundColor: "#f7f7f8" }}
     >
-      <View style={styles.card}>
+      <View style={{...styles.card, backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.5)" : "#fff"}}>
         <View style={styles.petImageContainer}>
-          <Image source={{ uri: url }} style={styles.petImage} />
+          <Image source={{ uri: url }} style={{...styles.petImage, opacity: modalVisible ? 0.5 : null}} />
         </View>
         <View style={styles.petDetails}>
           <Text style={styles.petDate}>Fecha de registro: {fechaRegistro}</Text>
@@ -61,7 +61,6 @@ const MascotaContenido = React.memo(({
             <Text style={styles.petDescription}>Descripción</Text>
           </View>
           <Text style={styles.petDescriptionValue}>{descripcion}</Text>
-          {console.log(date)}
         </View>
       </View>
     </ScrollView>

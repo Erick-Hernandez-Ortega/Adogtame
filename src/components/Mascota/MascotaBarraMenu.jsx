@@ -4,11 +4,18 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import BtnBuscar from "../MenuPrincipal/BtnBuscar";
 
-const MascotaBarraMenu = React.memo(({ name, tipo }) => {
+const MascotaBarraMenu = React.memo(({ name, tipo, modalVisible }) => {
   navigator = useNavigation();
 
   return (
-    <SafeAreaView style={styles.header}>
+    <SafeAreaView
+      style={{
+        ...styles.header,
+        backgroundColor: modalVisible
+          ? "rgba(244, 160, 32, 0.5)"
+          : "rgba(244, 160, 32, 1)",
+      }}
+    >
       <View style={styles.container}>
         <Icon
           name="arrow-left"
@@ -29,7 +36,6 @@ const MascotaBarraMenu = React.memo(({ name, tipo }) => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#f4a020",
     elevation: Platform.OS === "android" ? 4 : 0, // Agrega sombra en Android
     shadowColor: "#000000", // Agrega sombra en iOS
     shadowOffset: {
