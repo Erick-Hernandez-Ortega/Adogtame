@@ -14,8 +14,10 @@ const MascotaContenido = React.memo(({
   nombreDuenno,
   telefonoDuenno,
   edadDuenno,
-  ubicacion
+  ubicacion,
+  fechaRegistro
 }) => {
+  const date = new Date()
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -26,7 +28,7 @@ const MascotaContenido = React.memo(({
           <Image source={{ uri: url }} style={styles.petImage} />
         </View>
         <View style={styles.petDetails}>
-          <Text style={styles.petDate}>Fecha de registro: 22-12-2012</Text>
+          <Text style={styles.petDate}>Fecha de registro: {fechaRegistro}</Text>
           <View style={styles.textContainer}>
             <Text style={styles.petName}>Nombre</Text>
             <Text style={styles.petNameValue}>{name}</Text>
@@ -59,27 +61,7 @@ const MascotaContenido = React.memo(({
             <Text style={styles.petDescription}>Descripción</Text>
           </View>
           <Text style={styles.petDescriptionValue}>{descripcion}</Text>
-        </View>
-        <View
-          style={{ height: 1, backgroundColor: "#ccc", marginVertical: 20 }}
-        />
-
-        <Text style={styles.ownerLabel}>Dueño actual</Text>
-        <View style={styles.textContainer}>
-          <Text style={styles.ownerName}>Nombre</Text>
-          <Text style={styles.ownerNameValue}>{nombreDuenno}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.ownerPhone}>Teléfono</Text>
-          <Text style={styles.ownerPhoneValue}>{telefonoDuenno}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.ownerPhone}>Edad</Text>
-          <Text style={styles.ownerPhoneValue}>{edadDuenno} años</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.ownerPhone}>Correo</Text>
-          <Text style={styles.ownerPhoneValue}>{idDuenno}</Text>
+          {console.log(date)}
         </View>
       </View>
     </ScrollView>

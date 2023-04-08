@@ -41,7 +41,8 @@ const MascotaMain = React.memo(({ route }) => {
     nombreDuenno,
     telefonoDuenno,
     edadDuenno,
-    ubicacion
+    ubicacion,
+    fechaRegistro,
   } = mascotaData;
 
   return (
@@ -60,8 +61,9 @@ const MascotaMain = React.memo(({ route }) => {
         telefonoDuenno={telefonoDuenno}
         edadDuenno={edadDuenno}
         ubicacion={ubicacion}
+        fechaRegistro={fechaRegistro}
       />
-      <BotonFlotante/>
+      <BotonFlotante />
     </View>
   );
 });
