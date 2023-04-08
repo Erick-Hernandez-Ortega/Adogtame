@@ -13,7 +13,8 @@ const MascotaContenido = React.memo(({
   idDuenno,
   nombreDuenno,
   telefonoDuenno,
-  edadDuenno
+  edadDuenno,
+  ubicacion
 }) => {
   return (
     <ScrollView
@@ -52,7 +53,7 @@ const MascotaContenido = React.memo(({
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.petBreed}>¿Onta Ubicado?</Text>
-            <Text style={styles.petBreedValue}>Tonalá, Jalisco, México.</Text>
+            <Text style={styles.petBreedValue}>{ubicacion}</Text>
           </View>
           <View style={{ marginTop: 10 }}>
             <Text style={styles.petDescription}>Descripción</Text>
