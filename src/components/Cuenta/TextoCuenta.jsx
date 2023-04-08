@@ -13,7 +13,7 @@ const TextoCuenta = (props) => {
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.subtitulo}>Edad: </Text>
-        <Text style={styles.textPrincipal}>{props.edad}</Text>
+        <Text style={styles.textPrincipal}>{props.edad} años</Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.subtitulo}>Correo: </Text>
