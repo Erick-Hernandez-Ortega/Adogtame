@@ -26,7 +26,7 @@ const ContenidoAdopciones = React.memo(() => {
 
   useEffect(() => {
     request();
-  }, [])
+  }, []);
 
   return (
     <View style={styles.container}>

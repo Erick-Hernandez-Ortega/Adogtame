@@ -17,7 +17,14 @@ const ContenidoAdoptado = ({
   fechaRegistro,
 }) => {
   return (
-    <View style={{padding: 20, width: "100%" , height: "100%", paddingBottom: "35%"}}>
+    <View
+      style={{
+        padding: 20,
+        width: "100%",
+        height: "100%",
+        paddingBottom: "35%",
+      }}
+    >
       <View style={{ alignItems: "center", marginBottom: 20 }}>
         <Image
           source={{ uri: url }}
