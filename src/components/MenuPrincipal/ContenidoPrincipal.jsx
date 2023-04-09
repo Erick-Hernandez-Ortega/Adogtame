@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
 const Contenido = React.memo(() => {
-  const ids = [1, 2];
+  const ids = [1, 2, 3, 4];
   navigator = useNavigation();
   return (
     <View style={style.container}>

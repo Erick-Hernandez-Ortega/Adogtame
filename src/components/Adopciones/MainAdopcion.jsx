@@ -1,9 +1,21 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import ContenidoAdopciones from "./ContenidoAdopciones";
+import { useNavigation } from "@react-navigation/native";
+import { getAuth } from "firebase/auth";
 
 const MainAdopciones = () => {
+  const auth = getAuth();
+  const usuario = auth.currentUser;
+  navigator = useNavigation();
+
+  if (usuario == null)
+    return (
+      Alert.alert("Error", "Inicia sesión para poder ver tus adopciones"),
+      navigator.navigate("Login")
+    );
+
   return (
     <ScrollView
       contentContainerStyle={styles.container}

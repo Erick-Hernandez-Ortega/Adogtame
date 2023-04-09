@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Modal } from "react-native";
+import { StyleSheet, View, Text, Modal, Alert } from "react-native";
 import React from "react";
 import MascotaBarraMenu from "./MascotaBarraMenu";
 import MascotaContenido from "./MascotaContenido";
@@ -8,6 +8,7 @@ import firebase from "../../DataBase/firebase";
 import BotonFlotante from "../BotonFlotante/BotonFlotante";
 import BtnCuenta from "../Cuenta/BtnCuenta";
 import { ScrollView } from "react-native-gesture-handler";
+import { getAuth } from "firebase/auth";
 
 const MascotaMain = React.memo(({ route }) => {
   const [mascotaData, setMascotaData] = useState(null);
@@ -27,6 +28,43 @@ const MascotaMain = React.memo(({ route }) => {
       setMascotaData(mascota.data());
     } catch (e) {
       console.log(e);
+    }
+  }
+
+  async function adoptar() {
+    try {
+      const auth = getAuth();
+      const usuario = auth.currentUser;
+
+      if (usuario !== null) {
+        const mascota = mascotaData;
+        // agregamos id del nuevo dueño
+        mascota["idDuennoAdoptado"] = `${usuario.email}`;
+        // Agregamos a mascotas adoptadas
+        const adopcion = await firebase.db
+          .collection("Mascotas Adoptadas")
+          .add(mascota);
+        // Borramos de mascotas no adoptadas
+        const DeleteMascota = await firebase.db
+          .collection("Mascotas No Adoptadas")
+          .doc(`${id}`)
+          .delete();
+
+        navigator.navigate("Adopciones");
+        Alert.alert(
+          "¡Gracias por adoptar!",
+          `Ponte en contacto con el dueño de ${mascota.nombre} ${
+            mascota.tipo ? "🐶" : "🐱"
+          } para iniciar el proceso de adopción`
+        );
+      } else {
+        Alert.alert(
+          "Error en adoptar",
+          "Inicia sesión con una cuenta para poder adoptar"
+        );
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -111,7 +149,7 @@ const MascotaMain = React.memo(({ route }) => {
                 bgColor="#006400"
                 color="#fff"
                 onPress={() => {
-                  toggleModalVisible();
+                  adoptar();
                 }}
               />
               <BtnCuenta

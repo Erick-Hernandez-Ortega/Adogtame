@@ -4,24 +4,68 @@ import { ScrollView } from "react-native-gesture-handler";
 import AdoptadoBarraMenu from "./AdoptadoBarraMenu";
 import DogLoading from "../DogLoading/DogLoading";
 import ContenidoAdoptado from "./ContenidoAdoptado";
+import firebase from "../../DataBase/firebase";
 
-const MainAdoptado = ({route}) => {
-  const {id} = route.params;
-  const [pokemonData, setPokemonData] = useState(null);
+const MainAdoptado = ({ route }) => {
+  const { id } = route.params;
+  const [mascotaData, setMascotaData] = useState(null);
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-      .then((response) => response.json())
-      .then((data) => setPokemonData(data));
+    resquest();
   });
 
-  if (!pokemonData) return <DogLoading />;
+  async function resquest() {
+    try {
+      const mascota = await firebase.db
+        .collection("Mascotas Adoptadas")
+        .doc(`${id}`)
+        .get();
+      setMascotaData(mascota.data());
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  if (!mascotaData) return <DogLoading />;
+
+  const {
+    nombre,
+    imagen,
+    descripcion,
+    edad,
+    genero,
+    raza,
+    tipo,
+    idDuenno,
+    nombreDuenno,
+    telefonoDuenno,
+    edadDuenno,
+    ubicacion,
+    fechaRegistro,
+  } = mascotaData;
 
   return (
     <View>
-      <AdoptadoBarraMenu name={pokemonData.name} />
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
-        <ContenidoAdoptado name={pokemonData.name} id={id} url={pokemonData.sprites.front_default} />
+      <AdoptadoBarraMenu name={nombre} />
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.container}
+      >
+        <ContenidoAdoptado
+          name={nombre}
+          descripcion={descripcion}
+          edad={edad}
+          genero={genero}
+          raza={raza}
+          tipo={tipo}
+          url={imagen}
+          idDuenno={idDuenno}
+          nombreDuenno={nombreDuenno}
+          telefonoDuenno={telefonoDuenno}
+          edadDuenno={edadDuenno}
+          ubicacion={ubicacion}
+          fechaRegistro={fechaRegistro}
+        />
       </ScrollView>
     </View>
   );
@@ -32,9 +76,6 @@ export default MainAdoptado;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    height: "100%",
-    width: "100%",
-    padding: 20,
   },
   scrollView: {
     backgroundColor: "#f7f7f8",

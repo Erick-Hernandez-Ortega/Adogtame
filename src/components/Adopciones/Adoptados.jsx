@@ -3,31 +3,42 @@ import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import DogLoading from "../DogLoading/DogLoading";
 import { useEffect, useState } from "react";
+import firebase from "../../DataBase/firebase";
 
-const Adoptados = React.memo(({ id , onPress}) => {
-  const [pokemonData, setPokemonData] = useState(null);
+const Adoptados = React.memo(({ id, onPress }) => {
+  const [mascotaData, setMascotaData] = useState(null);
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-      .then((response) => response.json())
-      .then((data) => setPokemonData(data));
+    resquest();
   }, []);
 
-  if (!pokemonData) return <DogLoading />;
+  async function resquest() {
+    try {
+      const mascota = await firebase.db
+        .collection("Mascotas Adoptadas")
+        .doc(`${id}`)
+        .get();
+      setMascotaData(mascota.data());
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  if (!mascotaData) return <DogLoading />;
+
+  const { nombre, imagen, edad, genero, tipo } = mascotaData;
 
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <Image
-        source={{ uri: pokemonData.sprites.front_default }}
-        style={styles.image}
-      />
+      <Image source={{ uri: imagen }} style={styles.image} />
       <View style={styles.cardContent}>
-        <Text style={styles.title}>{pokemonData.name}</Text>
-        <Text style={styles.subtitle}>Edad: {pokemonData.id}</Text>
-        <Text style={styles.description}>
-          Bulbasaur es un Pokémon de tipo planta/veneno. Es uno de los Pokémon
-          iniciales en la región de Kanto y es muy popular entre los
-          entrenadores Pokémon.
+        <Text style={styles.title}>{nombre}</Text>
+        <Text style={styles.subtitle}>
+          Es un {tipo ? "Chucho 🐕" : "Michi 🐈"}
+        </Text>
+        <Text style={styles.subtitle}>Tiene {edad} años</Text>
+        <Text style={styles.subtitle}>
+          {genero ? "Es un señor" : "Es una señora"}
         </Text>
       </View>
     </TouchableOpacity>

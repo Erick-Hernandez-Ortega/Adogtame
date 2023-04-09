@@ -1,16 +1,41 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet } from "react-native";
 import Adoptados from "./Adoptados";
+import { getAuth } from "firebase/auth";
+import firebase from "../../DataBase/firebase";
 
 const ContenidoAdopciones = React.memo(() => {
   navigator = useNavigation();
-  const ids = [45, 14, 22, 38, 31, 48, 27, 20, 42, 16];
+  const auth = getAuth();
+  const usuario = auth.currentUser;
+  const [ids, setIds] = useState([]);
+
+  async function request() {
+    try {
+      const mascotasAdoptadasRef = firebase.db.collection("Mascotas Adoptadas");
+      const query = await mascotasAdoptadasRef
+        .where("idDuennoAdoptado", "==", `${usuario.email}`)
+        .get();
+
+      query.forEach((e) => setIds((prevIds) => [...prevIds, e.id]));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    request();
+  }, [])
 
   return (
     <View style={styles.container}>
       {ids.map((e) => (
-        <Adoptados id={e} key={e} onPress={() => navigator.navigate("Adoptado", {id: e})} />
+        <Adoptados
+          id={e}
+          key={e}
+          onPress={() => navigator.navigate("Adoptado", { id: e })}
+        />
       ))}
     </View>
   );

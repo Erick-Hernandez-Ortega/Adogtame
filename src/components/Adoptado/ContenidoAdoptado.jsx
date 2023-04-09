@@ -1,48 +1,84 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const ContenidoAdoptado = ({name, id, url}) => {
+const ContenidoAdoptado = ({
+  name,
+  url,
+  descripcion,
+  edad,
+  genero,
+  raza,
+  tipo,
+  idDuenno,
+  nombreDuenno,
+  telefonoDuenno,
+  edadDuenno,
+  ubicacion,
+  fechaRegistro,
+}) => {
   return (
-    <View>
+    <View style={{padding: 20, width: "100%" , height: "100%", paddingBottom: "35%"}}>
       <View style={{ alignItems: "center", marginBottom: 20 }}>
         <Image
           source={{ uri: url }}
           style={{ height: 150, width: 150, borderRadius: 150 / 2 }}
         />
       </View>
-      <Text style={styles.date}>Fecha de adopción: 22-12-2012</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.date}>Fecha de registro: {fechaRegistro}</Text>
+        <Text style={styles.date}>Fecha de adopción: 22-12-2012</Text>
+      </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Nombre</Text>
         <Text style={styles.textValue}>{name}</Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Edad</Text>
-        <Text style={styles.textValue}>{id} años</Text>
+        <Text style={styles.textValue}>{edad} años</Text>
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.petAge}>¿Es chucho o michi?</Text>
+        <Text style={styles.petAgeValue}>
+          Es un {tipo ? "Chucho 🐕" : "Michi 🐈"}
+        </Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Raza</Text>
-        <Text style={styles.textValue}>Gris</Text>
+        <Text style={styles.textValue}>{raza}</Text>
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.petBreed}>Genero</Text>
+        <Text style={styles.petBreedValue}>
+          {genero ? "Es un señor" : "Es una señora"}
+        </Text>
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.petBreed}>¿Onta Ubicado?</Text>
+        <Text style={styles.petBreedValue}>{ubicacion}</Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Descripción</Text>
       </View>
-      <Text style={styles.textDescription}>
-        El gato American Shorthair es una raza de gatos domésticos de tamaño
-        mediano con un pelaje corto y grueso en una variedad de colores y
-        patrones. Son conocidos por su temperamento tranquilo y amigable, y son
-        excelentes compañeros de familia.
-      </Text>
+      <Text style={styles.textDescription}>{descripcion}</Text>
       <View
         style={{ height: 1, backgroundColor: "#ccc", marginVertical: 20 }}
       />
-      <Text style={styles.ownerLabel}>Dueño Anterior</Text>
+      <Text style={styles.ownerLabel}>Datos del dueño anterior</Text>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>Nombre del dueño</Text>
-        <Text style={styles.textValue}>Bolita</Text>
+        <Text style={styles.text}>Nombre</Text>
+        <Text style={styles.textValue}>{nombreDuenno}</Text>
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>Teléfono del dueño</Text>
-        <Text style={styles.textValue}>3323986735</Text>
+        <Text style={styles.text}>Teléfono</Text>
+        <Text style={styles.textValue}>{telefonoDuenno}</Text>
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>Correo</Text>
+        <Text style={styles.textValue}>{idDuenno}</Text>
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>Edad</Text>
+        <Text style={styles.textValue}>{edadDuenno} años</Text>
       </View>
     </View>
   );
@@ -53,12 +89,12 @@ export default ContenidoAdoptado;
 const styles = StyleSheet.create({
   text: {
     fontFamily: "Chewy",
-    fontSize: 18,
+    fontSize: 20,
     color: "#999",
   },
   textValue: {
     fontFamily: "Chewy",
-    fontSize: 18,
+    fontSize: 20,
   },
   textContainer: {
     marginVertical: 10,
@@ -76,10 +112,30 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
   },
+  petBreed: {
+    fontSize: 20,
+    marginBottom: 5,
+    color: "#999999",
+    fontFamily: "Chewy",
+  },
+  petBreedValue: {
+    fontFamily: "Chewy",
+    fontSize: 20,
+  },
   date: {
     fontSize: 12,
     color: "#888",
     fontFamily: "Chewy",
-    marginBottom: 5
+    marginBottom: 5,
+  },
+  petAge: {
+    fontSize: 20,
+    marginBottom: 5,
+    color: "#999999",
+    fontFamily: "Chewy",
+  },
+  petAgeValue: {
+    fontFamily: "Chewy",
+    fontSize: 20,
   },
 });
