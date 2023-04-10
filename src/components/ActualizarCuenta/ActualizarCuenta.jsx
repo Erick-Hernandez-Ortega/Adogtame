@@ -1,8 +1,8 @@
-import { Alert, StyleSheet, Text, View, Modal } from "react-native";
+import { Alert, StyleSheet, Text, View, Modal, TextInput } from "react-native";
 import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import BtnCuenta from "../Cuenta/BtnCuenta";
-import ContenidoActualizarCuenta from "./ContenidoActualizarCuenta";
+// import ContenidoActualizarCuenta from "./ContenidoActualizarCuenta";
 import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
 
@@ -16,6 +16,7 @@ const ActualizarCuenta = () => {
   const actualizarCuenta = () => {
     Alert.alert("Adogcuenta 🐶", "Se han actualizado tus datos");
   };
+
   // Guardamos la info del usuario
   const [user, setUsuario] = useState({
     id: "",
@@ -98,10 +99,43 @@ const ActualizarCuenta = () => {
         </View>
       </Modal>
 
-      <ContenidoActualizarCuenta
-        toggleModalVisible={toggleModalVisible}
-        props={user}
-      />
+      <View style={styles.container}>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={styles.text}>Nombres</Text>
+          <TextInput placeholder={user.nombres} style={styles.textInput} />
+        </View>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={styles.text}>Apellidos</Text>
+          <TextInput placeholder={user.apellidos} style={styles.textInput} />
+        </View>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={styles.text}>Edad</Text>
+          <TextInput placeholder={user.edad} style={styles.textInput} />
+        </View>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={styles.text}>Celular</Text>
+          <TextInput placeholder={user.telefono} style={styles.textInput} />
+        </View>
+
+        <View style={{ marginTop: 35 }}>
+          <BtnCuenta
+            name="Guardar"
+            icon="content-save-all"
+            bgColor="#007f00"
+            color="#fff"
+            onPress={toggleModalVisible}
+          />
+          <BtnCuenta
+            name="Cancelar"
+            icon="delete-empty"
+            bgColor="#8b0000"
+            color="#fff"
+            onPress={() => navigator.navigate("Cuenta")}
+          />
+        </View>
+      </View>
+
+      {/*  <ContenidoActualizarCuenta toggleModalVisible={toggleModalVisible} /> */}
     </ScrollView>
   );
 };
@@ -128,5 +162,26 @@ const styles = StyleSheet.create({
     elevation: 5,
     marginBottom: 22,
     width: "92%",
+  },
+  container: {
+    height: "98%",
+    width: "100%",
+    padding: 20,
+  },
+  text: {
+    fontFamily: "Chewy",
+    fontSize: 18,
+  },
+  textInput: {
+    height: 50,
+    width: "100%",
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "rgba(0, 0, 0, 0.3)",
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    marginTop: 10,
+    fontSize: 16,
+    fontFamily: "Chewy",
   },
 });

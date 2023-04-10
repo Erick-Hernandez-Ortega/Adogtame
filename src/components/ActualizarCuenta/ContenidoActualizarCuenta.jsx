@@ -1,30 +1,68 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BtnCuenta from "../Cuenta/BtnCuenta";
 import { TextInput } from "react-native-gesture-handler";
+import { getAuth } from "firebase/auth";
+import firebase from "../../DataBase/firebase";
 
-const ContenidoActualizarCuenta = ({ toggleModalVisible, props }) => {
+const ContenidoActualizarCuenta = ({ toggleModalVisible }) => {
+  // Guardamos la info del usuario
+  const [user, setUsuario] = useState({
+    id: "",
+    nombres: "",
+    apellidos: "",
+    edad: "",
+    correo: "",
+    telefono: "",
+  });
+  // Funcion para jalar la info
+  useEffect(() => {
+    const auth = getAuth();
+    const usuario = auth.currentUser;
+    if (usuario !== null) {
+      const userCollectionRef = firebase.db.collection("Usuarios");
+      userCollectionRef
+        .where("Correo", "==", usuario.email)
+        .get()
+        .then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+            const userDoc = querySnapshot.docs[0];
+            const userData = userDoc.data();
+            setUsuario({
+              nombres: userData.Nombres,
+              apellidos: userData.Apellidos,
+              edad: userData.Edad,
+              correo: userData.Correo,
+              telefono: userData.Telefono,
+            });
+          } else {
+            Alert.alert("El documento no existe");
+          }
+        })
+        .catch((e) => {
+          Alert.alert(e);
+        });
+    } else {
+      Alert.alert("Hubo un error al autenticar el usuario");
+    }
+  }, []);
   return (
     <View style={styles.container}>
       <View style={{ marginBottom: 10 }}>
         <Text style={styles.text}>Nombres</Text>
-        <TextInput placeholder={props.nombres} style={styles.textInput} />
+        <TextInput placeholder={user.nombres} style={styles.textInput} />
       </View>
       <View style={{ marginBottom: 10 }}>
         <Text style={styles.text}>Apellidos</Text>
-        <TextInput placeholder={props.apellidos} style={styles.textInput} />
+        <TextInput placeholder={user.apellidos} style={styles.textInput} />
       </View>
       <View style={{ marginBottom: 10 }}>
         <Text style={styles.text}>Edad</Text>
-        <TextInput placeholder={props.edad} style={styles.textInput} />
-      </View>
-      <View style={{ marginBottom: 10 }}>
-        <Text style={styles.text}>Correo</Text>
-        <TextInput placeholder={props.correo} style={styles.textInput} />
+        <TextInput placeholder={user.edad} style={styles.textInput} />
       </View>
       <View style={{ marginBottom: 10 }}>
         <Text style={styles.text}>Celular</Text>
-        <TextInput placeholder={props.telefono} style={styles.textInput} />
+        <TextInput placeholder={user.telefono} style={styles.textInput} />
       </View>
 
       <View style={{ marginTop: 35 }}>
