@@ -3,31 +3,28 @@ import React from "react";
 import BtnCuenta from "../Cuenta/BtnCuenta";
 import { TextInput } from "react-native-gesture-handler";
 
-const ContenidoActualizarCuenta = ({ toggleModalVisible }) => {
+const ContenidoActualizarCuenta = ({ toggleModalVisible, props }) => {
   return (
     <View style={styles.container}>
       <View style={{ marginBottom: 10 }}>
-        <Text style={styles.text}>Nombre de usuario</Text>
-        <TextInput placeholder="Bolita" style={styles.textInput} />
+        <Text style={styles.text}>Nombres</Text>
+        <TextInput placeholder={props.nombres} style={styles.textInput} />
+      </View>
+      <View style={{ marginBottom: 10 }}>
+        <Text style={styles.text}>Apellidos</Text>
+        <TextInput placeholder={props.apellidos} style={styles.textInput} />
+      </View>
+      <View style={{ marginBottom: 10 }}>
+        <Text style={styles.text}>Edad</Text>
+        <TextInput placeholder={props.edad} style={styles.textInput} />
       </View>
       <View style={{ marginBottom: 10 }}>
         <Text style={styles.text}>Correo</Text>
-        <TextInput
-          placeholder="jose.castaneda@alumnos.udg.mx"
-          style={styles.textInput}
-        />
+        <TextInput placeholder={props.correo} style={styles.textInput} />
       </View>
       <View style={{ marginBottom: 10 }}>
         <Text style={styles.text}>Celular</Text>
-        <TextInput placeholder="3313197707" style={styles.textInput} />
-      </View>
-      <View style={{ marginBottom: 10 }}>
-        <Text style={styles.text}>Nombre</Text>
-        <TextInput placeholder="Jóse Jaime Gpe." style={styles.textInput} />
-      </View>
-      <View style={{ marginBottom: 10 }}>
-        <Text style={styles.text}>Apellido</Text>
-        <TextInput placeholder="Castañeda Ruiz" style={styles.textInput} />
+        <TextInput placeholder={props.telefono} style={styles.textInput} />
       </View>
 
       <View style={{ marginTop: 35 }}>

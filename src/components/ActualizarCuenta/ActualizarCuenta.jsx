@@ -1,8 +1,10 @@
 import { Alert, StyleSheet, Text, View, Modal } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import BtnCuenta from "../Cuenta/BtnCuenta";
 import ContenidoActualizarCuenta from "./ContenidoActualizarCuenta";
+import { getAuth } from "firebase/auth";
+import firebase from "../../DataBase/firebase";
 
 const ActualizarCuenta = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -14,6 +16,46 @@ const ActualizarCuenta = () => {
   const actualizarCuenta = () => {
     Alert.alert("Adogcuenta 🐶", "Se han actualizado tus datos");
   };
+  // Guardamos la info del usuario
+  const [user, setUsuario] = useState({
+    id: "",
+    nombres: "",
+    apellidos: "",
+    edad: "",
+    correo: "",
+    telefono: "",
+  });
+  // Funcion para jalar la info
+  useEffect(() => {
+    const auth = getAuth();
+    const usuario = auth.currentUser;
+    if (usuario !== null) {
+      const userCollectionRef = firebase.db.collection("Usuarios");
+      userCollectionRef
+        .where("Correo", "==", usuario.email)
+        .get()
+        .then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+            const userDoc = querySnapshot.docs[0];
+            const userData = userDoc.data();
+            setUsuario({
+              nombres: userData.Nombres,
+              apellidos: userData.Apellidos,
+              edad: userData.Edad,
+              correo: userData.Correo,
+              telefono: userData.Telefono,
+            });
+          } else {
+            Alert.alert("El documento no existe");
+          }
+        })
+        .catch((e) => {
+          Alert.alert(e);
+        });
+    } else {
+      Alert.alert("Hubo un error al autenticar el usuario");
+    }
+  }, []);
 
   return (
     <ScrollView
@@ -56,7 +98,10 @@ const ActualizarCuenta = () => {
         </View>
       </Modal>
 
-      <ContenidoActualizarCuenta toggleModalVisible={toggleModalVisible} />
+      <ContenidoActualizarCuenta
+        toggleModalVisible={toggleModalVisible}
+        props={user}
+      />
     </ScrollView>
   );
 };
