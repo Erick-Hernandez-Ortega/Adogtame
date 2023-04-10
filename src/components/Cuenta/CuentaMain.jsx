@@ -49,7 +49,7 @@ const CuentaMain = () => {
     } else {
       Alert.alert("Hubo un error al autenticar el usuario");
     }
-  }, []);
+  });
   // funciones de los modales
   const toggleModalVisible = () => {
     setModalVisible(!modalVisible);
