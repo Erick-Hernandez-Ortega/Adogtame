@@ -46,7 +46,7 @@ const MainLogin = (navigator) => {
     } else {
       setErrorContra(false);
       firebase
-        .signInWithEmailAndPassword(auth, correo, contra)
+        .signInWithEmailAndPassword(auth, correo.toLowerCase(), contra)
         .then(() => {
           navigator.navigate("Principal");
         })

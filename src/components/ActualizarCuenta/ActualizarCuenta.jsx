@@ -18,9 +18,7 @@ const ActualizarCuenta = () => {
     setModalVisible(!modalVisible);
   };
 
-  const actualizarCuenta = () => {
-    Alert.alert("Adogcuenta 🐶", "Se han actualizado tus datos " + nombre);
-  };
+  const actualizarCuenta = () => {};
 
   // Guardamos la info del usuario
   const [user, setUsuario] = useState({
@@ -45,6 +43,7 @@ const ActualizarCuenta = () => {
             const userDoc = querySnapshot.docs[0];
             const userData = userDoc.data();
             setUsuario({
+              id: userDoc.id,
               nombres: userData.Nombres,
               apellidos: userData.Apellidos,
               edad: userData.Edad,
