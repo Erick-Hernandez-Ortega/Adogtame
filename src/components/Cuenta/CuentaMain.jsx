@@ -9,7 +9,6 @@ import firebase from "../../DataBase/firebase";
 const CuentaMain = () => {
   navigator = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalVisible2, setModalVisible2] = useState(false);
   // Guardamos la info del usuario
   const [user, setUsuario] = useState({
     id: "",
@@ -54,9 +53,6 @@ const CuentaMain = () => {
   const toggleModalVisible = () => {
     setModalVisible(!modalVisible);
   };
-  const toggleModalVisible2 = () => {
-    setModalVisible2(!modalVisible2);
-  };
   const borrarCuenta = () => {
     Alert.alert("Cuenta borrada con exito :(");
   };
@@ -75,43 +71,7 @@ const CuentaMain = () => {
             style={styles.imagen}
           />
         </View>
-
         <TextoCuenta {...user} />
-        <Modal visible={modalVisible2} animationType="slide" transparent={true}>
-          <View style={styles.modalContainerCenter}>
-            <View style={styles.modalView}>
-              <Text
-                style={{ fontFamily: "Chewy", fontSize: 18, paddingBottom: 20 }}
-              >
-                ¿De verdad quieres hacerlo?
-              </Text>
-              <View style={{ marginTop: 0 }}>
-                <BtnCuenta
-                  name="Confirmar"
-                  icon="check-circle-outline"
-                  bgColor="#006400"
-                  color="#fff"
-                  onPress={() => {
-                    borrarCuenta();
-                    toggleModalVisible2();
-                    toggleModalVisible();
-                  }}
-                />
-                <BtnCuenta
-                  name="Cancelar"
-                  icon="emoticon-poop"
-                  bgColor="#8b0000"
-                  color="#fff"
-                  onPress={() => {
-                    toggleModalVisible2();
-                    toggleModalVisible();
-                  }}
-                />
-              </View>
-            </View>
-          </View>
-        </Modal>
-
         <Modal visible={modalVisible} animationType="slide" transparent={true}>
           <View style={styles.modalContainerCenter}>
             <View style={styles.modalView}>
@@ -127,7 +87,7 @@ const CuentaMain = () => {
                   bgColor="#006400"
                   color="#fff"
                   onPress={() => {
-                    toggleModalVisible2();
+                    toggleModalVisible(), borrarCuenta();
                   }}
                 />
                 <BtnCuenta
@@ -141,7 +101,6 @@ const CuentaMain = () => {
             </View>
           </View>
         </Modal>
-
         <View style={{ flex: 1, justifyContent: "flex-end", width: "90%" }}>
           <BtnCuenta
             name="Actualizar Cuenta"
