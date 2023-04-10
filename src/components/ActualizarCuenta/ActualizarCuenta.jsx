@@ -1,13 +1,17 @@
 import { Alert, StyleSheet, Text, View, Modal, TextInput } from "react-native";
 import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 import BtnCuenta from "../Cuenta/BtnCuenta";
 // import ContenidoActualizarCuenta from "./ContenidoActualizarCuenta";
 import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
 
-const ActualizarCuenta = () => {
+const ActualizarCuenta = (navigator) => {
   const [modalVisible, setModalVisible] = useState(false);
+  navigator = useNavigation();
+  const auth = getAuth();
+  const usuario = auth.currentUser;
   // Datos en los textInputs
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
@@ -18,7 +22,33 @@ const ActualizarCuenta = () => {
     setModalVisible(!modalVisible);
   };
 
-  const actualizarCuenta = () => {};
+  const actualizarCuenta = () => {
+    if (nombre === "") {
+      setNombre(user.nombres);
+    } else if (apellido === "") {
+      setApellido(user.apellidos);
+    } else if (edad === "") {
+      setEdad(user.edad);
+    } else if (celular === "") {
+      setCelular(user.telefono);
+    } else {
+      const docRef = firebase.db.collection("Usuarios").doc(user.id);
+      docRef
+        .update({
+          Apellidos: apellido,
+          Edad: edad,
+          Nombres: nombre,
+          Telefono: celular,
+        })
+        .then(() => {
+          Alert.alert("Datos actualizados correctamente :)");
+          navigator.navigate("Cuenta");
+        })
+        .catch((error) => {
+          Alert.alert("Hubo un error... " + error);
+        });
+    }
+  };
 
   // Guardamos la info del usuario
   const [user, setUsuario] = useState({
@@ -31,8 +61,6 @@ const ActualizarCuenta = () => {
   });
   // Funcion para jalar la info
   useEffect(() => {
-    const auth = getAuth();
-    const usuario = auth.currentUser;
     if (usuario !== null) {
       const userCollectionRef = firebase.db.collection("Usuarios");
       userCollectionRef
