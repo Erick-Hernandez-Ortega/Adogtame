@@ -20,8 +20,6 @@ const CuentaMain = () => {
   });
   // Funcion para jalar la info
   useEffect(() => {
-    const auth = getAuth();
-    const usuario = auth.currentUser;
     if (usuario !== null) {
       const userCollectionRef = firebase.db.collection("Usuarios");
       userCollectionRef
@@ -32,6 +30,7 @@ const CuentaMain = () => {
             const userDoc = querySnapshot.docs[0];
             const userData = userDoc.data();
             setUsuario({
+              id: userDoc.id,
               nombres: userData.Nombres,
               apellidos: userData.Apellidos,
               edad: userData.Edad,
@@ -53,8 +52,26 @@ const CuentaMain = () => {
   const toggleModalVisible = () => {
     setModalVisible(!modalVisible);
   };
-  const borrarCuenta = () => {
-    Alert.alert("Cuenta borrada con exito :(");
+  const auth = getAuth();
+  const usuario = auth.currentUser;
+  const borrarCuenta = async () => {
+    const dbRef = firebase.db.collection("Usuarios").doc(user.id);
+    await dbRef
+      .delete()
+      .then(() => {
+        usuario
+          .delete()
+          .then(() => {
+            Alert.alert("Cuenta eliminada con exito :(");
+            navigator.navigate("PreLogin");
+          })
+          .catch((error) => {
+            Alert.alert("Upss..." + error);
+          });
+      })
+      .catch((error) => {
+        Alert.alert("Ups... " + error);
+      });
   };
 
   return (
