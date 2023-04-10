@@ -8,13 +8,18 @@ import firebase from "../../DataBase/firebase";
 
 const ActualizarCuenta = () => {
   const [modalVisible, setModalVisible] = useState(false);
-
+  // Datos en los textInputs
+  const [nombre, setNombre] = useState("");
+  const [edad, setEdad] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [celular, setCelular] = useState("");
+  // Funcion para hacer visible al modal
   const toggleModalVisible = () => {
     setModalVisible(!modalVisible);
   };
 
   const actualizarCuenta = () => {
-    Alert.alert("Adogcuenta 🐶", "Se han actualizado tus datos");
+    Alert.alert("Adogcuenta 🐶", "Se han actualizado tus datos " + nombre);
   };
 
   // Guardamos la info del usuario
@@ -102,19 +107,39 @@ const ActualizarCuenta = () => {
       <View style={styles.container}>
         <View style={{ marginBottom: 10 }}>
           <Text style={styles.text}>Nombres</Text>
-          <TextInput placeholder={user.nombres} style={styles.textInput} />
+          <TextInput
+            placeholder={user.nombres}
+            style={styles.textInput}
+            onChangeText={setNombre}
+            value={nombre}
+          />
         </View>
         <View style={{ marginBottom: 10 }}>
           <Text style={styles.text}>Apellidos</Text>
-          <TextInput placeholder={user.apellidos} style={styles.textInput} />
+          <TextInput
+            placeholder={user.apellidos}
+            style={styles.textInput}
+            onChangeText={setApellido}
+            value={apellido}
+          />
         </View>
         <View style={{ marginBottom: 10 }}>
           <Text style={styles.text}>Edad</Text>
-          <TextInput placeholder={user.edad} style={styles.textInput} />
+          <TextInput
+            placeholder={user.edad}
+            style={styles.textInput}
+            onChangeText={setEdad}
+            value={edad}
+          />
         </View>
         <View style={{ marginBottom: 10 }}>
           <Text style={styles.text}>Celular</Text>
-          <TextInput placeholder={user.telefono} style={styles.textInput} />
+          <TextInput
+            placeholder={user.telefono}
+            style={styles.textInput}
+            onChangeText={setCelular}
+            value={celular}
+          />
         </View>
 
         <View style={{ marginTop: 35 }}>
