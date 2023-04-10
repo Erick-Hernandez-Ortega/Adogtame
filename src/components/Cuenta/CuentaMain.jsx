@@ -18,6 +18,8 @@ const CuentaMain = () => {
     correo: "",
     telefono: "",
   });
+  const auth = getAuth();
+  const usuario = auth.currentUser;
   // Funcion para jalar la info
   useEffect(() => {
     if (usuario !== null) {
@@ -52,8 +54,6 @@ const CuentaMain = () => {
   const toggleModalVisible = () => {
     setModalVisible(!modalVisible);
   };
-  const auth = getAuth();
-  const usuario = auth.currentUser;
   const borrarCuenta = async () => {
     const dbRef = firebase.db.collection("Usuarios").doc(user.id);
     await dbRef
