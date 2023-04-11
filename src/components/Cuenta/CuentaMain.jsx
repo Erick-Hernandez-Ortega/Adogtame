@@ -50,14 +50,14 @@ const CuentaMain = () => {
               setFoto(uriPerros);
             }
           } else {
-            Alert.alert("El documento no existe");
+            //Alert.alert("El documento no existe");
           }
         })
         .catch((e) => {
-          Alert.alert(e);
+          //Alert.alert(e);
         });
     } else {
-      Alert.alert("Hubo un error al autenticar el usuario");
+      //Alert.alert("Hubo un error al autenticar el usuario");
     }
   });
   // funciones de los modales
@@ -75,13 +75,9 @@ const CuentaMain = () => {
             Alert.alert("Cuenta eliminada con exito :(");
             navigator.navigate("PreLogin");
           })
-          .catch((error) => {
-            Alert.alert("Upss..." + error);
-          });
+          .catch((error) => {});
       })
-      .catch((error) => {
-        Alert.alert("Ups... " + error);
-      });
+      .catch((error) => {});
   };
 
   return (
