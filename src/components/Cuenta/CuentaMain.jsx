@@ -9,7 +9,7 @@ import firebase from "../../DataBase/firebase";
 const CuentaMain = () => {
   navigator = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
-  const [foto, setFoto] = useState("");
+  const [foto, setFoto] = useState("https://picsum.photos/id/275/200/300");
   const uriGatos = "http://placekitten.com/300/300";
   const uriPerros = "https://place-puppy.com/300x400";
   // Guardamos la info del usuario
