@@ -16,16 +16,24 @@ const ContenidoAdopciones = React.memo(() => {
       const mascotasAdoptadasRef = firebase.db.collection("Mascotas Adoptadas");
       const query = await mascotasAdoptadasRef
         .where("idDuennoAdoptado", "==", `${usuario.email}`)
-        .get();
-
-      query.forEach((e) => setIds((prevIds) => [...prevIds, e.id]));
+        .onSnapshot((e) => {
+          setIds([]);
+        e.docs.forEach((e) => setIds((prevIds) => [...prevIds, e.id]));
+      });
+      
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    request();
+    const unsubscribe = request();
+
+    // Limpia los efectos secundarios cuando se desmonta el componente
+    return () => {
+      unsubscribe();
+      setIds([]);
+    };
   }, []);
 
   return (
