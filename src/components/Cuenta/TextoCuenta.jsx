@@ -23,6 +23,10 @@ const TextoCuenta = (props) => {
         <Text style={styles.subtitulo}>Celular: </Text>
         <Text style={styles.textPrincipal}>{props.telefono}</Text>
       </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.subtitulo}>Preferencia: </Text>
+        <Text style={styles.textPrincipal}>{props.preferencia}</Text>
+      </View>
     </View>
   );
 };

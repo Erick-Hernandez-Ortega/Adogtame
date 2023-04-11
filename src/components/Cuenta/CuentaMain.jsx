@@ -17,6 +17,7 @@ const CuentaMain = () => {
     edad: "",
     correo: "",
     telefono: "",
+    preferencia: "",
   });
   const auth = getAuth();
   const usuario = auth.currentUser;
@@ -38,6 +39,7 @@ const CuentaMain = () => {
               edad: userData.Edad,
               correo: userData.Correo,
               telefono: userData.Telefono,
+              preferencia: userData.Preferencia,
             });
           } else {
             Alert.alert("El documento no existe");
