@@ -6,6 +6,7 @@ import BtnCuenta from "../Cuenta/BtnCuenta";
 // import ContenidoActualizarCuenta from "./ContenidoActualizarCuenta";
 import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
+import { Picker } from "@react-native-picker/picker";
 
 const ActualizarCuenta = (navigator) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -17,6 +18,7 @@ const ActualizarCuenta = (navigator) => {
   const [edad, setEdad] = useState("");
   const [apellido, setApellido] = useState("");
   const [celular, setCelular] = useState("");
+  const [pref, setPref] = useState("");
   // Funcion para hacer visible al modal
   const toggleModalVisible = () => {
     setModalVisible(!modalVisible);
@@ -31,6 +33,8 @@ const ActualizarCuenta = (navigator) => {
       setEdad(user.edad);
     } else if (celular === "") {
       setCelular(user.telefono);
+    } else if (pref === "") {
+      setPref(user.preferencia);
     } else {
       const docRef = firebase.db.collection("Usuarios").doc(user.id);
       docRef
@@ -39,9 +43,15 @@ const ActualizarCuenta = (navigator) => {
           Edad: edad,
           Nombres: nombre,
           Telefono: celular,
+          Preferencia: pref,
         })
         .then(() => {
           Alert.alert("Datos actualizados correctamente :)");
+          setApellido("");
+          setCelular("");
+          setEdad("");
+          setNombre("");
+          setPref("");
           navigator.navigate("Cuenta");
         })
         .catch((error) => {
@@ -49,7 +59,6 @@ const ActualizarCuenta = (navigator) => {
         });
     }
   };
-
   // Guardamos la info del usuario
   const [user, setUsuario] = useState({
     id: "",
@@ -58,6 +67,7 @@ const ActualizarCuenta = (navigator) => {
     edad: "",
     correo: "",
     telefono: "",
+    preferencia: "",
   });
   // Funcion para jalar la info
   useEffect(() => {
@@ -77,6 +87,7 @@ const ActualizarCuenta = (navigator) => {
               edad: userData.Edad,
               correo: userData.Correo,
               telefono: userData.Telefono,
+              preferencia: userData.Preferencia,
             });
           } else {
             Alert.alert("El documento no existe");
@@ -168,7 +179,16 @@ const ActualizarCuenta = (navigator) => {
             value={celular}
           />
         </View>
-
+        <View style={{ marginBottom: 10 }}>
+          <Text style={styles.text}>Preferencia</Text>
+          <Picker
+            selectedValue={pref}
+            onValueChange={(iValor, iIndex) => setPref(iValor)}
+          >
+            <Picker.Item label="Perros" value={"Perros"} />
+            <Picker.Item label="Gatos" value={"Gatos"} />
+          </Picker>
+        </View>
         <View style={{ marginTop: 35 }}>
           <BtnCuenta
             name="Guardar"
@@ -186,7 +206,6 @@ const ActualizarCuenta = (navigator) => {
           />
         </View>
       </View>
-
       {/*  <ContenidoActualizarCuenta toggleModalVisible={toggleModalVisible} /> */}
     </ScrollView>
   );
