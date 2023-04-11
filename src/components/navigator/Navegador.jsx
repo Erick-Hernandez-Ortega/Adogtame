@@ -21,6 +21,8 @@ import ActualizarCuenta from "../ActualizarCuenta/ActualizarCuenta";
 import BarraMenuAdopciones from "../Adopciones/BarraMenuAdopciones";
 import MainAdoptado from "../Adoptado/MainAdoptado";
 import MascotaResultado from "../Buscador/MascotaResultado";
+import MisPublicacionesMain from "../MisPublicaciones/MisPublicacionesMain";
+import BarraMenuPublicaciones from "../MisPublicaciones/BarraMenuPublicaciones";
 
 const Nav = createDrawerNavigator();
 
@@ -87,6 +89,11 @@ const Navegador = React.memo(() => {
         component={MascotaResultado}
         options={{ headerShown: false }}
       />
+      <Nav.Screen
+        name="MisPublicaciones"
+        component={MisPublicacionesMain}
+        options={{ headerBackground: BarraMenuPublicaciones }}
+      />
     </Nav.Navigator>
   );
 });
@@ -113,6 +120,11 @@ const MenuLateralContenido = React.memo(({ navigator }) => {
         icon="dog"
         text="Mis Adogciones"
         onPress={() => navigator.navigate("Adopciones")}
+      />
+      <MenuBtn
+        icon="cat"
+        text="Mis Publicatciones"
+        onPress={() => navigator.navigate("MisPublicaciones")}
       />
       <Text style={style.txtConfig}>Configuracion</Text>
       <MenuBtn
