@@ -1,11 +1,34 @@
 import { Text, View, StyleSheet, ScrollView, Alert } from "react-native";
 import Mascotas from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import firebase from "../../DataBase/firebase";
 
 const Contenido = React.memo(() => {
-  const ids = [1, 2, 3, 4];
+  const [ids, setIds] = useState([]);
   navigator = useNavigation();
+
+  async function getIds() {
+    try {
+      const collectionRef = firebase.db.collection("Mascotas No Adoptadas");
+      const query = collectionRef.onSnapshot((e) => {
+        setIds([]);
+        e.docs.forEach((e) => setIds((prevIds) => [...prevIds, e.id]));
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    const unsubscribe = getIds();
+
+    // Limpia los efectos secundarios cuando se desmonta el componente
+    return () => {
+      unsubscribe();
+      setIds([]);
+    };
+  }, []);
+
   return (
     <View style={style.container}>
       <ScrollView
