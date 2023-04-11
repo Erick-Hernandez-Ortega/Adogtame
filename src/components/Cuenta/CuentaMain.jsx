@@ -11,7 +11,7 @@ const CuentaMain = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [foto, setFoto] = useState("");
   const uriGatos = "http://placekitten.com/300/300";
-  const uriPerros = "https://place-puppy.com/300x300";
+  const uriPerros = "https://place-puppy.com/300x400";
   // Guardamos la info del usuario
   const [user, setUsuario] = useState({
     id: "",
