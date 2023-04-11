@@ -3,6 +3,8 @@ import Mascotas from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import firebase from "../../DataBase/firebase";
+import { FAB } from "react-native-elements";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const Contenido = React.memo(() => {
   const [ids, setIds] = useState([]);
@@ -47,6 +49,12 @@ const Contenido = React.memo(() => {
             onPress={() => navigator.navigate("Mascota", { id: e })}
           />
         ))}
+        <FAB
+          placement="right"
+          icon={<Icon name="plus" size={24} />}
+          style={style.icon}
+          color="#f4c272"
+        />
       </ScrollView>
     </View>
   );
@@ -69,6 +77,10 @@ const style = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Chewy",
     letterSpacing: 1,
+  },
+  icon: {
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
