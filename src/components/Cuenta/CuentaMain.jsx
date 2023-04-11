@@ -9,6 +9,9 @@ import firebase from "../../DataBase/firebase";
 const CuentaMain = () => {
   navigator = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
+  const [foto, setFoto] = useState("");
+  const uriGatos = "http://placekitten.com/300/300";
+  const uriPerros = "https://place-puppy.com/300x300";
   // Guardamos la info del usuario
   const [user, setUsuario] = useState({
     id: "",
@@ -41,6 +44,11 @@ const CuentaMain = () => {
               telefono: userData.Telefono,
               preferencia: userData.Preferencia,
             });
+            if (user.preferencia === "Gatos") {
+              setFoto(uriGatos);
+            } else if (user.preferencia === "Perros") {
+              setFoto(uriPerros);
+            }
           } else {
             Alert.alert("El documento no existe");
           }
@@ -85,10 +93,7 @@ const CuentaMain = () => {
         }}
       >
         <View style={{ ...styles.circulo, opacity: modalVisible ? 0.8 : 1.0 }}>
-          <Image
-            source={{ uri: "http://placekitten.com/300/300" }}
-            style={styles.imagen}
-          />
+          <Image source={{ uri: foto }} style={styles.imagen} />
         </View>
         <TextoCuenta {...user} />
         <Modal visible={modalVisible} animationType="slide" transparent={true}>
