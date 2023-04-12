@@ -6,8 +6,8 @@ const BotonFlotante = ({onPress, modalVisible}) => {
   return (
     <TouchableOpacity style={{...styles.boton, display: modalVisible ? "none" : null}} onPress={onPress}>
       <View style={styles.icono}>
-            <Icon name={'plus'} size={30} style={{color: "#fff"}} />
-            <Icon name={'dog-service'} size={30} style={{color: "#fff"}} />
+            <Icon name={'plus'} size={25} style={{color: "#fff"}} />
+            <Icon name={'dog-service'} size={25} style={{color: "#fff"}} />
       </View>
     </TouchableOpacity>
   )
@@ -18,8 +18,8 @@ export default BotonFlotante
 const styles = StyleSheet.create({
     boton: {
       position: 'absolute',
-      width: 75,
-      height: 75,
+      width: 64,
+      height: 64,
       alignItems: 'center',
       justifyContent: 'center',
       right: 20,
