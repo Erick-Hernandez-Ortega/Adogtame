@@ -44,12 +44,12 @@ const Contenido = React.memo(() => {
     }
   }
   useEffect(() => {
-    const unsubscribe = getIds();
-    // Limpia los efectos secundarios cuando se desmonta el componente
-    return () => {
-      unsubscribe();
-      setIds([]);
-    };
+    // const unsubscribe = getIds();
+    // // Limpia los efectos secundarios cuando se desmonta el componente
+    // return () => {
+    //   unsubscribe();
+    //   setIds([]);
+    // };
   }, []);
 
   return (
@@ -122,22 +122,22 @@ const Contenido = React.memo(() => {
                     </Picker>
                   </View>
                   <View style={style.inputContainer}>
-                    <Text style={style.label}>Sexo:</Text>
+                    <Text style={{...style.label, flex: 1}}>Sexo:</Text>
                     <Picker
                       selectedValue={genero}
                       onValueChange={(iValor, iIndex) => setGenero(iValor)}
                       itemStyle={{
                         fontSize: 17,
                         fontFamily: "Chewy",
-                        width: 135,
+                        width: 130,
                         height: 60,
                       }}
-                      style={{ width: 135, height: 60 }}
+                      style={{ width: 130, height: 60 }}
                     >
                       <Picker.Item label="Macho" value={true} />
                       <Picker.Item label="Hembra" value={false} />
                     </Picker>
-                    <Text style={style.label}>Tipo:</Text>
+                    <Text style={{...style.label, flex: 1}}>Tipo:</Text>
                     <Picker
                       selectedValue={tipo}
                       onValueChange={(iValor, iIndex) => setTipo(iValor)}
@@ -338,7 +338,7 @@ const style = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     marginBottom: 22,
-    width: "90%",
+    width: "92%",
     height: "85%",
   },
   inputContainer: {
