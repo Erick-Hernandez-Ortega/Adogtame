@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import ContenidoAdopciones from "./ContenidoAdopciones";
 import { useNavigation } from "@react-navigation/native";
