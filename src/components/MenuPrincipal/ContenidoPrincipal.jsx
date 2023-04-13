@@ -185,6 +185,7 @@ const Contenido = React.memo(() => {
                       placeholder="Edad"
                       placeholderTextColor={"darkgray"}
                       style={style.inputEdad}
+                      maxLength={2}
                       onChangeText={setEdad}
                       value={edad}
                       keyboardType="numeric"
