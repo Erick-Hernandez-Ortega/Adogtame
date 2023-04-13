@@ -4,14 +4,14 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import BtnBuscar from "../MenuPrincipal/BtnBuscar";
 
-const MascotaBarraMenu = React.memo(({ name, tipo, modalVisible }) => {
+const MascotaBarraMenu = React.memo(({ name, tipo, modalVisible, modalVisible2 }) => {
   navigator = useNavigation();
 
   return (
     <SafeAreaView
       style={{
         ...styles.header,
-        backgroundColor: modalVisible
+        backgroundColor: (modalVisible || modalVisible2)
           ? "rgba(244, 160, 32, 0.5)"
           : "rgba(244, 160, 32, 1)",
       }}

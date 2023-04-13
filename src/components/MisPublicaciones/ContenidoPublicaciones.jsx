@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import firebase from "../../DataBase/firebase";
+import MisPublicaciones from "./MisPublicaciones";
 
 const ContenidoPublicaciones = () => {
   navigator = useNavigation();
@@ -26,6 +27,12 @@ const ContenidoPublicaciones = () => {
     }
   }
 
+  if (usuario == null)
+    return (
+      Alert.alert("Error", "Inicia sesión para poder ver tus publicatciones"),
+      navigator.navigate("Login")
+    );
+
   useEffect(() => {
     const unsubscribe = request();
 
@@ -38,7 +45,13 @@ const ContenidoPublicaciones = () => {
 
   return (
     <View>
-      <Text>ContenidoPublicaciones</Text>
+      {ids.map((e) => (
+          <MisPublicaciones
+            key={e}
+            id={e}
+            onPress={() => navigator.navigate("Mascota", { id: e })}
+          />
+        ))}
     </View>
   );
 };

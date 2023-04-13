@@ -12,16 +12,17 @@ const MascotaContenido = React.memo(({
   tipo,
   ubicacion,
   fechaRegistro,
-  modalVisible
+  modalVisible,
+  modalVisible2,
 }) => {
   const date = new Date()
   return (
     <ScrollView
       contentContainerStyle={styles.container}
     >
-      <View style={{...styles.card, backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.5)" : "#fff"}}>
+      <View style={{...styles.card, backgroundColor: (modalVisible || modalVisible2) ? "rgba(0, 0, 0, 0.5)" : "#fff"}}>
         <View style={styles.petImageContainer}>
-          <Image source={{ uri: url }} style={{...styles.petImage, opacity: modalVisible ? 0.5 : null}} />
+          <Image source={{ uri: url }} style={{...styles.petImage, opacity: (modalVisible || modalVisible2) ? 0.5 : null}} />
         </View>
         <View style={styles.petDetails}>
           <Text style={styles.petDate}>Fecha de registro: {fechaRegistro}</Text>

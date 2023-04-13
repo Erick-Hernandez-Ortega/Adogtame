@@ -9,14 +9,22 @@ import BotonFlotante from "../BotonFlotante/BotonFlotante";
 import BtnCuenta from "../Cuenta/BtnCuenta";
 import { ScrollView } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth";
+import BotonFlotanteBorrar from "../BotonFlotante/BotonFlotanteBorrar";
 
 const MascotaMain = React.memo(({ route }) => {
   const [mascotaData, setMascotaData] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
   const { id } = route.params;
+  const auth = getAuth();
+  const usuario = auth.currentUser;
 
   const toggleModalVisible = () => {
     setModalVisible(!modalVisible);
+  };
+
+  const toggleModalVisible2 = () => {
+    setModalVisible2(!modalVisible2);
   };
 
   async function resquest() {
@@ -31,11 +39,21 @@ const MascotaMain = React.memo(({ route }) => {
     }
   }
 
+  async function borrar(){
+    try {
+      const mascota = await firebase.db
+        .collection("Mascotas No Adoptadas")
+        .doc(`${id}`)
+        .delete()
+        Alert.alert("Exito",`Se ha borrado a ${nombre} con exito :(`)
+        navigator.navigate("MisPublicaciones");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   async function adoptar() {
     try {
-      const auth = getAuth();
-      const usuario = auth.currentUser;
-
       if (usuario !== null) {
         const mascota = mascotaData;
         // agregamos id del nuevo dueño
@@ -82,17 +100,13 @@ const MascotaMain = React.memo(({ route }) => {
     genero,
     raza,
     tipo,
-    idDuenno,
-    nombreDuenno,
-    telefonoDuenno,
-    edadDuenno,
     ubicacion,
     fechaRegistro,
   } = mascotaData;
 
   return (
     <View>
-      <MascotaBarraMenu name={nombre} tipo={tipo} modalVisible={modalVisible} />
+      <MascotaBarraMenu name={nombre} tipo={tipo} modalVisible={modalVisible} modalVisible2={modalVisible2} />
 
       <Modal visible={modalVisible} animationType="slide" transparent={true}>
         <View style={styles.modalContainerCenter}>
@@ -164,6 +178,37 @@ const MascotaMain = React.memo(({ route }) => {
         </View>
       </Modal>
 
+      <Modal visible={modalVisible2} animationType="slide" transparent={true}>
+        <View style={{...styles.modalContainerCenter, justifyContent: "flex-end"}}>
+          <View style={styles.modalView}>
+            <Text
+              style={{ fontFamily: "Chewy", fontSize: 18, paddingBottom: 20 }}
+            >
+              ¿Estas seguro que quieres borrar tu publicación de {nombre}?
+            </Text>
+            <View style={{ marginTop: 0 }}>
+              <BtnCuenta
+                name="Confirmar"
+                icon="check-circle-outline"
+                bgColor="#006400"
+                color="#fff"
+                onPress={() => {
+                  borrar();
+                  toggleModalVisible2();
+                }}
+              />
+              <BtnCuenta
+                name="Cancelar"
+                icon="emoticon-poop"
+                bgColor="#8b0000"
+                color="#fff"
+                onPress={() => toggleModalVisible2()}
+              />
+            </View>
+          </View>
+        </View>
+      </Modal>
+
       <MascotaContenido
         name={nombre}
         descripcion={descripcion}
@@ -175,8 +220,19 @@ const MascotaMain = React.memo(({ route }) => {
         ubicacion={ubicacion}
         fechaRegistro={fechaRegistro}
         modalVisible={modalVisible}
+        modalVisible2={modalVisible2}
       />
-      <BotonFlotante onPress={toggleModalVisible} modalVisible={modalVisible} />
+      {usuario.email == mascotaData.idDuenno ? (
+        <BotonFlotanteBorrar
+          onPress={toggleModalVisible2}
+          modalVisible={modalVisible2}
+        />
+      ) : (
+        <BotonFlotante
+          onPress={toggleModalVisible}
+          modalVisible={modalVisible}
+        />
+      )}
     </View>
   );
 });
