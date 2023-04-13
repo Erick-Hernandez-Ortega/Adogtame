@@ -6,6 +6,7 @@ import {
   Modal,
   TextInput,
   Platform,
+  Alert,
 } from "react-native";
 import Mascotas from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
@@ -17,20 +18,35 @@ import BtnCuenta from "../Cuenta/BtnCuenta";
 import Constants from "expo-constants";
 import { Picker } from "@react-native-picker/picker";
 import { KeyboardAvoidingView } from "react-native";
+import { getAuth } from "firebase/auth";
 
 const Contenido = React.memo(() => {
   const [ids, setIds] = useState([]);
   navigator = useNavigation();
-
   const [modalVisible, setModalVisible] = useState(false);
-  const toggleModalVisible = () => {
-    setModalVisible(!modalVisible);
-  };
   // Guardar datos del modal
   const [genero, setGenero] = useState(true); // True es Macho
   const [tipo, setTipo] = useState(true); // True es Perro
-  const [estado, setEstado] = useState(""); // True es Perro
-  const [textDescription, setTextDescription] = useState("");
+  const [isAnno, setAnno] = useState(true); // True si la edad de mascota es en años
+  const [estado, setEstado] = useState("");
+  const [municipio, setMunicipio] = useState("");
+  const [description, setDescription] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [edad, setEdad] = useState("");
+  const [raza, setRaza] = useState("");
+  const [usuarioDuenno, setUsuarioDuenno] = useState(null);
+
+  const toggleModalVisible = () => {
+    const auth = getAuth();
+    const usuario = auth.currentUser;
+
+    if (usuario == null) {
+      Alert.alert("Error", "Inicia sesión para poder ver subir una mascota"),
+        navigator.navigate("Login");
+    } else {
+      setModalVisible(!modalVisible);
+    }
+  };
 
   async function getIds() {
     try {
@@ -43,14 +59,75 @@ const Contenido = React.memo(() => {
       console.log(error);
     }
   }
+
+  async function getUsuario() {
+    const auth = getAuth();
+    const usuario = auth.currentUser;
+    const userRef = await firebase.db
+      .collection("Usuarios")
+      .where("Correo", "==", `${usuario.email}`)
+      .get();
+    setUsuarioDuenno(userRef.docs[0].data());
+  }
+
   useEffect(() => {
-    // const unsubscribe = getIds();
-    // // Limpia los efectos secundarios cuando se desmonta el componente
-    // return () => {
-    //   unsubscribe();
-    //   setIds([]);
-    // };
+    const usu = getUsuario();
+    const unsubscribe = getIds();
+    // Limpia los efectos secundarios cuando se desmonta el componente
+    return () => {
+      usu();
+      unsubscribe();
+      setIds([]);
+    };
   }, []);
+
+  async function subirMascota() {
+    if (!nombre || !edad || !municipio || !raza || !description) {
+      Alert.alert(
+        "Advertencia",
+        "Por favor, llene todos los campos para continuar."
+      );
+    } else {
+      try {
+        const fechaActual = new Date();
+        const dia = fechaActual.getDate();
+        const mes = fechaActual.getMonth() + 1;
+        const anio = fechaActual.getFullYear();
+        const collectionRef = firebase.db.collection("Mascotas No Adoptadas");
+        await collectionRef.add({
+          descripcion: description,
+          edad:
+            edad === "1"
+              ? isAnno
+                ? "1 año"
+                : "1 mes"
+              : `${edad} ${isAnno ? "años" : "meses"}`,
+          edadDuenno: `${usuarioDuenno.Edad}`,
+          fechaRegistro: `${dia}-${mes}-${anio}`,
+          genero: genero,
+          idDuenno: `${usuarioDuenno.Correo}`,
+          imagen: tipo
+            ? "https://place-puppy.com/300x300"
+            : "http://placekitten.com/300/300",
+          nombre: nombre,
+          nombreDuenno: usuarioDuenno.Nombres,
+          raza: raza,
+          telefonoDuenno: usuarioDuenno.Telefono,
+          tipo: tipo,
+          ubicacion: `${municipio}, ${estado}`,
+        });
+        Alert.alert(
+          "Exito!",
+          `${nombre} ${
+            tipo ? "🐶" : "🐱"
+          } a sido subo exitosamente para ser adoptado`
+        );
+      } catch (error) {
+        // Alert.alert("Error", error);
+        console.log(error);
+      }
+    }
+  }
 
   return (
     <View style={style.container}>
@@ -87,6 +164,8 @@ const Contenido = React.memo(() => {
                     <TextInput
                       placeholder="Nombre"
                       style={style.input}
+                      value={nombre}
+                      onChangeText={setNombre}
                       placeholderTextColor={"darkgray"}
                     />
                   </View>
@@ -95,6 +174,8 @@ const Contenido = React.memo(() => {
                     <TextInput
                       placeholder="Raza"
                       placeholderTextColor={"darkgray"}
+                      value={raza}
+                      onChangeText={setRaza}
                       style={style.input}
                     />
                   </View>
@@ -104,11 +185,13 @@ const Contenido = React.memo(() => {
                       placeholder="Edad"
                       placeholderTextColor={"darkgray"}
                       style={style.inputEdad}
+                      onChangeText={setEdad}
+                      value={edad}
                       keyboardType="numeric"
                     />
                     <Picker
-                      selectedValue={genero}
-                      onValueChange={(iValor, iIndex) => setGenero(iValor)}
+                      selectedValue={isAnno}
+                      onValueChange={(iValor, iIndex) => setAnno(iValor)}
                       itemStyle={{
                         fontSize: 17,
                         fontFamily: "Chewy",
@@ -122,7 +205,7 @@ const Contenido = React.memo(() => {
                     </Picker>
                   </View>
                   <View style={style.inputContainer}>
-                    <Text style={{...style.label, flex: 1}}>Sexo:</Text>
+                    <Text style={{ ...style.label, flex: 1 }}>Sexo:</Text>
                     <Picker
                       selectedValue={genero}
                       onValueChange={(iValor, iIndex) => setGenero(iValor)}
@@ -137,7 +220,7 @@ const Contenido = React.memo(() => {
                       <Picker.Item label="Macho" value={true} />
                       <Picker.Item label="Hembra" value={false} />
                     </Picker>
-                    <Text style={{...style.label, flex: 1}}>Tipo:</Text>
+                    <Text style={{ ...style.label, flex: 1 }}>Tipo:</Text>
                     <Picker
                       selectedValue={tipo}
                       onValueChange={(iValor, iIndex) => setTipo(iValor)}
@@ -173,7 +256,7 @@ const Contenido = React.memo(() => {
                         width: 250,
                         height: 90,
                       }}
-                        style={{ height: 90,  width: 250,}}
+                      style={{ height: 90, width: 250 }}
                     >
                       <Picker.Item
                         label="Aguascalientes"
@@ -233,6 +316,8 @@ const Contenido = React.memo(() => {
                     <TextInput
                       placeholder="Municipio"
                       style={style.input}
+                      onChangeText={setMunicipio}
+                      value={municipio}
                       placeholderTextColor={"darkgray"}
                     />
                   </View>
@@ -249,8 +334,10 @@ const Contenido = React.memo(() => {
                   <TextInput
                     placeholder="Descripcion breve..."
                     style={style.inputDescripcion}
+                    onChangeText={setDescription}
                     placeholderTextColor={"darkgray"}
                     multiline
+                    value={description}
                     numberOfLines={4}
                     maxLength={400}
                   />
@@ -266,6 +353,7 @@ const Contenido = React.memo(() => {
                       bgColor="#006400"
                       color="#fff"
                       onPress={() => {
+                        subirMascota();
                         toggleModalVisible();
                       }}
                     />

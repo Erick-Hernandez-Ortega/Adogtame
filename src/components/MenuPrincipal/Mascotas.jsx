@@ -25,7 +25,7 @@ const Mascotas = React.memo((props) => {
 
   if (!mascotaData) return <DogLoading />;
 
-  const { nombre, imagen, edad, genero, tipo } = mascotaData;
+  const { nombre, imagen, edad, genero, tipo, ubicacion } = mascotaData;
 
   return (
     <TouchableOpacity
@@ -40,12 +40,12 @@ const Mascotas = React.memo((props) => {
         <Text style={styles.subtitle}>
           Es un {tipo ? "Chucho 🐕" : "Michi 🐈"}
         </Text>
-        <Text style={styles.subtitle}>Tiene {edad} años</Text>
+        <Text style={styles.subtitle}>Tiene {edad}</Text>
         <Text style={styles.subtitle}>
           {genero ? "Es un señor" : "Es una señora"}
         </Text>
 
-        <Text style={styles.description}>Tonalá, Jalisco, México.</Text>
+        <Text style={styles.description}>{ubicacion}</Text>
       </View>
     </TouchableOpacity>
   );

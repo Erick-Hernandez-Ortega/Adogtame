@@ -172,10 +172,6 @@ const MascotaMain = React.memo(({ route }) => {
         raza={raza}
         tipo={tipo}
         url={imagen}
-        idDuenno={idDuenno}
-        nombreDuenno={nombreDuenno}
-        telefonoDuenno={telefonoDuenno}
-        edadDuenno={edadDuenno}
         ubicacion={ubicacion}
         fechaRegistro={fechaRegistro}
         modalVisible={modalVisible}

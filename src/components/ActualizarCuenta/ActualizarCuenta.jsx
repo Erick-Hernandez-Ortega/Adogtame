@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import BtnCuenta from "../Cuenta/BtnCuenta";
-// import ContenidoActualizarCuenta from "./ContenidoActualizarCuenta";
 import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
 import { Picker } from "@react-native-picker/picker";

@@ -10,10 +10,6 @@ const MascotaContenido = React.memo(({
   genero,
   raza,
   tipo,
-  idDuenno,
-  nombreDuenno,
-  telefonoDuenno,
-  edadDuenno,
   ubicacion,
   fechaRegistro,
   modalVisible
@@ -35,7 +31,7 @@ const MascotaContenido = React.memo(({
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.petAge}>Edad</Text>
-            <Text style={styles.petAgeValue}>{edad} años</Text>
+            <Text style={styles.petAgeValue}>{edad}</Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.petAge}>¿Es chucho o michi?</Text>
@@ -72,6 +68,7 @@ export default MascotaContenido;
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    height: "100%"
   },
   card: {
     backgroundColor: "#fff",
