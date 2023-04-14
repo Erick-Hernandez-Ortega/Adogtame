@@ -50,7 +50,7 @@ const Contenido = React.memo(() => {
 
   async function getIds() {
     try {
-      const collectionRef = firebase.db.collection("Mascotas No Adoptadas");
+      const collectionRef = firebase.db.collection("Mascotas No Adoptadas").limit(4);
       const query = collectionRef.onSnapshot((e) => {
         setIds([]);
         e.docs.forEach((e) => setIds((prevIds) => [...prevIds, e.id]));
