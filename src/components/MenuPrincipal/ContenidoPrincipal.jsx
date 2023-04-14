@@ -1,23 +1,10 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  Modal,
-  TextInput,
-  Platform,
-  Alert,
-} from "react-native";
+import { Text, View, StyleSheet, ScrollView, Alert } from "react-native";
 import Mascotas from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import firebase from "../../DataBase/firebase";
 import { FAB } from "react-native-elements";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import BtnCuenta from "../Cuenta/BtnCuenta";
-import Constants from "expo-constants";
-import { Picker } from "@react-native-picker/picker";
-import { KeyboardAvoidingView } from "react-native";
 import { getAuth } from "firebase/auth";
 
 const Contenido = React.memo(({ navigator }) => {
