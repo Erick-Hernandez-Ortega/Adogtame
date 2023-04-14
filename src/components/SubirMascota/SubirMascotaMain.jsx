@@ -378,7 +378,8 @@ const style = StyleSheet.create({
   },
   btnContainer: {
     marginTop: 50,
-    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
 });
 export default SubirMascotaMain;
