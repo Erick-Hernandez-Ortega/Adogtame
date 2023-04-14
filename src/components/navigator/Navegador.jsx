@@ -23,6 +23,8 @@ import MainAdoptado from "../Adoptado/MainAdoptado";
 import MascotaResultado from "../Buscador/MascotaResultado";
 import MisPublicacionesMain from "../MisPublicaciones/MisPublicacionesMain";
 import BarraMenuPublicaciones from "../MisPublicaciones/BarraMenuPublicaciones";
+import BarraSubirMascota from "../SubirMascota/BarraSubirMascota";
+import SubirMascotaMain from "../SubirMascota/SubirMascotaMain";
 
 const Nav = createDrawerNavigator();
 
@@ -68,6 +70,11 @@ const Navegador = React.memo(() => {
         name="Adoptado"
         component={MainAdoptado}
         options={{ headerShown: false }}
+      />
+      <Nav.Screen
+        name="SubirMascotas"
+        component={SubirMascotaMain}
+        options={{ headerBackground: BarraSubirMacotas }}
       />
       <Nav.Screen
         name="PreLogin"
@@ -116,6 +123,7 @@ const MenuLateralContenido = React.memo(({ navigator }) => {
         text="Buscar"
         onPress={() => navigator.navigate("Buscar")}
       />
+      <Text style={style.titulo}>Actividad</Text>
       <MenuBtn
         icon="dog"
         text="Mis Adogciones"
@@ -125,6 +133,12 @@ const MenuLateralContenido = React.memo(({ navigator }) => {
         icon="cat"
         text="Mis Publicatciones"
         onPress={() => navigator.navigate("MisPublicaciones")}
+      />
+      <Text style={style.titulo}>Acciones</Text>
+      <MenuBtn
+        icon="cat"
+        text="Subir Mascota"
+        onPress={() => navigator.navigate("SubirMascotas")}
       />
       <Text style={style.txtConfig}>Configuracion</Text>
       <MenuBtn
@@ -150,6 +164,10 @@ const CuentaBarraMenu = () => {
 
 function BarraCentral() {
   return <BarraMenuPrincipal />;
+}
+
+function BarraSubirMacotas() {
+  return <BarraSubirMascota />;
 }
 
 const style = StyleSheet.create({
