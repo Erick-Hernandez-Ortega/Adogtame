@@ -56,7 +56,46 @@ const SubirMascotaMain = () => {
                     paddingBottom: 20,
                   }}
                 >
-                  ¿Estas seguro que quieres borrar tu Adogcuenta?
+                  Antes de poner en adopcion a {nombre}, ten en cuenta lo
+                  siguiente...
+                </Text>
+                <Text
+                  style={{
+                    paddingBottom: 20,
+                    textAlign: "justify",
+                    fontWeight: "300",
+                    fontSize: 15,
+                  }}
+                >
+                  Cuidar de una mascota es una gran responsabilidad, asi que no
+                  es algo que debas tomar a la ligera.
+                  {"\n\n"}Asegúrate que el futuro dueño de {nombre}{" "}
+                  {tipo ? "🐶" : "🐱"}, este capacitado para cuidar
+                  correctamente de el/ella.
+                  {"\n\n"}
+                  Te damos algunas recomendaciones:{"\n\n"}
+                  {"\u2022"}Evalúa su estilo de vida: Considera su tiempo
+                  disponible, presupuesto y espacio en casa antes de entregar a
+                  tu mascota.{"\n\n"}
+                  {"\u2022"}Pregunta sobre informacion acerca de otras mascotas
+                  que haya tenido, asi puedes estar seguro/a de que sabe cuidar
+                  de los animales.{"\n\n"}
+                  {"\u2022"}Usa la información de contacto de la persona
+                  interesada para que se puedan comunicar de manera sencilla.
+                  {"\n\n"}
+                  {"\u2022"}Por último, si deseas eliminar una publicación, ve
+                  al apartado "Mis Publicatciones", en el menú lateral y
+                  eliminala.{"\n"}
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: "Chewy",
+                    fontSize: 20,
+                    paddingBottom: 20,
+                    textAlign: "center",
+                  }}
+                >
+                  ¿Estas seguro/a de poner en adogcion a {nombre}?
                 </Text>
                 <View style={{ marginTop: 0 }}>
                   <BtnCuenta
@@ -65,7 +104,7 @@ const SubirMascotaMain = () => {
                     bgColor="#006400"
                     color="#fff"
                     onPress={() => {
-                      toggleModalVisible(), borrarCuenta();
+                      toggleModalVisible();
                     }}
                   />
                   <BtnCuenta
@@ -271,7 +310,6 @@ const SubirMascotaMain = () => {
               bgColor="#006400"
               color="#fff"
               onPress={() => {
-                subirMascota();
                 toggleModalVisible();
               }}
             />
