@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,12 +6,17 @@ import {
   TextInput,
   ScrollView,
   Modal,
+  Alert,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import BtnCuenta from "../Cuenta/BtnCuenta";
+import { getAuth } from "firebase/auth";
+import firebase from "../../DataBase/firebase";
 
-const SubirMascotaMain = () => {
+const SubirMascotaMain = React.memo(({ navigator }) => {
+  navigator = useNavigation();
   // Datos de la publicacion
   const [genero, setGenero] = useState(true); // True es Macho
   const [tipo, setTipo] = useState(true); // True es Perro
@@ -29,6 +34,84 @@ const SubirMascotaMain = () => {
     setModalVisible(!modalVisible);
   };
 
+  async function getUsuario() {
+    const auth = getAuth();
+    const usuario = auth.currentUser;
+    const userRef = await firebase.db
+      .collection("Usuarios")
+      .where("Correo", "==", `${usuario.email}`)
+      .get();
+    setUsuarioDuenno(userRef.docs[0].data());
+  }
+
+  useEffect(() => {
+    const usu = getUsuario();
+    // Limpia los efectos secundarios cuando se desmonta el componente
+    return () => {
+      usu();
+    };
+  }, []);
+
+  async function subirMascota() {
+    if (!nombre || !edad || !municipio || !raza || !description) {
+      Alert.alert(
+        "Advertencia",
+        "Por favor, llene todos los campos para continuar."
+      );
+    } else {
+      try {
+        const fechaActual = new Date();
+        const dia = fechaActual.getDate();
+        const mes = fechaActual.getMonth() + 1;
+        const anio = fechaActual.getFullYear();
+        const collectionRef = firebase.db.collection("Mascotas No Adoptadas");
+        await collectionRef.add({
+          descripcion: description,
+          edad:
+            edad === "1"
+              ? isAnno
+                ? "1 año"
+                : "1 mes"
+              : `${edad} ${isAnno ? "años" : "meses"}`,
+          edadDuenno: `${usuarioDuenno.Edad}`,
+          fechaRegistro: `${dia}-${mes}-${anio}`,
+          genero: genero,
+          idDuenno: `${usuarioDuenno.Correo}`,
+          imagen: tipo
+            ? "https://place-puppy.com/300x300"
+            : "http://placekitten.com/300/300",
+          nombre: nombre,
+          nombreDuenno: usuarioDuenno.Nombres,
+          raza: raza,
+          telefonoDuenno: usuarioDuenno.Telefono,
+          tipo: tipo,
+          ubicacion: `${municipio}, ${estado}`,
+        });
+        Alert.alert(
+          "Exito!",
+          `${nombre} ${
+            tipo ? "🐶" : "🐱"
+          } a sido subo exitosamente para ser adoptado`
+        );
+      } catch (error) {
+        // Alert.alert("Error", error);
+        console.log(error);
+      }
+    }
+  }
+
+  function limpiarInputs() {
+    setEstado("");
+    setMunicipio("");
+    setDescription("");
+    setNombre("");
+    setEdad("");
+    setRaza("");
+    setUsuarioDuenno(null);
+    setGenero(true);
+    setTipo(true);
+    setAnno(true);
+  }
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -104,7 +187,10 @@ const SubirMascotaMain = () => {
                     bgColor="#006400"
                     color="#fff"
                     onPress={() => {
+                      subirMascota();
+                      limpiarInputs();
                       toggleModalVisible();
+                      navigator.navigate("Principal");
                     }}
                   />
                   <BtnCuenta
@@ -325,7 +411,7 @@ const SubirMascotaMain = () => {
       </View>
     </KeyboardAvoidingView>
   );
-};
+});
 
 const style = StyleSheet.create({
   text: {
