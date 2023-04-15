@@ -8,7 +8,8 @@ import {
   Modal,
   Alert,
   Platform,
-  Button
+  Button,
+  Image,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -17,7 +18,7 @@ import BtnCuenta from "../Cuenta/BtnCuenta";
 import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 
 const SubirMascotaMain = React.memo(({ navigator }) => {
   navigator = useNavigation();
@@ -31,12 +32,12 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
   const [raza, setRaza] = useState("");
-  const [image, setImage] = useState("");  // link imagen chucho
+  const [imagenMascota, setImagenMascota] = useState(""); // link imagen chucho
   const [usuarioDuenno, setUsuarioDuenno] = useState(null);
-  // Modal antes de subir la publicacion
   const [modalVisible, setModalVisible] = useState(false);
   const storage = getStorage();
-  const mountainImagesRef = ref(storage, 'images/mountains.jpg');
+  const mountainImagesRef = ref(storage, "images/uu.jpg");
+  const [image, setImage] = useState("");
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -47,22 +48,12 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
       quality: 1,
     });
 
-    console.log(result);
-
-    if (!result.canceled) {  // Entrara si el usuario eligio una foto
-      //setImage(result.assets[0].uri);
-      const response = await fetch(result.assets[0].uri);
-      const blob = await response.blob();
-
-      uploadBytes(mountainImagesRef, blob).then((snapshot) => {
-        console.log('Uploaded a blob or file! ');
-      });
-
-      getDownloadURL(mountainImagesRef).then((url) => {console.log(url)})
+    if (!result.canceled) {
+      // Entrara si el usuario eligio una foto
+      setImage(result.assets[0].uri);
     }
   };
 
-  
   const toggleModalVisible = () => {
     setModalVisible(!modalVisible);
   };
@@ -77,13 +68,30 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
     setUsuarioDuenno(userRef.docs[0].data());
   }
 
-   useEffect(() => {
-     //const usu = getUsuario();
-     // Limpia los efectos secundarios cuando se desmonta el componente
-    //  return () => {
-    //    usu();
-    //  };
-   }, []);
+  useEffect(() => {
+    const usu = getUsuario();
+    //Limpia los efectos secundarios cuando se desmonta el componente
+    return () => {
+      usu();
+    };
+  }, []);
+
+  useEffect(() => {
+    const subirImagen = async () => {
+      const response = await fetch(image);
+      const blob = await response.blob();
+
+      uploadBytes(mountainImagesRef, blob).then((snapshot) => {
+        console.log("Uploaded a blob or file! ");
+      });
+
+      getDownloadURL(mountainImagesRef).then((url) => setImagenMascota(url));
+    };
+
+    if (image) {
+      subirImagen();
+    }
+  }, [image]);
 
   async function subirMascota() {
     if (!nombre || !edad || !municipio || !raza || !description) {
@@ -110,9 +118,7 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
           fechaRegistro: `${dia}-${mes}-${anio}`,
           genero: genero,
           idDuenno: `${usuarioDuenno.Correo}`,
-          imagen: tipo
-            ? "https://place-puppy.com/300x300"
-            : "http://placekitten.com/300/300",
+          imagen: `${imagenMascota}`,
           nombre: nombre,
           nombreDuenno: usuarioDuenno.Nombres,
           raza: raza,
@@ -140,11 +146,13 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
     setNombre("");
     setEdad("");
     setRaza("");
+    setImage("");
     setUsuarioDuenno(null);
     setGenero(true);
     setTipo(true);
     setAnno(true);
   }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -417,7 +425,16 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
 
           <View style={style.inputContainer}>
             <Text style={style.label}>Agregar imagenes:</Text>
-            <Button title="Pick an image from camera roll" onPress={pickImage} />
+            <Button
+              title="Pick an image from camera roll"
+              onPress={pickImage}
+            />
+            {image && (
+              <Image
+                source={{ uri: image }}
+                style={{ width: 50, height: 50 }}
+              />
+            )}
           </View>
 
           <View style={style.btnContainer}>
