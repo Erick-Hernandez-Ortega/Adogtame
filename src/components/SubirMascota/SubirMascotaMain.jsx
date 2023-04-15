@@ -45,13 +45,13 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
     setUsuarioDuenno(userRef.docs[0].data());
   }
 
-  // useEffect(() => {
-  //   const usu = getUsuario();
-  //   // Limpia los efectos secundarios cuando se desmonta el componente
-  //   return () => {
-  //     usu();
-  //   };
-  // }, []);
+   useEffect(() => {
+     const usu = getUsuario();
+     // Limpia los efectos secundarios cuando se desmonta el componente
+     return () => {
+       usu();
+     };
+   }, []);
 
   async function subirMascota() {
     if (!nombre || !edad || !municipio || !raza || !description) {
