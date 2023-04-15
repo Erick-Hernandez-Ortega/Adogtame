@@ -8,6 +8,7 @@ import {
   Modal,
   Alert,
   Platform,
+  Button
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -15,6 +16,8 @@ import { Picker } from "@react-native-picker/picker";
 import BtnCuenta from "../Cuenta/BtnCuenta";
 import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import * as ImagePicker from 'expo-image-picker';
 
 const SubirMascotaMain = React.memo(({ navigator }) => {
   navigator = useNavigation();
@@ -31,6 +34,36 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
   const [usuarioDuenno, setUsuarioDuenno] = useState(null);
   // Modal antes de subir la publicacion
   const [modalVisible, setModalVisible] = useState(false);
+  const storage = getStorage();
+  const mountainImagesRef = ref(storage, 'images/mountains.jpg');
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {  // Entrara si el usuario eligio una foto
+      //setImage(result.assets[0].uri);
+      const response = await fetch(result.assets[0].uri);
+      const blob = await response.blob();
+
+      uploadBytes(mountainImagesRef, blob).then((snapshot) => {
+        console.log('Uploaded a blob or file! ');
+      });
+
+      
+      //getDownloadURL(mountainImagesRef).then((url) => {console.log(url)})
+    }
+  };
+
+  
   const toggleModalVisible = () => {
     setModalVisible(!modalVisible);
   };
@@ -46,11 +79,11 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
   }
 
    useEffect(() => {
-     const usu = getUsuario();
+     //const usu = getUsuario();
      // Limpia los efectos secundarios cuando se desmonta el componente
-     return () => {
-       usu();
-     };
+    //  return () => {
+    //    usu();
+    //  };
    }, []);
 
   async function subirMascota() {
@@ -385,6 +418,7 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
 
           <View style={style.inputContainer}>
             <Text style={style.label}>Agregar imagenes:</Text>
+            <Button title="Pick an image from camera roll" onPress={pickImage} />
           </View>
 
           <View style={style.btnContainer}>
