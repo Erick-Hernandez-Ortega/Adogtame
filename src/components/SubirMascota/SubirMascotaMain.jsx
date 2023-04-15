@@ -31,12 +31,12 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
   const [raza, setRaza] = useState("");
+  const [image, setImage] = useState("");  // link imagen chucho
   const [usuarioDuenno, setUsuarioDuenno] = useState(null);
   // Modal antes de subir la publicacion
   const [modalVisible, setModalVisible] = useState(false);
   const storage = getStorage();
   const mountainImagesRef = ref(storage, 'images/mountains.jpg');
-  const [image, setImage] = useState(null);
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -58,8 +58,7 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
         console.log('Uploaded a blob or file! ');
       });
 
-      
-      //getDownloadURL(mountainImagesRef).then((url) => {console.log(url)})
+      getDownloadURL(mountainImagesRef).then((url) => {console.log(url)})
     }
   };
 
