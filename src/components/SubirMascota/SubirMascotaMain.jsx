@@ -7,6 +7,7 @@ import {
   ScrollView,
   Modal,
   Alert,
+  Platform,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -44,13 +45,13 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
     setUsuarioDuenno(userRef.docs[0].data());
   }
 
-  useEffect(() => {
-    const usu = getUsuario();
-    // Limpia los efectos secundarios cuando se desmonta el componente
-    return () => {
-      usu();
-    };
-  }, []);
+  // useEffect(() => {
+  //   const usu = getUsuario();
+  //   // Limpia los efectos secundarios cuando se desmonta el componente
+  //   return () => {
+  //     usu();
+  //   };
+  // }, []);
 
   async function subirMascota() {
     if (!nombre || !edad || !municipio || !raza || !description) {
@@ -205,7 +206,7 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
             </View>
           </Modal>
           <Text style={style.text}>
-            Llena los campos con la informacion de tu mascota
+            Llena los campos con la información de tu mascota
           </Text>
           <View style={style.inputContainer}>
             <Text style={style.label}>Nombre:</Text>
@@ -227,80 +228,77 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
               style={style.input}
             />
           </View>
-          <View style={style.inputContainer}>
-            <Text style={{ ...style.label, flex: 1 }}>Edad:</Text>
-            <View style={style.containerRow}>
-              <TextInput
-                placeholder="Edad"
-                placeholderTextColor={"darkgray"}
-                style={style.inputEdad}
-                maxLength={2}
-                onChangeText={setEdad}
-                value={edad}
-                keyboardType="numeric"
-              />
-              <Picker
-                selectedValue={isAnno}
-                onValueChange={(iValor, iIndex) => setAnno(iValor)}
-                itemStyle={{
-                  fontSize: 17,
-                  fontFamily: "Chewy",
-                  width: 130,
-                  height: 60,
-                }}
-                style={{ width: 130, height: 60 }}
-              >
-                <Picker.Item label="años" value={true} />
-                <Picker.Item label="meses" value={false} />
-              </Picker>
-            </View>
+          <View style={style.containerRow}>
+            <Text style={style.label}>Edad:</Text>
+
+            <TextInput
+              placeholder="Edad"
+              placeholderTextColor={"darkgray"}
+              style={style.inputEdad}
+              maxLength={2}
+              onChangeText={setEdad}
+              value={edad}
+              keyboardType="numeric"
+            />
+            <Picker
+              selectedValue={isAnno}
+              onValueChange={(iValor, iIndex) => setAnno(iValor)}
+              itemStyle={{
+                fontSize: 17,
+                fontFamily: "Chewy",
+                width: 150,
+                height: 60,
+              }}
+              style={{ width: 150, height: 60 }}
+            >
+              <Picker.Item label="años" value={true} />
+              <Picker.Item label="meses" value={false} />
+            </Picker>
           </View>
-          <View style={style.containerRow2}>
-            <View style={style.inputContainer}>
-              <Text style={{ ...style.label, flex: 1 }}>Sexo:</Text>
-              <Picker
-                selectedValue={genero}
-                onValueChange={(iValor, iIndex) => setGenero(iValor)}
-                itemStyle={{
-                  fontSize: 17,
-                  fontFamily: "Chewy",
-                  width: 130,
-                  height: 60,
-                }}
-                style={{ width: 130, height: 60 }}
-              >
-                <Picker.Item label="Macho" value={true} />
-                <Picker.Item label="Hembra" value={false} />
-              </Picker>
-            </View>
-            <View style={style.inputContainer}>
-              <Text style={{ ...style.label, flex: 1 }}>Tipo:</Text>
-              <Picker
-                selectedValue={tipo}
-                onValueChange={(iValor, iIndex) => setTipo(iValor)}
-                itemStyle={{
-                  fontSize: 17,
-                  fontFamily: "Chewy",
-                  width: 120,
-                  height: 60,
-                }}
-                style={{ width: 120, height: 60 }}
-              >
-                <Picker.Item label="Perro" value={true} />
-                <Picker.Item label="Gato" value={false} />
-              </Picker>
-            </View>
+          <View style={style.containerRow}>
+            <Text style={{ ...style.label, flex: 1 }}>Sexo:</Text>
+            <Picker
+              selectedValue={genero}
+              onValueChange={(iValor, iIndex) => setGenero(iValor)}
+              itemStyle={{
+                fontSize: 17,
+                fontFamily: "Chewy",
+                width: 130,
+                height: 60,
+              }}
+              style={{ width: 130, height: 60 }}
+            >
+              <Picker.Item label="Macho" value={true} />
+              <Picker.Item label="Hembra" value={false} />
+            </Picker>
+          </View>
+          <View style={style.containerRow}>
+            <Text style={{ ...style.label, flex: 1 }}>Tipo:</Text>
+            <Picker
+              selectedValue={tipo}
+              onValueChange={(iValor, iIndex) => setTipo(iValor)}
+              itemStyle={{
+                fontSize: 17,
+                fontFamily: "Chewy",
+                width: 150,
+                height: 60,
+              }}
+              style={{ width: 150, height: 60 }}
+            >
+              <Picker.Item label="Perro" value={true} />
+              <Picker.Item label="Gato" value={false} />
+            </Picker>
           </View>
           <Text
             style={{
               fontFamily: "Chewy",
-              fontSize: 17,
+              fontSize: 18,
               textAlign: "center",
             }}
           >
             Ubicación
           </Text>
-          <View style={style.containerUbicacion}>
+          <View style={style.containerRow}>
             <Text style={{ ...style.label, flex: 1 }}>Estado:</Text>
             <Picker
               selectedValue={estado}
@@ -308,10 +306,10 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
               itemStyle={{
                 fontSize: 17,
                 fontFamily: "Chewy",
-                width: 250,
+                width: 270,
                 height: 90,
               }}
-              style={{ height: 60, width: 250 }}
+              style={{ height: 90, width: 270 }}
             >
               <Picker.Item label="Aguascalientes" value={"Aguascalientes"} />
               <Picker.Item label="Baja California" value={"Baja California"} />
@@ -425,15 +423,11 @@ const style = StyleSheet.create({
     marginVertical: 10,
     marginStart: 15,
   },
-  containerRow2: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  containerUbicacion: {
-    marginStart: 15,
-  },
   containerRow: {
     flexDirection: "row",
+    alignItems: "center",
+    marginStart: 15,
+    width: "96%",
   },
   containerUbicacion: {
     marginStart: 15,
@@ -442,9 +436,9 @@ const style = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Chewy",
     color: "black",
-    flex: 1,
     letterSpacing: 0.5,
     marginBottom: 5,
+    flex: 1,
   },
   input: {
     fontSize: 17,
@@ -452,7 +446,7 @@ const style = StyleSheet.create({
     fontFamily: "Chewy",
     width: "96%",
     letterSpacing: 0.5,
-    borderColor: "black",
+    borderColor: "#d9d9d9",
     borderWidth: 1,
     borderRadius: 10,
     backgroundColor: "#f2f2f2",
@@ -462,7 +456,7 @@ const style = StyleSheet.create({
     padding: 10,
     backgroundColor: "#f2f2f2",
     borderRadius: 10,
-    borderColor: "black",
+    borderColor: "#d9d9d9",
     borderWidth: 1,
     fontFamily: "Chewy",
     width: "92%",
@@ -475,6 +469,8 @@ const style = StyleSheet.create({
     fontSize: 17,
     padding: 10,
     width: "20%",
+    borderWidth: 1,
+    borderColor: "#d9d9d9",
     backgroundColor: "#f2f2f2",
     borderRadius: 10,
     fontFamily: "Chewy",
