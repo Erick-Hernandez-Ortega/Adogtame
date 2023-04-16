@@ -8,7 +8,6 @@ import {
   Modal,
   Alert,
   Platform,
-  Button,
   Image,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
@@ -19,7 +18,8 @@ import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import * as ImagePicker from "expo-image-picker";
-import uuid from 'react-native-uuid';
+import uuid from "react-native-uuid";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SubirMascotaMain = React.memo(({ navigator }) => {
   navigator = useNavigation();
@@ -33,12 +33,11 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
   const [raza, setRaza] = useState("");
-  const [imagenMascota, setImagenMascota] = useState(""); // link imagen chucho
   const [usuarioDuenno, setUsuarioDuenno] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const IDPhoto = uuid.v4();
   const storage = getStorage();
-  const mountainImagesRef = ref(storage, "images/uu.jpg");
+  const mountainImagesRef = ref(storage, `images/${IDPhoto}.jpg`);
   const [image, setImage] = useState("");
 
   const pickImage = async () => {
@@ -74,22 +73,13 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
     getUsuario();
   }, []);
 
-  useEffect(() => {
-    const subirImagen = async () => {
-      const response = await fetch(image);
-      const blob = await response.blob();
+  async function subirFoto() {
+    const response = await fetch(image);
+    const blob = await response.blob();
 
-      uploadBytes(mountainImagesRef, blob).then((snapshot) => {
-        console.log("Uploaded a blob or file! ");
-      });
-
-      getDownloadURL(mountainImagesRef).then((url) => setImagenMascota(url));
-    };
-
-    if (image) {
-      subirImagen();
-    }
-  }, [image]);
+    await uploadBytes(mountainImagesRef, blob);
+    return await getDownloadURL(mountainImagesRef);
+  }
 
   async function subirMascota() {
     if (!nombre || !edad || !municipio || !raza || !description) {
@@ -99,6 +89,7 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
       );
     } else {
       try {
+        const s = await subirFoto();
         const fechaActual = new Date();
         const dia = fechaActual.getDate();
         const mes = fechaActual.getMonth() + 1;
@@ -116,7 +107,7 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
           fechaRegistro: `${dia}-${mes}-${anio}`,
           genero: genero,
           idDuenno: `${usuarioDuenno.Correo}`,
-          imagen: `${imagenMascota}`,
+          imagen: `${s}`,
           nombre: nombre,
           nombreDuenno: usuarioDuenno.Nombres,
           raza: raza,
@@ -128,11 +119,11 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
           "Exito!",
           `${nombre} ${
             tipo ? "🐶" : "🐱"
-          } a sido subo exitosamente para ser adoptado`
+          } a sido subido exitosamente para ser adoptado`
         );
       } catch (error) {
         // Alert.alert("Error", error);
-        console.log(error);
+        console.log("Error: " + error);
       }
     }
   }
@@ -423,14 +414,19 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
 
           <View style={style.inputContainer}>
             <Text style={style.label}>Agregar imagenes:</Text>
-            <Button
-              title="Pick an image from camera roll"
-              onPress={pickImage}
-            />
+            <Text
+              style={{ color: "darkgray", fontFamily: "Chewy", fontSize: 14 }}
+            >
+              No mas elige una que no nos pagan por mantener la BD
+            </Text>
+            <TouchableOpacity style={style.botonImagen} onPress={pickImage}>
+              <Text style={style.textBotonImagen}>Subir imagen</Text>
+            </TouchableOpacity>
+
             {image && (
               <Image
                 source={{ uri: image }}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 100, height: 100, alignSelf: "center", borderRadius: 100 / 2 }}
               />
             )}
           </View>
@@ -470,6 +466,19 @@ const style = StyleSheet.create({
   inputContainer: {
     marginVertical: 10,
     marginStart: 15,
+  },
+  botonImagen: {
+    backgroundColor: "#3498db",
+    padding: 10,
+    borderRadius: 5,
+    alignSelf: "center",
+    marginVertical: 10,
+  },
+  textBotonImagen: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontFamily: "Chewy",
   },
   containerRow: {
     flexDirection: "row",
