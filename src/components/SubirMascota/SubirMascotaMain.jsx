@@ -69,11 +69,7 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
   }
 
   useEffect(() => {
-    const usu = getUsuario();
-    //Limpia los efectos secundarios cuando se desmonta el componente
-    return () => {
-      usu();
-    };
+    getUsuario();
   }, []);
 
   useEffect(() => {
