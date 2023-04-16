@@ -19,6 +19,7 @@ import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import * as ImagePicker from "expo-image-picker";
+import uuid from 'react-native-uuid';
 
 const SubirMascotaMain = React.memo(({ navigator }) => {
   navigator = useNavigation();
@@ -35,6 +36,7 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
   const [imagenMascota, setImagenMascota] = useState(""); // link imagen chucho
   const [usuarioDuenno, setUsuarioDuenno] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const IDPhoto = uuid.v4();
   const storage = getStorage();
   const mountainImagesRef = ref(storage, "images/uu.jpg");
   const [image, setImage] = useState("");
