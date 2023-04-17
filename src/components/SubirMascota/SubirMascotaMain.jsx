@@ -142,6 +142,11 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
     setAnno(true);
   }
 
+  function handlerCancelar() {
+    limpiarInputs();
+    navigator.navigate("Principal");
+  }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -426,7 +431,12 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
             {image && (
               <Image
                 source={{ uri: image }}
-                style={{ width: 100, height: 100, alignSelf: "center", borderRadius: 100 / 2 }}
+                style={{
+                  width: 100,
+                  height: 100,
+                  alignSelf: "center",
+                  borderRadius: 100 / 2,
+                }}
               />
             )}
           </View>
@@ -446,7 +456,7 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
               icon="publish-off"
               bgColor="#8b0000"
               color="#fff"
-              onPress={() => toggleModalVisible()}
+              onPress={() => handlerCancelar()}
             />
           </View>
         </ScrollView>
