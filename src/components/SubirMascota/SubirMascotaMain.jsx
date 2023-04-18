@@ -33,7 +33,6 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
   const [nombre, setNombre] = useState("");
   const [edad, setEdad] = useState("");
   const [raza, setRaza] = useState("");
-  const [usuarioDuenno, setUsuarioDuenno] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const IDPhoto = uuid.v4();
   const storage = getStorage();
@@ -66,12 +65,8 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
       .collection("Usuarios")
       .where("Correo", "==", `${usuario.email}`)
       .get();
-    setUsuarioDuenno(userRef.docs[0].data());
+    return userRef.docs[0].data();
   }
-
-  useEffect(() => {
-    getUsuario();
-  }, []);
 
   async function subirFoto() {
     const response = await fetch(image);
@@ -89,6 +84,7 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
       );
     } else {
       try {
+        const usuarioDuenno = await getUsuario();
         const s = await subirFoto();
         const fechaActual = new Date();
         const dia = fechaActual.getDate();
@@ -136,7 +132,6 @@ const SubirMascotaMain = React.memo(({ navigator }) => {
     setEdad("");
     setRaza("");
     setImage("");
-    setUsuarioDuenno(null);
     setGenero(true);
     setTipo(true);
     setAnno(true);
