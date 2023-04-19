@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import DogLoading from "../DogLoading/DogLoading";
 import firebase from "../../DataBase/firebase";
 import React from "react";

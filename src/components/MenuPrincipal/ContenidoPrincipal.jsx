@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, ScrollView, Alert } from "react-native";
+import { Text, View, StyleSheet, ScrollView} from "react-native";
 import Mascotas from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
