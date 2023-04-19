@@ -46,14 +46,6 @@ const Contenido = React.memo(({ navigator }) => {
         }}
       >
         <Text style={style.text}>¡Echa un vistazo a tus futuras mascotas!</Text>
-
-        {ids.map((e) => (
-          <Mascotas
-            key={e}
-            id={e}
-            onPress={() => navigator.navigate("Mascota", { id: e })}
-          />
-        ))}
         <FAB
           placement="right"
           icon={<Icon name="plus" size={24} />}
@@ -61,6 +53,13 @@ const Contenido = React.memo(({ navigator }) => {
           color="#f4c272"
           onPress={handlePress}
         />
+        {ids.map((e) => (
+          <Mascotas
+            key={e}
+            id={e}
+            onPress={() => navigator.navigate("Mascota", { id: e })}
+          />
+        ))}
       </ScrollView>
     </View>
   );
@@ -81,6 +80,7 @@ const style = StyleSheet.create({
   icon: {
     alignItems: "center",
     justifyContent: "center",
+    position: "absolute",
   },
   inputContainer: {
     flexDirection: "row",

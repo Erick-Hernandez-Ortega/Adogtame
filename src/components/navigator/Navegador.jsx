@@ -38,6 +38,7 @@ const Navegador = React.memo(() => {
         headerBackground: BarraCentral,
         headerLeftContainerStyle: { marginTop: 20 },
         headerTintColor: "#000",
+        gestureHandlerProps: { enabled: false },
       }}
     >
       <Nav.Screen name="Principal" component={Principal} />
