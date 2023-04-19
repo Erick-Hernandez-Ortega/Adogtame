@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Alert,
+  Platform,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
@@ -55,6 +56,35 @@ const Registro = (navigator) => {
   const animCelular = useRef();
   const animContra = useRef();
   const animConfirmContra = useRef();
+  // Funcion para limpiar inputs
+  function limpiarInputs() {
+    setNombre("");
+    setEdad("");
+    setApellido("");
+    setCorreo("");
+    setCelular("");
+    setContrasena("");
+    setConfirmContrasena("");
+    setClicN(false);
+    setClicE(false);
+    setClicAp(false);
+    setClicC(false);
+    setClicT(false);
+    setClicCon(false);
+    setClicCC(false);
+    setErrorNombre(false);
+    setErrorApellido(false);
+    setErrorEdad(false);
+    setErrorCorreo(false);
+    setErrorCelular(false);
+    setErrorContra(false);
+    setErrorCContra(false);
+  }
+  // Funcion de volver
+  function handlerVolver() {
+    limpiarInputs();
+    navigator.navigate("PreLogin");
+  }
   // Variables para autenticar
   const auth = firebase.getAuth(firebase.app);
   // Funcion para el radiobutton
@@ -108,21 +138,7 @@ const Registro = (navigator) => {
             Contrasena: contrasena,
             Preferencia: radio,
           });
-          setNombre("");
-          setEdad("");
-          setApellido("");
-          setCorreo("");
-          setCelular("");
-          setContrasena("");
-          setConfirmContrasena("");
-          setClicN(false);
-          setClicE(false);
-          setClicAp(false);
-          setClicC(false);
-          setClicT(false);
-          setClicCon(false);
-          setClicCC(false);
-          setErrorContra(false);
+          limpiarInputs();
           Alert.alert(
             "🐶 Adogcuenta 🐶",
             "¡Tu Adogcuenta fue creada con éxito!"
@@ -140,12 +156,22 @@ const Registro = (navigator) => {
   return (
     <ScrollView style={style.container}>
       <SafeAreaView>
-        <AnimatedLottieView
-          source={require("../../../assets/fonts/AcountLoading.json")}
-          autoPlay
-          loop
-          style={{ opacity: Isloading ? 1 : 0 }}
-        />
+        {Platform.OS === "android" && (
+          <AnimatedLottieView
+            source={require("../../../assets/fonts/AcountLoading.json")}
+            autoPlay
+            loop
+            style={{ opacity: Isloading ? 1 : 0 }}
+          />
+        )}
+        {Platform.OS === "ios" && (
+          <AnimatedLottieView
+            source={require("../../../assets/fonts/AcountLoading.json")}
+            autoPlay
+            loop
+            style={{ opacity: Isloading ? 1 : 0 }}
+          />
+        )}
         <View style={[style.containerChido, { opacity: Isloading ? 0 : 1 }]}>
           <Text style={style.label}>Información personal</Text>
           <Animatable.View style={style.containerInput} ref={animNombre}>
@@ -379,7 +405,7 @@ const Registro = (navigator) => {
           <TouchableOpacity
             style={style.btn}
             onPress={() => {
-              navigator.navigate("PreLogin");
+              handlerVolver();
             }}
           >
             <Text style={style.btnText}>Volver 🔙</Text>
