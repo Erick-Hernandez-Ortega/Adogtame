@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StatusBar,
   Platform,
+  Image,
 } from "react-native";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
@@ -30,7 +31,14 @@ const PreLogin = (navigator) => {
         </Text>
       </View>
 
-      {Platform.OS === "web" ? null : (
+      {Platform.OS === "web" ? (
+        <View style={style.img}>
+          <Image
+            source={require("../../../assets/adogtame-logo.png")}
+            style={style.image}
+          />
+        </View>
+      ) : (
         <View style={style.animacion}>
           <AnimatedLottieView
             source={require("../../../assets/fonts/AnimacionPreLogin.json")}
@@ -132,6 +140,16 @@ const style = StyleSheet.create({
   animacion: {
     width: "80%",
     height: "45%",
+  },
+  img: {
+    width: "90%",
+    height : "45%",
+    alignItems:"center",
+    justifyContent: "center",
+  },
+  image: {
+    width: "50%",
+    height: "50%",
   },
 });
 
