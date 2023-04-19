@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   StatusBar,
+  Platform,
 } from "react-native";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
@@ -13,7 +14,7 @@ import { useFonts } from "expo-font";
 
 const PreLogin = (navigator) => {
   navigator = useNavigation();
-
+  const [dispositivo, setDispositivo] = useState(false);
   const [fontsLoaded] = useFonts({
     Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
   });
@@ -29,13 +30,24 @@ const PreLogin = (navigator) => {
           mascota
         </Text>
       </View>
-      <View style={style.animacion}>
-        <AnimatedLottieView
-          source={require("../../../assets/fonts/AnimacionPreLogin.json")}
-          autoPlay
-          loop
-        />
-      </View>
+      {Platform.OS === "android" && (
+        <View style={style.animacion}>
+          <AnimatedLottieView
+            source={require("../../../assets/fonts/AnimacionPreLogin.json")}
+            autoPlay
+            loop
+          />
+        </View>
+      )}
+      {Platform.OS === "ios" && (
+        <View style={style.animacion}>
+          <AnimatedLottieView
+            source={require("../../../assets/fonts/AnimacionPreLogin.json")}
+            autoPlay
+            loop
+          />
+        </View>
+      )}
       <View style={style.irLogin}>
         <TouchableOpacity
           onPress={() => {
