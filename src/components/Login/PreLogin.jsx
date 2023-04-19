@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -14,7 +14,6 @@ import { useFonts } from "expo-font";
 
 const PreLogin = (navigator) => {
   navigator = useNavigation();
-  const [dispositivo, setDispositivo] = useState(false);
   const [fontsLoaded] = useFonts({
     Chewy: require("./../../../assets/fonts/Chewy-Regular.ttf"),
   });
