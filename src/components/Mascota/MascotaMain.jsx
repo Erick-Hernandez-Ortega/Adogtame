@@ -39,14 +39,14 @@ const MascotaMain = React.memo(({ route }) => {
     }
   }
 
-  async function borrar(){
+  async function borrar() {
     try {
       const mascota = await firebase.db
         .collection("Mascotas No Adoptadas")
         .doc(`${id}`)
-        .delete()
-        Alert.alert("Exito",`Se ha borrado a ${nombre} con exito :(`)
-        navigator.navigate("MisPublicaciones");
+        .delete();
+      Alert.alert("Exito", `Se ha borrado a ${nombre} con exito :(`);
+      navigator.navigate("MisPublicaciones");
     } catch (e) {
       console.log(e);
     }
@@ -106,7 +106,12 @@ const MascotaMain = React.memo(({ route }) => {
 
   return (
     <View>
-      <MascotaBarraMenu name={nombre} tipo={tipo} modalVisible={modalVisible} modalVisible2={modalVisible2} />
+      <MascotaBarraMenu
+        name={nombre}
+        tipo={tipo}
+        modalVisible={modalVisible}
+        modalVisible2={modalVisible2}
+      />
 
       <Modal visible={modalVisible} animationType="slide" transparent={true}>
         <View style={styles.modalContainerCenter}>
@@ -179,7 +184,9 @@ const MascotaMain = React.memo(({ route }) => {
       </Modal>
 
       <Modal visible={modalVisible2} animationType="slide" transparent={true}>
-        <View style={{...styles.modalContainerCenter, justifyContent: "flex-end"}}>
+        <View
+          style={{ ...styles.modalContainerCenter, justifyContent: "flex-end" }}
+        >
           <View style={styles.modalView}>
             <Text
               style={{ fontFamily: "Chewy", fontSize: 18, paddingBottom: 20 }}

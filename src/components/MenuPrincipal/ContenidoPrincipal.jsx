@@ -3,8 +3,7 @@ import Mascotas from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import firebase from "../../DataBase/firebase";
-import { FAB } from "react-native-elements";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import BotonFlotanteAgregar from "../BotonFlotante/BotonFlotanteAgregar";
 
 const Contenido = React.memo(({ navigator }) => {
   const [ids, setIds] = useState([]);
@@ -46,13 +45,7 @@ const Contenido = React.memo(({ navigator }) => {
         }}
       >
         <Text style={style.text}>¡Echa un vistazo a tus futuras mascotas!</Text>
-        <FAB
-          placement="right"
-          icon={<Icon name="plus" size={24} />}
-          style={style.icon}
-          color="#f4c272"
-          onPress={handlePress}
-        />
+
         {ids.map((e) => (
           <Mascotas
             key={e}
@@ -60,6 +53,8 @@ const Contenido = React.memo(({ navigator }) => {
             onPress={() => navigator.navigate("Mascota", { id: e })}
           />
         ))}
+
+        <BotonFlotanteAgregar onPress={handlePress} />
       </ScrollView>
     </View>
   );
@@ -76,11 +71,6 @@ const style = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Chewy",
     letterSpacing: 1,
-  },
-  icon: {
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
   },
   inputContainer: {
     flexDirection: "row",
