@@ -231,34 +231,34 @@ const Registro = (navigator) => {
                     />
                   )}
                 </Animatable.View>
-                <Animatable.View
-                  style={styleWeb.containerInputWeb}
-                  ref={animEdad}
-                >
-                  <TextInput
-                    placeholder="Edad"
-                    style={styleWeb.input}
-                    placeholderTextColor={"darkgray"}
-                    onChangeText={setEdad}
-                    value={edad}
-                    onFocus={() => {
-                      setClicE(true);
-                    }}
-                    keyboardType="number-pad"
-                  />
-                  {clicE && (
-                    <Icon
-                      name="close"
-                      size={25}
-                      onPress={() => {
-                        setEdad("");
-                        setClicE(false);
-                        Keyboard.dismiss();
-                      }}
-                    />
-                  )}
-                </Animatable.View>
               </View>
+              <Animatable.View
+                style={styleWeb.containerInputWeb}
+                ref={animEdad}
+              >
+                <TextInput
+                  placeholder="Edad"
+                  style={styleWeb.input}
+                  placeholderTextColor={"darkgray"}
+                  onChangeText={setEdad}
+                  value={edad}
+                  onFocus={() => {
+                    setClicE(true);
+                  }}
+                  keyboardType="number-pad"
+                />
+                {clicE && (
+                  <Icon
+                    name="close"
+                    size={25}
+                    onPress={() => {
+                      setEdad("");
+                      setClicE(false);
+                      Keyboard.dismiss();
+                    }}
+                  />
+                )}
+              </Animatable.View>
               <View style={styleWeb.containerWeb}>
                 <Animatable.View
                   style={styleWeb.containerInputWeb}
@@ -618,7 +618,7 @@ const Registro = (navigator) => {
         </View>
         <View style={[style.containerBtn, { opacity: Isloading ? 0 : 1 }]}>
           <TouchableOpacity
-            style={style.btn}
+            style={Platform.OS === "web" ? style.btnWeb : style.btn}
             onPress={() => {
               handlerCrearCuenta(navigator);
             }}
@@ -626,7 +626,7 @@ const Registro = (navigator) => {
             <Text style={style.btnText}>Crear Cuenta 🐾</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={style.btn}
+            style={Platform.OS === "web" ? style.btnWeb : style.btn}
             onPress={() => {
               handlerVolver();
             }}
@@ -649,6 +649,7 @@ const style = StyleSheet.create({
   },
   containerChidoWeb: {
     alignItems: "center",
+    justifyContent: "center",
   },
   containerInput: {
     alignItems: "center",
@@ -685,6 +686,21 @@ const style = StyleSheet.create({
     backgroundColor: "#f4c272",
     marginBottom: 15,
     width: "80%",
+    alignItems: "center",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 3.65,
+    elevation: 6,
+  },
+  btnWeb: {
+    backgroundColor: "#f4c272",
+    marginBottom: 15,
+    width: "50%",
     alignItems: "center",
     borderRadius: 10,
     shadowColor: "#000",
@@ -744,6 +760,7 @@ const styleWeb = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     backgroundColor: "#f2f2f2",
+    
   },
   label: {
     fontSize: 22,
