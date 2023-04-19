@@ -73,20 +73,14 @@ const MainLogin = (navigator) => {
   };
 
   return (
-    <View style={style.container}>
-      {Platform.OS === "android" && (
-        <View style={style.animacion}>
-          <AnimatedLottieView
-            source={require("../../../assets/fonts/AnimacionLogin.json")}
-            autoPlay
-            loop
-          />
-        </View>
-      )}
-      {Platform.OS === "ios" && (
-        <ScrollView
-          contentContainerStyle={{ paddingBottom: "40%", paddingTop: "15%" }}
-        >
+    <ScrollView
+      contentContainerStyle={{
+        paddingBottom: Platform.OS === "web" ? null : "40%",
+        paddingTop: Platform.OS === "web" ? null : "15%",
+      }}
+    >
+      <View style={style.container}>
+        {Platform.OS === "web" ? null : (
           <View style={style.animacion}>
             <AnimatedLottieView
               source={require("../../../assets/fonts/AnimacionLogin.json")}
@@ -94,112 +88,113 @@ const MainLogin = (navigator) => {
               loop
             />
           </View>
-        </ScrollView>
-      )}
-      {Platform.OS === "android" && (
-        <Image
-          source={require("../../../assets/adogtame-logo.png")}
-          style={style.imageMovil}
-        />
-      )}
-      {Platform.OS === "web" && (
-        <Image
-          source={require("../../../assets/adogtame-logo.png")}
-          style={style.image}
-        />
-      )}
-      <Animatable.View style={style.containerInput} ref={animCorreo}>
-        <TextInput
-          placeholder="Correo"
-          style={style.input}
-          onChangeText={setCorreo}
-          value={correo}
-          onFocus={() => {
-            setClic(true);
-          }}
-        />
-        {clic && (
-          <Icon
-            name="close"
-            size={25}
-            style={style.cancelar}
-            onPress={() => {
-              setCorreo("");
-              setClic(false);
-              Keyboard.dismiss();
-            }}
+        )}
+
+        {Platform.OS === "web" ? (
+          <Image
+            source={require("../../../assets/adogtame-logo.png")}
+            style={style.image}
+          />
+        ) : (
+          <Image
+            source={require("../../../assets/adogtame-logo.png")}
+            style={style.imageMovil}
           />
         )}
-      </Animatable.View>
-      {errorCorreo && (
-        <View style={style.conatinerError}>
-          <Text style={style.error}>Ingrese un correo válido</Text>
-        </View>
-      )}
-      <Animatable.View style={style.containerInputC} ref={animContra}>
-        <TextInput
-          placeholder="Contraseña"
-          style={style.inputC}
-          onChangeText={setContra}
-          value={contra}
-          secureTextEntry={true}
-          onFocus={() => {
-            setClic2(true);
-          }}
-        />
-        {clic2 && (
-          <Icon
-            name="close"
-            size={25}
-            style={style.cancelar}
-            onPress={() => {
-              setContra("");
-              setClic2(false);
-              Keyboard.dismiss();
+
+        <Animatable.View style={style.containerInput} ref={animCorreo}>
+          <TextInput
+            placeholder="Correo"
+            style={style.input}
+            onChangeText={setCorreo}
+            value={correo}
+            onFocus={() => {
+              setClic(true);
             }}
           />
+          {clic && (
+            <Icon
+              name="close"
+              size={25}
+              style={style.cancelar}
+              onPress={() => {
+                setCorreo("");
+                setClic(false);
+                Keyboard.dismiss();
+              }}
+            />
+          )}
+        </Animatable.View>
+        {errorCorreo && (
+          <View style={style.conatinerError}>
+            <Text style={style.error}>Ingrese un correo válido</Text>
+          </View>
         )}
-      </Animatable.View>
-      {errorContra && (
-        <View style={style.conatinerError}>
-          <Text style={style.error}>La contraseña no coincide</Text>
+        <Animatable.View style={style.containerInputC} ref={animContra}>
+          <TextInput
+            placeholder="Contraseña"
+            style={style.inputC}
+            onChangeText={setContra}
+            value={contra}
+            secureTextEntry={true}
+            onFocus={() => {
+              setClic2(true);
+            }}
+          />
+          {clic2 && (
+            <Icon
+              name="close"
+              size={25}
+              style={style.cancelar}
+              onPress={() => {
+                setContra("");
+                setClic2(false);
+                Keyboard.dismiss();
+              }}
+            />
+          )}
+        </Animatable.View>
+        {errorContra && (
+          <View style={style.conatinerError}>
+            <Text style={style.error}>La contraseña no coincide</Text>
+          </View>
+        )}
+        <View style={style.containerPregunta}>
+          <TouchableOpacity
+            onPress={() => {
+              navigator.navigate("Registro");
+            }}
+          >
+            <Text style={style.pregunta}>¿No tienes cuenta?</Text>
+          </TouchableOpacity>
+          <Icon
+            name="arrow-expand-right"
+            size={20}
+            onPress={() => {
+              navigator.navigate("Registro");
+            }}
+          />
         </View>
-      )}
-      <View style={style.containerPregunta}>
-        <TouchableOpacity
-          onPress={() => {
-            navigator.navigate("Registro");
-          }}
-        >
-          <Text style={style.pregunta}>¿No tienes cuenta?</Text>
-        </TouchableOpacity>
-        <Icon
-          name="arrow-expand-right"
-          size={20}
-          onPress={() => {
-            navigator.navigate("Registro");
-          }}
-        />
+        <View style={style.containerBtn}>
+          <TouchableOpacity
+            onPress={() => {
+              handlerLogin(navigator);
+            }}
+          >
+            <Text style={style.btn}>Iniciar Sesión 🐈</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={style.containerBtn2}>
+          <TouchableOpacity
+            onPress={() => {
+              handlerVolver();
+            }}
+          >
+            <Text style={style.btn}>Volver 🔙</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={style.containerBtn}>
-        <TouchableOpacity
-          onPress={() => {
-            handlerLogin(navigator);
-          }}
-        >
-          <Text style={style.btn}>Iniciar Sesión 🐈</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={style.containerBtn2}>
-        <TouchableOpacity
-          onPress={() => {
-            handlerVolver();
-          }}
-        >
-          <Text style={style.btn}>Volver 🔙</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
