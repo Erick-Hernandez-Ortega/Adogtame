@@ -24,7 +24,13 @@ const PreLogin = (navigator) => {
   return (
     <View style={style.container}>
       <StatusBar barStyle={"dark-content"} backgroundColor={"#f4a020"} />
-      <View style={style.containerTitulo}>
+      <View
+        style={
+          Platform.OS === "web"
+            ? style.containerTituloWeb
+            : style.containerTitulo
+        }
+      >
         <Text style={Platform.OS === "web" ? style.tituloWeb : style.titulo}>
           Inicia sesion con tu cuenta o crea una para conseguir tu futura
           mascota
@@ -78,6 +84,10 @@ const style = StyleSheet.create({
   containerTitulo: {
     width: "80%",
     marginVertical: 60,
+  },
+  containerTituloWeb: {
+    width: "80%",
+    marginTop: 60,
   },
   titulo: {
     fontSize: 20,
@@ -151,6 +161,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
+    marginTop: 30,
     width: "50%",
     height: "50%",
   },
