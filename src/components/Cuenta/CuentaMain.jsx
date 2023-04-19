@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
 
-const CuentaMain = () => {
+const CuentaMain = (navigator) => {
   navigator = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [foto, setFoto] = useState("https://picsum.photos/id/275/200/300");
