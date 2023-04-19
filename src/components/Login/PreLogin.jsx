@@ -29,7 +29,8 @@ const PreLogin = (navigator) => {
           mascota
         </Text>
       </View>
-      {Platform.OS === "android" && (
+
+      {Platform.OS === "web" ? null : (
         <View style={style.animacion}>
           <AnimatedLottieView
             source={require("../../../assets/fonts/AnimacionPreLogin.json")}
@@ -38,15 +39,7 @@ const PreLogin = (navigator) => {
           />
         </View>
       )}
-      {Platform.OS === "ios" && (
-        <View style={style.animacion}>
-          <AnimatedLottieView
-            source={require("../../../assets/fonts/AnimacionPreLogin.json")}
-            autoPlay
-            loop
-          />
-        </View>
-      )}
+
       <View style={style.irLogin}>
         <TouchableOpacity
           onPress={() => {
