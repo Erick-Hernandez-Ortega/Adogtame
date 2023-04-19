@@ -102,10 +102,18 @@ const MainLogin = (navigator) => {
           />
         )}
 
-        <Animatable.View style={style.containerInput} ref={animCorreo}>
+        <Animatable.View
+          style={
+            Platform.OS === "web"
+              ? style.containerInputWeb
+              : style.containerInput
+          }
+          ref={animCorreo}
+        >
           <TextInput
             placeholder="Correo"
-            style={style.input}
+            placeholderTextColor={"darkgray"}
+            style={Platform.OS === "web" ? style.inputWeb : style.input}
             onChangeText={setCorreo}
             value={correo}
             onFocus={() => {
@@ -130,10 +138,18 @@ const MainLogin = (navigator) => {
             <Text style={style.error}>Ingrese un correo válido</Text>
           </View>
         )}
-        <Animatable.View style={style.containerInputC} ref={animContra}>
+        <Animatable.View
+          style={
+            Platform.OS === "web"
+              ? style.containerInputCWeb
+              : style.containerInputC
+          }
+          ref={animContra}
+        >
           <TextInput
             placeholder="Contraseña"
-            style={style.inputC}
+            placeholderTextColor={"darkgray"}
+            style={Platform.OS === "web" ? style.inputCWeb : style.inputC}
             onChangeText={setContra}
             value={contra}
             secureTextEntry={true}
@@ -165,7 +181,11 @@ const MainLogin = (navigator) => {
               navigator.navigate("Registro");
             }}
           >
-            <Text style={style.pregunta}>¿No tienes cuenta?</Text>
+            <Text
+              style={Platform.OS === "web" ? style.preguntaWeb : style.pregunta}
+            >
+              ¿No tienes cuenta?
+            </Text>
           </TouchableOpacity>
           <Icon
             name="arrow-expand-right"
@@ -205,8 +225,8 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: 350,
-    height: 100,
+    width: 450,
+    height: 150,
     marginTop: 50,
   },
   imageMovil: {
@@ -221,10 +241,27 @@ const style = StyleSheet.create({
     marginTop: 70,
     width: "65%",
   },
+  containerInputWeb: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 15,
+    marginStart: 15,
+    width: "100%",
+  },
   input: {
     fontSize: 20,
     padding: 10,
     width: "90%",
+  },
+  inputWeb: {
+    fontSize: 20,
+    padding: 15,
+    borderColor: "#d9d9d9",
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: "#f2f2f2",
+    width: "40%",
   },
   containerInputC: {
     flexDirection: "row",
@@ -239,6 +276,23 @@ const style = StyleSheet.create({
     padding: 10,
     width: "90%",
   },
+  containerInputCWeb: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    marginStart: 15,
+    marginTop: 20,
+    width: "100%",
+  },
+  inputCWeb: {
+    fontSize: 20,
+    padding: 15,
+    borderColor: "#d9d9d9",
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: "#f2f2f2",
+    width: "40%",
+  },
   cancelar: {
     marginEnd: 10,
   },
@@ -249,6 +303,12 @@ const style = StyleSheet.create({
   },
   pregunta: {
     fontSize: 16,
+    marginEnd: 10,
+    fontFamily: "Chewy",
+    letterSpacing: 0.4,
+  },
+  preguntaWeb: {
+    fontSize: 20,
     marginEnd: 10,
     fontFamily: "Chewy",
     letterSpacing: 0.4,

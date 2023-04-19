@@ -25,12 +25,11 @@ const PreLogin = (navigator) => {
     <View style={style.container}>
       <StatusBar barStyle={"dark-content"} backgroundColor={"#f4a020"} />
       <View style={style.containerTitulo}>
-        <Text style={style.titulo}>
+        <Text style={Platform.OS === "web" ? style.tituloWeb : style.titulo}>
           Inicia sesion con tu cuenta o crea una para conseguir tu futura
           mascota
         </Text>
       </View>
-
       {Platform.OS === "web" ? (
         <View style={style.img}>
           <Image
@@ -47,7 +46,6 @@ const PreLogin = (navigator) => {
           />
         </View>
       )}
-
       <View style={style.irLogin}>
         <TouchableOpacity
           onPress={() => {
@@ -83,6 +81,11 @@ const style = StyleSheet.create({
   },
   titulo: {
     fontSize: 20,
+    textAlign: "center",
+    fontFamily: "Chewy",
+  },
+  tituloWeb: {
+    fontSize: 25,
     textAlign: "center",
     fontFamily: "Chewy",
   },
@@ -143,8 +146,8 @@ const style = StyleSheet.create({
   },
   img: {
     width: "90%",
-    height : "45%",
-    alignItems:"center",
+    height: "45%",
+    alignItems: "center",
     justifyContent: "center",
   },
   image: {

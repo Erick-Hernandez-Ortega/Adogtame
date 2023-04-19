@@ -156,7 +156,7 @@ const Registro = (navigator) => {
   return (
     <ScrollView style={style.container}>
       <SafeAreaView>
-        {Platform.OS === "android" && (
+        {Platform.OS === "web" ? null : (
           <AnimatedLottieView
             source={require("../../../assets/fonts/AcountLoading.json")}
             autoPlay
@@ -164,234 +164,457 @@ const Registro = (navigator) => {
             style={{ opacity: Isloading ? 1 : 0 }}
           />
         )}
-        {Platform.OS === "ios" && (
-          <AnimatedLottieView
-            source={require("../../../assets/fonts/AcountLoading.json")}
-            autoPlay
-            loop
-            style={{ opacity: Isloading ? 1 : 0 }}
-          />
-        )}
-        <View style={[style.containerChido, { opacity: Isloading ? 0 : 1 }]}>
-          <Text style={style.label}>Información personal</Text>
-          <Animatable.View style={style.containerInput} ref={animNombre}>
-            <TextInput
-              placeholder="Nombres"
-              maxLength={30}
-              style={style.input}
-              onChangeText={setNombre}
-              value={nombre}
-              onFocus={() => {
-                setClicN(true);
-              }}
-            />
-            {clicN && (
-              <Icon
-                name="close"
-                size={25}
-                onPress={() => {
-                  setNombre("");
-                  setClicN(false);
-                  Keyboard.dismiss();
-                }}
-              />
-            )}
-          </Animatable.View>
-          <View style={style.containerError}>
-            {errorNombre && (
-              <Text style={style.error}>
-                Este campo debe tener entre 6 y 30 caracteres.
+        <View
+          style={[
+            Platform.OS === "web"
+              ? style.containerChidoWeb
+              : style.containerChido,
+            { opacity: Isloading ? 0 : 1 },
+          ]}
+        >
+          {Platform.OS === "web" ? (
+            <>
+              <Text style={styleWeb.label}>
+                Llena todos los campos para crear tu Adogcuenta
               </Text>
-            )}
-          </View>
-          <Animatable.View style={style.containerInput} ref={animApellido}>
-            <TextInput
-              placeholder="Apellidos"
-              style={style.input}
-              onChangeText={setApellido}
-              value={apellido}
-              onFocus={() => {
-                setClicAp(true);
-              }}
-            />
-            {clicAp && (
-              <Icon
-                name="close"
-                size={25}
-                onPress={() => {
-                  setApellido("");
-                  setClicAp(false);
-                  Keyboard.dismiss();
-                }}
-              />
-            )}
-          </Animatable.View>
-          <View style={style.containerError}>
-            {errorApellido && (
-              <Text style={style.error}>
-                Este campo debe tener entre 6 y 30 caracteres.
-              </Text>
-            )}
-          </View>
-          <Animatable.View style={style.containerInput} ref={animEdad}>
-            <TextInput
-              placeholder="Edad"
-              style={style.input}
-              onChangeText={setEdad}
-              value={edad}
-              onFocus={() => {
-                setClicE(true);
-              }}
-              keyboardType="number-pad"
-            />
-            {clicE && (
-              <Icon
-                name="close"
-                size={25}
-                onPress={() => {
-                  setEdad("");
-                  setClicE(false);
-                  Keyboard.dismiss();
-                }}
-              />
-            )}
-          </Animatable.View>
-          <View style={style.containerError}>
-            {errorEdad && (
-              <Text style={style.error}>Ingrese una edad válida</Text>
-            )}
-          </View>
-          <Text style={style.labelR}>¿Qué prefieres?</Text>
-          <Animatable.View style={style.containerRadio} ref={animRadio}>
-            <RadioButton.Group onValueChange={handleRadio} value={radio}>
-              <View style={style.containerRadio}>
-                <View style={style.containerRadio1}>
-                  <Text>Perros</Text>
-                  <RadioButton value="Perros" />
-                </View>
-                <View style={style.containerRadio2}>
-                  <Text>Gatos</Text>
-                  <RadioButton value="Gatos" />
-                </View>
+              <View style={styleWeb.containerWeb}>
+                <Animatable.View
+                  style={styleWeb.containerInputWeb}
+                  ref={animNombre}
+                >
+                  <TextInput
+                    placeholder="Nombres"
+                    placeholderTextColor={"darkgray"}
+                    maxLength={30}
+                    style={styleWeb.input}
+                    onChangeText={setNombre}
+                    value={nombre}
+                    onFocus={() => {
+                      setClicN(true);
+                    }}
+                  />
+                  {clicN && (
+                    <Icon
+                      name="close"
+                      size={25}
+                      onPress={() => {
+                        setNombre("");
+                        setClicN(false);
+                        Keyboard.dismiss();
+                      }}
+                    />
+                  )}
+                </Animatable.View>
+                <Animatable.View
+                  style={styleWeb.containerInputWeb}
+                  ref={animApellido}
+                >
+                  <TextInput
+                    placeholder="Apellidos"
+                    placeholderTextColor={"darkgray"}
+                    style={styleWeb.input}
+                    onChangeText={setApellido}
+                    value={apellido}
+                    onFocus={() => {
+                      setClicAp(true);
+                    }}
+                  />
+                  {clicAp && (
+                    <Icon
+                      name="close"
+                      size={25}
+                      onPress={() => {
+                        setApellido("");
+                        setClicAp(false);
+                        Keyboard.dismiss();
+                      }}
+                    />
+                  )}
+                </Animatable.View>
+                <Animatable.View
+                  style={styleWeb.containerInputWeb}
+                  ref={animEdad}
+                >
+                  <TextInput
+                    placeholder="Edad"
+                    style={styleWeb.input}
+                    placeholderTextColor={"darkgray"}
+                    onChangeText={setEdad}
+                    value={edad}
+                    onFocus={() => {
+                      setClicE(true);
+                    }}
+                    keyboardType="number-pad"
+                  />
+                  {clicE && (
+                    <Icon
+                      name="close"
+                      size={25}
+                      onPress={() => {
+                        setEdad("");
+                        setClicE(false);
+                        Keyboard.dismiss();
+                      }}
+                    />
+                  )}
+                </Animatable.View>
               </View>
-            </RadioButton.Group>
-          </Animatable.View>
-          <Text style={style.label}>Información de contacto</Text>
-          <Animatable.View style={style.containerInput} ref={animCorreo}>
-            <TextInput
-              placeholder="Correo"
-              style={style.input}
-              onChangeText={setCorreo}
-              keyboardType={"email-address"}
-              value={correo}
-              onFocus={() => {
-                setClicC(true);
-              }}
-            />
-            {clicC && (
-              <Icon
-                name="close"
-                size={25}
-                onPress={() => {
-                  setCorreo("");
-                  setClicC(false);
-                  Keyboard.dismiss();
-                }}
-              />
-            )}
-          </Animatable.View>
-          <View style={style.containerError}>
-            {errorCorreo && (
-              <Text style={style.error}>Ingrese un correo válido</Text>
-            )}
-          </View>
-          <Animatable.View style={style.containerInput} ref={animCelular}>
-            <TextInput
-              placeholder="Numero de celular"
-              style={style.input}
-              onChangeText={setCelular}
-              value={celular}
-              onFocus={() => {
-                setClicT(true);
-              }}
-              keyboardType="numeric"
-            />
-            {clicT && (
-              <Icon
-                name="close"
-                size={25}
-                onPress={() => {
-                  setCelular("");
-                  setClicT(false);
-                  Keyboard.dismiss();
-                }}
-              />
-            )}
-          </Animatable.View>
-          <View style={style.containerError}>
-            {errorCelular && (
-              <Text style={style.error}>Ingrese un numéro de 10 dígitos</Text>
-            )}
-          </View>
-          <Text style={style.label}>Seguridad</Text>
-          <Animatable.View style={style.containerInput} ref={animContra}>
-            <TextInput
-              placeholder="Contraseña"
-              style={style.input}
-              onChangeText={setContrasena}
-              value={contrasena}
-              secureTextEntry={true}
-              onFocus={() => {
-                setClicCon(true);
-              }}
-            />
-            {clicCon && (
-              <Icon
-                name="close"
-                size={25}
-                onPress={() => {
-                  setContrasena("");
-                  setClicCon(false);
-                  Keyboard.dismiss();
-                }}
-              />
-            )}
-          </Animatable.View>
-          <View style={style.containerError}>
-            {errorContra && (
-              <Text style={style.error}>
-                Este campo debe tener mínimo 6 caracteres.
-              </Text>
-            )}
-          </View>
-          <Animatable.View style={style.containerInput} ref={animConfirmContra}>
-            <TextInput
-              placeholder="Confirmar contraseña"
-              style={style.input}
-              onChangeText={setConfirmContrasena}
-              value={confirmContrasena}
-              secureTextEntry={true}
-              onFocus={() => {
-                setClicCC(true);
-              }}
-            />
-            {clicCC && (
-              <Icon
-                name="close"
-                size={25}
-                onPress={() => {
-                  setConfirmContrasena("");
-                  setClicCC(false);
-                  Keyboard.dismiss();
-                }}
-              />
-            )}
-          </Animatable.View>
-          <View style={style.containerError}>
-            {errorCContra && (
-              <Text style={style.error}>Las contraseñas no coinciden</Text>
-            )}
-          </View>
+              <View style={styleWeb.containerWeb}>
+                <Animatable.View
+                  style={styleWeb.containerInputWeb}
+                  ref={animCorreo}
+                >
+                  <TextInput
+                    placeholder="Correo"
+                    placeholderTextColor={"darkgray"}
+                    style={styleWeb.input}
+                    onChangeText={setCorreo}
+                    keyboardType={"email-address"}
+                    value={correo}
+                    onFocus={() => {
+                      setClicC(true);
+                    }}
+                  />
+                  {clicC && (
+                    <Icon
+                      name="close"
+                      size={25}
+                      onPress={() => {
+                        setCorreo("");
+                        setClicC(false);
+                        Keyboard.dismiss();
+                      }}
+                    />
+                  )}
+                </Animatable.View>
+                <Animatable.View
+                  style={styleWeb.containerInputWeb}
+                  ref={animCelular}
+                >
+                  <TextInput
+                    placeholder="Numero de celular"
+                    placeholderTextColor={"darkgray"}
+                    style={styleWeb.input}
+                    onChangeText={setCelular}
+                    value={celular}
+                    onFocus={() => {
+                      setClicT(true);
+                    }}
+                    keyboardType="numeric"
+                  />
+                  {clicT && (
+                    <Icon
+                      name="close"
+                      size={25}
+                      onPress={() => {
+                        setCelular("");
+                        setClicT(false);
+                        Keyboard.dismiss();
+                      }}
+                    />
+                  )}
+                </Animatable.View>
+              </View>
+              <View style={styleWeb.containerWeb}>
+                <Animatable.View
+                  style={styleWeb.containerInputWeb}
+                  ref={animContra}
+                >
+                  <TextInput
+                    placeholder="Contraseña"
+                    placeholderTextColor={"darkgray"}
+                    style={styleWeb.input}
+                    onChangeText={setContrasena}
+                    value={contrasena}
+                    secureTextEntry={true}
+                    onFocus={() => {
+                      setClicCon(true);
+                    }}
+                  />
+                  {clicCon && (
+                    <Icon
+                      name="close"
+                      size={25}
+                      onPress={() => {
+                        setContrasena("");
+                        setClicCon(false);
+                        Keyboard.dismiss();
+                      }}
+                    />
+                  )}
+                </Animatable.View>
+                <Animatable.View
+                  style={styleWeb.containerInputWeb}
+                  ref={animConfirmContra}
+                >
+                  <TextInput
+                    placeholder="Confirmar contraseña"
+                    placeholderTextColor={"darkgray"}
+                    style={styleWeb.input}
+                    onChangeText={setConfirmContrasena}
+                    value={confirmContrasena}
+                    secureTextEntry={true}
+                    onFocus={() => {
+                      setClicCC(true);
+                    }}
+                  />
+                  {clicCC && (
+                    <Icon
+                      name="close"
+                      size={25}
+                      onPress={() => {
+                        setConfirmContrasena("");
+                        setClicCC(false);
+                        Keyboard.dismiss();
+                      }}
+                    />
+                  )}
+                </Animatable.View>
+              </View>
+              <Text style={styleWeb.labelR}>¿Qué prefieres?</Text>
+              <Animatable.View ref={animRadio}>
+                <RadioButton.Group onValueChange={handleRadio} value={radio}>
+                  <View style={styleWeb.containerRadio}>
+                    <View style={styleWeb.containerRadio1}>
+                      <Text style={styleWeb.inputR}>Perros</Text>
+                      <RadioButton value="Perros" />
+                    </View>
+                    <View style={styleWeb.containerRadio2}>
+                      <Text style={styleWeb.inputR}>Gatos</Text>
+                      <RadioButton value="Gatos" />
+                    </View>
+                  </View>
+                </RadioButton.Group>
+              </Animatable.View>
+            </>
+          ) : (
+            <>
+              <Text style={style.label}>Información personal</Text>
+              <Animatable.View style={style.containerInput} ref={animNombre}>
+                <TextInput
+                  placeholder="Nombres"
+                  maxLength={30}
+                  style={style.input}
+                  onChangeText={setNombre}
+                  value={nombre}
+                  onFocus={() => {
+                    setClicN(true);
+                  }}
+                />
+                {clicN && (
+                  <Icon
+                    name="close"
+                    size={25}
+                    onPress={() => {
+                      setNombre("");
+                      setClicN(false);
+                      Keyboard.dismiss();
+                    }}
+                  />
+                )}
+              </Animatable.View>
+              <View style={style.containerError}>
+                {errorNombre && (
+                  <Text style={style.error}>
+                    Este campo debe tener entre 6 y 30 caracteres.
+                  </Text>
+                )}
+              </View>
+              <Animatable.View style={style.containerInput} ref={animApellido}>
+                <TextInput
+                  placeholder="Apellidos"
+                  style={style.input}
+                  onChangeText={setApellido}
+                  value={apellido}
+                  onFocus={() => {
+                    setClicAp(true);
+                  }}
+                />
+                {clicAp && (
+                  <Icon
+                    name="close"
+                    size={25}
+                    onPress={() => {
+                      setApellido("");
+                      setClicAp(false);
+                      Keyboard.dismiss();
+                    }}
+                  />
+                )}
+              </Animatable.View>
+              <View style={style.containerError}>
+                {errorApellido && (
+                  <Text style={style.error}>
+                    Este campo debe tener entre 6 y 30 caracteres.
+                  </Text>
+                )}
+              </View>
+              <Animatable.View style={style.containerInput} ref={animEdad}>
+                <TextInput
+                  placeholder="Edad"
+                  style={style.input}
+                  onChangeText={setEdad}
+                  value={edad}
+                  onFocus={() => {
+                    setClicE(true);
+                  }}
+                  keyboardType="number-pad"
+                />
+                {clicE && (
+                  <Icon
+                    name="close"
+                    size={25}
+                    onPress={() => {
+                      setEdad("");
+                      setClicE(false);
+                      Keyboard.dismiss();
+                    }}
+                  />
+                )}
+              </Animatable.View>
+              <View style={style.containerError}>
+                {errorEdad && (
+                  <Text style={style.error}>Ingrese una edad válida</Text>
+                )}
+              </View>
+              <Text style={style.labelR}>¿Qué prefieres?</Text>
+              <Animatable.View style={style.containerRadio} ref={animRadio}>
+                <RadioButton.Group onValueChange={handleRadio} value={radio}>
+                  <View style={style.containerRadio}>
+                    <View style={style.containerRadio1}>
+                      <Text>Perros</Text>
+                      <RadioButton value="Perros" />
+                    </View>
+                    <View style={style.containerRadio2}>
+                      <Text>Gatos</Text>
+                      <RadioButton value="Gatos" />
+                    </View>
+                  </View>
+                </RadioButton.Group>
+              </Animatable.View>
+              <Text style={style.label}>Información de contacto</Text>
+              <Animatable.View style={style.containerInput} ref={animCorreo}>
+                <TextInput
+                  placeholder="Correo"
+                  style={style.input}
+                  onChangeText={setCorreo}
+                  keyboardType={"email-address"}
+                  value={correo}
+                  onFocus={() => {
+                    setClicC(true);
+                  }}
+                />
+                {clicC && (
+                  <Icon
+                    name="close"
+                    size={25}
+                    onPress={() => {
+                      setCorreo("");
+                      setClicC(false);
+                      Keyboard.dismiss();
+                    }}
+                  />
+                )}
+              </Animatable.View>
+              <View style={style.containerError}>
+                {errorCorreo && (
+                  <Text style={style.error}>Ingrese un correo válido</Text>
+                )}
+              </View>
+              <Animatable.View style={style.containerInput} ref={animCelular}>
+                <TextInput
+                  placeholder="Numero de celular"
+                  style={style.input}
+                  onChangeText={setCelular}
+                  value={celular}
+                  onFocus={() => {
+                    setClicT(true);
+                  }}
+                  keyboardType="numeric"
+                />
+                {clicT && (
+                  <Icon
+                    name="close"
+                    size={25}
+                    onPress={() => {
+                      setCelular("");
+                      setClicT(false);
+                      Keyboard.dismiss();
+                    }}
+                  />
+                )}
+              </Animatable.View>
+              <View style={style.containerError}>
+                {errorCelular && (
+                  <Text style={style.error}>
+                    Ingrese un numéro de 10 dígitos
+                  </Text>
+                )}
+              </View>
+              <Text style={style.label}>Seguridad</Text>
+              <Animatable.View style={style.containerInput} ref={animContra}>
+                <TextInput
+                  placeholder="Contraseña"
+                  style={style.input}
+                  onChangeText={setContrasena}
+                  value={contrasena}
+                  secureTextEntry={true}
+                  onFocus={() => {
+                    setClicCon(true);
+                  }}
+                />
+                {clicCon && (
+                  <Icon
+                    name="close"
+                    size={25}
+                    onPress={() => {
+                      setContrasena("");
+                      setClicCon(false);
+                      Keyboard.dismiss();
+                    }}
+                  />
+                )}
+              </Animatable.View>
+              <View style={style.containerError}>
+                {errorContra && (
+                  <Text style={style.error}>
+                    Este campo debe tener mínimo 6 caracteres.
+                  </Text>
+                )}
+              </View>
+              <Animatable.View
+                style={style.containerInput}
+                ref={animConfirmContra}
+              >
+                <TextInput
+                  placeholder="Confirmar contraseña"
+                  style={style.input}
+                  onChangeText={setConfirmContrasena}
+                  value={confirmContrasena}
+                  secureTextEntry={true}
+                  onFocus={() => {
+                    setClicCC(true);
+                  }}
+                />
+                {clicCC && (
+                  <Icon
+                    name="close"
+                    size={25}
+                    onPress={() => {
+                      setConfirmContrasena("");
+                      setClicCC(false);
+                      Keyboard.dismiss();
+                    }}
+                  />
+                )}
+              </Animatable.View>
+              <View style={style.containerError}>
+                {errorCContra && (
+                  <Text style={style.error}>Las contraseñas no coinciden</Text>
+                )}
+              </View>
+            </>
+          )}
         </View>
         <View style={[style.containerBtn, { opacity: Isloading ? 0 : 1 }]}>
           <TouchableOpacity
@@ -422,6 +645,9 @@ const style = StyleSheet.create({
   },
   containerChido: {
     justifyContent: "center",
+    alignItems: "center",
+  },
+  containerChidoWeb: {
     alignItems: "center",
   },
   containerInput: {
@@ -496,6 +722,66 @@ const style = StyleSheet.create({
   containerRadio: {
     flexDirection: "row",
     marginVertical: 10,
+  },
+});
+
+const styleWeb = StyleSheet.create({
+  containerWeb: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
+  containerInputWeb: {
+    alignItems: "center",
+    flexDirection: "row",
+    marginTop: 15,
+    marginStart: 15,
+  },
+  input: {
+    fontSize: 20,
+    padding: 15,
+    borderColor: "#d9d9d9",
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: "#f2f2f2",
+  },
+  label: {
+    fontSize: 22,
+    marginTop: 18,
+    fontFamily: "Chewy",
+    color: "darkgray",
+    letterSpacing: 0.5,
+  },
+  labelR: {
+    fontSize: 22,
+    marginTop: 18,
+    fontFamily: "Chewy",
+    color: "darkgray",
+    letterSpacing: 0.5,
+  },
+  containerRadio1: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: "#d9d9d9",
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  containerRadio2: {
+    paddingLeft: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: "#d9d9d9",
+    borderWidth: 1,
+    borderRadius: 10,
+    marginStart: 15,
+  },
+  containerRadio: {
+    flexDirection: "row",
+    marginVertical: 10,
+  },
+  inputR: {
+    fontSize: 20,
+    padding: 15,
   },
 });
 
