@@ -71,7 +71,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    width: "100%",
+    width: "90%",
   },
   container: {
     width: "100%",
