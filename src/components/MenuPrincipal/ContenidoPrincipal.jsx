@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, ScrollView} from "react-native";
+import { Text, View, StyleSheet, ScrollView, Platform } from "react-native";
 import Mascotas from "./Mascotas";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
@@ -36,81 +36,37 @@ const Contenido = React.memo(({ navigator }) => {
     navigator.navigate("SubirMascotas");
   }
   return (
-    <View style={style.container}>
-      <ScrollView
-        contentContainerStyle={{
-          width: "100%",
-          paddingBottom: "10%",
-          paddingTop: "5%",
-        }}
-      >
-        <Text style={style.text}>¡Echa un vistazo a tus futuras mascotas!</Text>
+    <ScrollView contentContainerStyle={style.container}>
+      <Text style={style.text}>¡Echa un vistazo a tus futuras mascotas!</Text>
 
-        {ids.map((e) => (
-          <Mascotas
-            key={e}
-            id={e}
-            onPress={() => navigator.navigate("Mascota", { id: e })}
-          />
-        ))}
+      {ids.map((e) => (
+        <Mascotas
+          key={e}
+          id={e}
+          onPress={() => navigator.navigate("Mascota", { id: e })}
+        />
+      ))}
 
-        <BotonFlotanteAgregar onPress={handlePress} />
-      </ScrollView>
-    </View>
+      <BotonFlotanteAgregar onPress={handlePress} />
+    </ScrollView>
   );
 });
 
 const style = StyleSheet.create({
   container: {
+    width: "100%",
+    paddingBottom: "10%",
+    paddingTop: "5%",
+    backgroundColor: "red",
     alignItems: "center",
     backgroundColor: "#fff",
   },
   text: {
     textAlign: "center",
     padding: 20,
-    fontSize: 18,
+    fontSize: Platform.OS === "web" ? 22 : 18,
     fontFamily: "Chewy",
     letterSpacing: 1,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 10,
-    justifyContent: "space-between",
-  },
-  input: {
-    fontSize: 17,
-    padding: 10,
-    backgroundColor: "#f2f2f2",
-    borderRadius: 15,
-    fontFamily: "Chewy",
-    width: "75%",
-    letterSpacing: 0.5,
-  },
-  inputDescripcion: {
-    fontSize: 17,
-    padding: 10,
-    backgroundColor: "#f2f2f2",
-    borderRadius: 15,
-    fontFamily: "Chewy",
-    width: "100%",
-    height: 120,
-    letterSpacing: 0.5,
-  },
-  inputEdad: {
-    fontSize: 17,
-    padding: 10,
-    backgroundColor: "#f2f2f2",
-    borderRadius: 15,
-    fontFamily: "Chewy",
-    letterSpacing: 0.5,
-  },
-  label: {
-    fontSize: 18,
-    fontFamily: "Chewy",
-    color: "darkgray",
-    flex: 1,
-    letterSpacing: 0.5,
   },
 });
 
