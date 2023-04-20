@@ -1,5 +1,6 @@
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { IconButton } from "@react-native-material/core";
+import { Platform } from "react-native";
 
 
 const BtnBuscar = (navigator) => {
@@ -9,7 +10,7 @@ const BtnBuscar = (navigator) => {
           <Icon
             name="magnify"
             color="black"
-            size={25}
+            size={Platform.OS === "web" ? 30 : 25}
             onPress={() => {
               navigator.navigate("Buscar");
             }}

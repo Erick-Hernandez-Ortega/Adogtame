@@ -12,8 +12,10 @@ const BarraMenuPrincipal = (navigator) => {
     <View>
       {Platform.OS === "ios" ? (
         <BarraMenuIos {...navigator} />
-      ) : (
+      ) : Platform.OS === "android" ? (
         <BarraMenuAndroid {...navigator} />
+      ) : (
+        <BarraMenuWeb {...navigator} />
       )}
     </View>
   );
@@ -40,6 +42,29 @@ const Logo = () => {
   return (
     <View>
       <Image source={logo} style={{ width: 150, height: 50 }} />
+    </View>
+  );
+};
+
+const LogoWeb = () => {
+  return (
+    <View style={{ width: 250, height: 55 }}>
+      <Image source={logo} style={{ width: 250, height: 55 }} />
+    </View>
+  );
+};
+
+const BarraMenuWeb = (navigator) => {
+  navigator = useNavigation();
+  return (
+    <View style={style.BarraPrincipal}>
+      <StatusBar backgroundColor={"#f4a020"} barStyle={"dark-content"} />
+      <Header
+        placement="center"
+        backgroundColor="#f4a020"
+        centerComponent={<LogoWeb />}
+        rightComponent={BtnBuscar(navigator)}
+      />
     </View>
   );
 };
