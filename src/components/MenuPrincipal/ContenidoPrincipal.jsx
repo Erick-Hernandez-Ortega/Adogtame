@@ -39,13 +39,26 @@ const Contenido = React.memo(({ navigator }) => {
     <ScrollView contentContainerStyle={style.container}>
       <Text style={style.text}>¡Echa un vistazo a tus futuras mascotas!</Text>
 
-      {ids.map((e) => (
-        <Mascotas
-          key={e}
-          id={e}
-          onPress={() => navigator.navigate("Mascota", { id: e })}
-        />
-      ))}
+      {Platform.OS === "web" ? (
+        <View style={style.web}>
+          {ids.map((e) => (
+            <View key={e} style={{ width: "33.33%", marginBottom: 10 }}>
+              <Mascotas
+                id={e}
+                onPress={() => navigator.navigate("Mascota", { id: e })}
+              />
+            </View>
+          ))}
+        </View>
+      ) : (
+        ids.map((e) => (
+          <Mascotas
+            key={e}
+            id={e}
+            onPress={() => navigator.navigate("Mascota", { id: e })}
+          />
+        ))
+      )}
 
       <BotonFlotanteAgregar onPress={handlePress} />
     </ScrollView>
@@ -53,6 +66,13 @@ const Contenido = React.memo(({ navigator }) => {
 });
 
 const style = StyleSheet.create({
+  web: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    width: "100%",
+  },
   container: {
     width: "100%",
     paddingBottom: Platform.OS === "web" ? null : "10%",
