@@ -55,11 +55,10 @@ const Contenido = React.memo(({ navigator }) => {
 const style = StyleSheet.create({
   container: {
     width: "100%",
-    paddingBottom: "10%",
-    paddingTop: "5%",
-    backgroundColor: "red",
+    paddingBottom: Platform.OS === "web" ? null : "10%",
+    paddingTop: Platform.OS === "web" ? null : "5%",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#f5f5f5",
   },
   text: {
     textAlign: "center",
