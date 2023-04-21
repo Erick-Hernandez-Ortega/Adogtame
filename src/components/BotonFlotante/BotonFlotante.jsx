@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Platform } from "react-native";
 import React from "react";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     right: 20,
-    bottom: 150,
+    bottom: Platform.OS === "web" ? 0 : 150,
     backgroundColor: "#009c7a",
     borderRadius: 40,
   },

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Platform } from "react-native";
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -15,7 +15,7 @@ const MascotaContenido = React.memo(({
   modalVisible,
   modalVisible2,
 }) => {
-  const date = new Date()
+
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -84,15 +84,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
     elevation: 4,
-    paddingBottom: "35%",
+    paddingBottom: Platform.OS === "web" ? "5%" : "35%",
   },
   petImageContainer: {
     alignItems: "center",
   },
   petImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 150 / 2,
+    width: Platform.OS === "web" ? 200 : 150,
+    height: Platform.OS === "web" ? 200 : 150,
+    borderRadius:  Platform.OS === "web" ? 200 / 2 : 150 / 2,
   },
   petDetails: {
     marginTop: 20,
