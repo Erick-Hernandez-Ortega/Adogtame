@@ -20,10 +20,16 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#f4a020"
-      }
+      },
+      "package": "com.ramonchis47.Adogtame"
     },
     "web": {
       "favicon": "./assets/adogtame-icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "28ffc0b9-65b4-418b-82fc-c2ce8bfeb112"
+      }
     }
   }
 }

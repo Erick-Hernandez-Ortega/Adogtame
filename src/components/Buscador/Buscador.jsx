@@ -33,7 +33,7 @@ const Buscador = (navigator) => {
       setMascotas((await query.get()).docs);
     }
   }
-
+  
   navigator = useNavigation();
   return (
     <View>

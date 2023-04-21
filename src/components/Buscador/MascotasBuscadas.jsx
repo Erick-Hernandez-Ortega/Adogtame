@@ -3,7 +3,7 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
 
-const MascotasBuscadas = ({item}) => {
+const MascotasBuscadas = ({item, navigator}) => {
   navigator = useNavigation();
   const { nombre, imagen, edad, genero, tipo } = item;
 
