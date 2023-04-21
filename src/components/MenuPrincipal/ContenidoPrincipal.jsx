@@ -45,7 +45,7 @@ const Contenido = React.memo(({ navigator }) => {
             <View key={e} style={{ width: "33.33%", marginBottom: 10 }}>
               <Mascotas
                 id={e}
-                onPress={() => navigator.navigate("Mascota", { id: e })}
+                onPress={() => navigator.navigate("Mascota", { id: e , navigator: navigator})}
               />
             </View>
           ))}

@@ -16,6 +16,7 @@ const MascotaMain = React.memo(({ route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
   const { id } = route.params;
+  const { navigator } = route.params;
   const auth = getAuth();
   const usuario = auth.currentUser;
 
@@ -111,6 +112,7 @@ const MascotaMain = React.memo(({ route }) => {
         tipo={tipo}
         modalVisible={modalVisible}
         modalVisible2={modalVisible2}
+        navigator={navigator}
       />
 
       <Modal visible={modalVisible} animationType="slide" transparent={true}>
