@@ -11,9 +11,10 @@ const Contenido = React.memo(({ navigator }) => {
 
   async function getIds() {
     try {
-      const collectionRef = firebase.db
-        .collection("Mascotas No Adoptadas")
-        .limit(4);
+      const collectionRef =
+        Platform.OS === "web"
+          ? firebase.db.collection("Mascotas No Adoptadas")
+          : firebase.db.collection("Mascotas No Adoptadas").limit(4);
       const query = collectionRef.onSnapshot((e) => {
         setIds([]);
         e.docs.forEach((e) => setIds((prevIds) => [...prevIds, e.id]));
@@ -45,7 +46,9 @@ const Contenido = React.memo(({ navigator }) => {
             <View key={e} style={{ width: "33.33%", marginBottom: 10 }}>
               <Mascotas
                 id={e}
-                onPress={() => navigator.navigate("Mascota", { id: e , navigator: navigator})}
+                onPress={() =>
+                  navigator.navigate("Mascota", { id: e, navigator: navigator })
+                }
               />
             </View>
           ))}
@@ -70,7 +73,7 @@ const style = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     width: "90%",
   },
   container: {
