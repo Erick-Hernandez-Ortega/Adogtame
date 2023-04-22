@@ -43,6 +43,7 @@ const MainAdoptado = ({ route }) => {
     edadDuenno,
     ubicacion,
     fechaRegistro,
+    fechaAdoptado
   } = mascotaData;
 
   return (
@@ -66,6 +67,7 @@ const MainAdoptado = ({ route }) => {
           edadDuenno={edadDuenno}
           ubicacion={ubicacion}
           fechaRegistro={fechaRegistro}
+          fechaAdoptado={fechaAdoptado}
         />
       </ScrollView>
     </View>

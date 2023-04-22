@@ -15,6 +15,7 @@ const ContenidoAdoptado = ({
   edadDuenno,
   ubicacion,
   fechaRegistro,
+  fechaAdoptado
 }) => {
   return (
     <View
@@ -33,7 +34,7 @@ const ContenidoAdoptado = ({
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.date}>Fecha de registro: {fechaRegistro}</Text>
-        <Text style={styles.date}>Fecha de adopción: 22-12-2012</Text>
+        <Text style={styles.date}>Fecha de adopción: {fechaAdoptado}</Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Nombre</Text>

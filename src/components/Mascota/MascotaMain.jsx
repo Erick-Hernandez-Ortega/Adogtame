@@ -57,8 +57,13 @@ const MascotaMain = React.memo(({ route }) => {
     try {
       if (usuario !== null) {
         const mascota = mascotaData;
+        const fechaActual = new Date();
+        const dia = fechaActual.getDate();
+        const mes = fechaActual.getMonth() + 1;
+        const anio = fechaActual.getFullYear();
         // agregamos id del nuevo dueño
         mascota["idDuennoAdoptado"] = `${usuario.email}`;
+        mascota["fechaAdoptado"] = `${dia}-${mes}-${anio}`;
         // Agregamos a mascotas adoptadas
         const adopcion = await firebase.db
           .collection("Mascotas Adoptadas")
