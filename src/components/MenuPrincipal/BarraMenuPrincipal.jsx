@@ -63,7 +63,6 @@ const BarraMenuWeb = (navigator) => {
         placement="center"
         backgroundColor="#f4a020"
         centerComponent={<LogoWeb />}
-        rightComponent={BtnBuscar(navigator)}
       />
     </View>
   );
