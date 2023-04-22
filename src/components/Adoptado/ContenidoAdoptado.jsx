@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Platform, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 const ContenidoAdoptado = ({
@@ -22,7 +22,7 @@ const ContenidoAdoptado = ({
         padding: 20,
         width: "100%",
         height: "100%",
-        paddingBottom: "35%",
+        paddingBottom: Platform.OS === "web" ? null : "35%",
       }}
     >
       <View style={{ alignItems: "center", marginBottom: 20 }}>

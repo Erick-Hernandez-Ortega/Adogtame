@@ -5,7 +5,7 @@ import Adoptados from "./Adoptados";
 import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
 
-const ContenidoAdopciones = React.memo(({navigator}) => {
+const ContenidoAdopciones = React.memo(({ navigator }) => {
   navigator = useNavigation();
   const auth = getAuth();
   const usuario = auth.currentUser;
@@ -41,7 +41,9 @@ const ContenidoAdopciones = React.memo(({navigator}) => {
         <Adoptados
           id={e}
           key={e}
-          onPress={() => navigator.navigate("Adoptado", { id: e, navigator: navigator })}
+          onPress={() =>
+            navigator.navigate("Adoptado", { id: e, navigator: navigator })
+          }
         />
       ))}
     </View>

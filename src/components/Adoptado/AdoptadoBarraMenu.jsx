@@ -4,7 +4,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import BtnBuscar from "../MenuPrincipal/BtnBuscar";
 
-const AdoptadoBarraMenu = ({name, navigator}) => {
+const AdoptadoBarraMenu = ({ name, navigator }) => {
   navigator = useNavigation();
 
   return (
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    marginTop: Platform.OS === "android" ? 24 : 0
+    marginTop: Platform.OS === "android" ? 24 : 0,
   },
   container: {
     paddingBottom: 10,
