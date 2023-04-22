@@ -4,7 +4,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import BtnBuscar from "../MenuPrincipal/BtnBuscar";
 
-const MascotaResultadoBarra = React.memo(({ name, tipo }) => {
+const MascotaResultadoBarra = React.memo(({ name, tipo, navigator }) => {
   navigator = useNavigation();
 
   return (
