@@ -41,7 +41,7 @@ const ContenidoAdopciones = React.memo(({navigator}) => {
         <Adoptados
           id={e}
           key={e}
-          onPress={() => navigator.navigate("Adoptado", { id: e })}
+          onPress={() => navigator.navigate("Adoptado", { id: e, navigator: navigator })}
         />
       ))}
     </View>

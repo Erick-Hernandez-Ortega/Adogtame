@@ -8,6 +8,7 @@ import firebase from "../../DataBase/firebase";
 
 const MainAdoptado = ({ route }) => {
   const { id } = route.params;
+  const { navigator } = route.params;
   const [mascotaData, setMascotaData] = useState(null);
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const MainAdoptado = ({ route }) => {
 
   return (
     <View>
-      <AdoptadoBarraMenu name={nombre} />
+      <AdoptadoBarraMenu name={nombre} navigator={navigator} />
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.container}

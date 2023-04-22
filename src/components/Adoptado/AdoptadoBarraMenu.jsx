@@ -4,7 +4,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import BtnBuscar from "../MenuPrincipal/BtnBuscar";
 
-const AdoptadoBarraMenu = ({name}) => {
+const AdoptadoBarraMenu = ({name, navigator}) => {
   navigator = useNavigation();
 
   return (
