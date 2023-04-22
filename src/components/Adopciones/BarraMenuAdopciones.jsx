@@ -50,14 +50,14 @@ const style = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: "#f4a020",
     paddingTop: 13,
-    shadowColor: "#000000",
-        shadowOffset: {
+    shadowColor: Platform.OS === "web" ? null : "#000000",
+        shadowOffset: Platform.OS === "web" ? null : {
           width: 0,
           height: 2,
         },
-        shadowOpacity: 0.4,
-        shadowRadius: 5,
-        elevation: 5,
+        shadowOpacity: Platform.OS === "web" ? null : 0.4,
+        shadowRadius: Platform.OS === "web" ? null : 5,
+        elevation: Platform.OS === "web" ? null : 5,
   },
 });
 

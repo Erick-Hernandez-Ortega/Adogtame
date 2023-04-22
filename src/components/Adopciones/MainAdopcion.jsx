@@ -1,11 +1,11 @@
 import React from "react";
-import { Alert, StyleSheet } from "react-native";
+import { Alert, Platform, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import ContenidoAdopciones from "./ContenidoAdopciones";
 import { useNavigation } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 
-const MainAdopciones = () => {
+const MainAdopciones = (navigator) => {
   const auth = getAuth();
   const usuario = auth.currentUser;
   navigator = useNavigation();
@@ -22,7 +22,7 @@ const MainAdopciones = () => {
       style={{ backgroundColor: "#f7f7f8" }}
       showsVerticalScrollIndicator={false}
     >
-      <ContenidoAdopciones />
+      <ContenidoAdopciones {...navigator} />
     </ScrollView>
   );
 };
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7f7f8",
     width: "100%",
     alignItems: "center",
-    paddingTop: "5%",
+    paddingTop: Platform.OS === "web" ? null : "5%",
   },
 });

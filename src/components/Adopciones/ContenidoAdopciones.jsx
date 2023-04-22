@@ -5,7 +5,7 @@ import Adoptados from "./Adoptados";
 import { getAuth } from "firebase/auth";
 import firebase from "../../DataBase/firebase";
 
-const ContenidoAdopciones = React.memo(() => {
+const ContenidoAdopciones = React.memo(({navigator}) => {
   navigator = useNavigation();
   const auth = getAuth();
   const usuario = auth.currentUser;
