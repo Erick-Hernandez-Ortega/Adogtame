@@ -1,4 +1,12 @@
-import { View, StyleSheet, Image, Modal, Text, Alert } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Modal,
+  Text,
+  Alert,
+  Platform,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import BtnCuenta from "./BtnCuenta";
 import TextoCuenta from "./TextoCuenta";
@@ -81,63 +89,158 @@ const CuentaMain = (navigator) => {
   };
 
   return (
-    <View style={styles.centrar}>
-      <View
-        style={{
-          ...styles.container,
-          backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#f7f7f8",
-        }}
-      >
-        <View style={{ ...styles.circulo, opacity: modalVisible ? 0.8 : 1.0 }}>
-          <Image source={{ uri: foto }} style={styles.imagen} />
-        </View>
-        <TextoCuenta {...user} />
-        <Modal visible={modalVisible} animationType="slide" transparent={true}>
-          <View style={styles.modalContainerCenter}>
-            <View style={styles.modalView}>
-              <Text
-                style={{ fontFamily: "Chewy", fontSize: 18, paddingBottom: 20 }}
-              >
-                ¿Estas seguro que quieres borrar tu Adogcuenta?
-              </Text>
-              <View style={{ marginTop: 0 }}>
-                <BtnCuenta
-                  name="Confirmar"
-                  icon="check-circle-outline"
-                  bgColor="#006400"
-                  color="#fff"
-                  onPress={() => {
-                    toggleModalVisible(), borrarCuenta();
-                  }}
-                />
-                <BtnCuenta
-                  name="Cancelar"
-                  icon="emoticon-poop"
-                  bgColor="#8b0000"
-                  color="#fff"
-                  onPress={() => toggleModalVisible()}
-                />
+    <View
+      style={{
+        ...styles.centrar,
+        backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#fff",
+      }}
+    >
+      {Platform.OS === "web" ? (
+        <>
+          <View
+            style={{
+              ...style.containerWeb,
+              backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#f7f7f8",
+            }}
+          >
+            <View
+              style={{ ...styles.circulo, opacity: modalVisible ? 0.8 : 1.0 }}
+            >
+              <Image source={{ uri: foto }} style={styles.imagen} />
+            </View>
+            <TextoCuenta {...user} />
+            <Modal
+              visible={modalVisible}
+              animationType="slide"
+              transparent={true}
+            >
+              <View style={style.modalContainerCenterWeb}>
+                <View style={style.modalViewWeb}>
+                  <Text
+                    style={{
+                      fontFamily: "Chewy",
+                      fontSize: 18,
+                      paddingBottom: 20,
+                    }}
+                  >
+                    ¿Estas seguro que quieres borrar tu Adogcuenta?
+                  </Text>
+                  <View style={{ marginTop: 0 }}>
+                    <BtnCuenta
+                      name="Confirmar"
+                      icon="check-circle-outline"
+                      bgColor="#006400"
+                      color="#fff"
+                      onPress={() => {
+                        toggleModalVisible(), borrarCuenta();
+                      }}
+                    />
+                    <BtnCuenta
+                      name="Cancelar"
+                      icon="emoticon-poop"
+                      bgColor="#8b0000"
+                      color="#fff"
+                      onPress={() => toggleModalVisible()}
+                    />
+                  </View>
+                </View>
               </View>
+            </Modal>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "flex-end",
+                width: "90%",
+                marginTop: 20,
+              }}
+            >
+              <BtnCuenta
+                name="Actualizar Cuenta"
+                icon="account-reactivate"
+                bgColor="#007f00"
+                color="#fff"
+                onPress={() => navigator.navigate("ActualizarCuenta")}
+              />
+              <BtnCuenta
+                name="Borrar Cuenta"
+                icon="account-remove"
+                bgColor="#8b0000"
+                color="#fff"
+                onPress={() => toggleModalVisible()}
+              />
             </View>
           </View>
-        </Modal>
-        <View style={{ flex: 1, justifyContent: "flex-end", width: "90%" }}>
-          <BtnCuenta
-            name="Actualizar Cuenta"
-            icon="account-reactivate"
-            bgColor="#007f00"
-            color="#fff"
-            onPress={() => navigator.navigate("ActualizarCuenta")}
-          />
-          <BtnCuenta
-            name="Borrar Cuenta"
-            icon="account-remove"
-            bgColor="#8b0000"
-            color="#fff"
-            onPress={() => toggleModalVisible()}
-          />
-        </View>
-      </View>
+        </>
+      ) : (
+        <>
+          <View
+            style={{
+              ...styles.container,
+              backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#f7f7f8",
+            }}
+          >
+            <View
+              style={{ ...styles.circulo, opacity: modalVisible ? 0.8 : 1.0 }}
+            >
+              <Image source={{ uri: foto }} style={styles.imagen} />
+            </View>
+            <TextoCuenta {...user} />
+            <Modal
+              visible={modalVisible}
+              animationType="slide"
+              transparent={true}
+            >
+              <View style={styles.modalContainerCenter}>
+                <View style={styles.modalView}>
+                  <Text
+                    style={{
+                      fontFamily: "Chewy",
+                      fontSize: 18,
+                      paddingBottom: 20,
+                    }}
+                  >
+                    ¿Estas seguro que quieres borrar tu Adogcuenta?
+                  </Text>
+                  <View style={{ marginTop: 0 }}>
+                    <BtnCuenta
+                      name="Confirmar"
+                      icon="check-circle-outline"
+                      bgColor="#006400"
+                      color="#fff"
+                      onPress={() => {
+                        toggleModalVisible(), borrarCuenta();
+                      }}
+                    />
+                    <BtnCuenta
+                      name="Cancelar"
+                      icon="emoticon-poop"
+                      bgColor="#8b0000"
+                      color="#fff"
+                      onPress={() => toggleModalVisible()}
+                    />
+                  </View>
+                </View>
+              </View>
+            </Modal>
+            <View style={{ flex: 1, justifyContent: "flex-end", width: "90%" }}>
+              <BtnCuenta
+                name="Actualizar Cuenta"
+                icon="account-reactivate"
+                bgColor="#007f00"
+                color="#fff"
+                onPress={() => navigator.navigate("ActualizarCuenta")}
+              />
+              <BtnCuenta
+                name="Borrar Cuenta"
+                icon="account-remove"
+                bgColor="#8b0000"
+                color="#fff"
+                onPress={() => toggleModalVisible()}
+              />
+            </View>
+          </View>
+        </>
+      )}
     </View>
   );
 };
@@ -201,6 +304,34 @@ const styles = StyleSheet.create({
     elevation: 5,
     marginBottom: 22,
     width: "92%",
+  },
+});
+
+const style = StyleSheet.create({
+  containerWeb: {
+    paddingTop: 10,
+    alignItems: "center",
+    width: "40%",
+  },
+  modalContainerCenterWeb: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  modalViewWeb: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    marginBottom: 22,
+    width: "40%",
   },
 });
 
