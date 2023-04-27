@@ -7,14 +7,22 @@ import { Header } from "react-native-elements";
 const BarraMenuCuenta = () => {
   return (
     <View>
-      {Platform.OS === "ios" ? <BarraMenuIos /> : <BarraMenuAndroid />}
+      {Platform.OS === "ios" ? (
+        <BarraMenuIos />
+      ) : Platform.OS === "android" ? (
+        <BarraMenuAndroid />
+      ) : (
+        <BarraMenuWeb />
+      )}
     </View>
   );
 };
 
 const Titulo = () => {
   return (
-    <Text style={{ fontFamily: "Chewy", fontSize: 22, height: 30 }}>MI ADOGCUENTA</Text>
+    <Text style={{ fontFamily: "Chewy", fontSize: 22, height: 30 }}>
+      MI ADOGCUENTA
+    </Text>
   );
 };
 
@@ -35,7 +43,19 @@ const BarraMenuIos = () => {
 const BarraMenuAndroid = () => {
   return (
     <View style={style.BarraPrincipal}>
-      <StatusBar backgroundColor={"#f4a020"} barStyle={"dark-content"}  />
+      <StatusBar backgroundColor={"#f4a020"} barStyle={"dark-content"} />
+      <Header
+        placement="center"
+        backgroundColor="#f4a020"
+        centerComponent={Titulo}
+      />
+    </View>
+  );
+};
+const BarraMenuWeb = () => {
+  return (
+    <View style={style.BarraPrincipal}>
+      <StatusBar backgroundColor={"#f4a020"} barStyle={"dark-content"} />
       <Header
         placement="center"
         backgroundColor="#f4a020"
@@ -51,13 +71,13 @@ const style = StyleSheet.create({
     backgroundColor: "#f4a020",
     paddingTop: 13,
     shadowColor: "#000000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.4,
-        shadowRadius: 5,
-        elevation: 5,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    elevation: 5,
   },
 });
 
