@@ -1,4 +1,12 @@
-import { Alert, StyleSheet, Text, View, Modal, TextInput } from "react-native";
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  TextInput,
+  Platform,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
@@ -110,101 +118,226 @@ const ActualizarCuenta = (navigator) => {
         justifyContent: "center",
       }}
     >
-      <Modal visible={modalVisible} animationType="slide" transparent={true}>
-        <View style={styles.modalContainerCenter}>
-          <View style={styles.modalView}>
-            <Text
-              style={{ fontFamily: "Chewy", fontSize: 18, paddingBottom: 20 }}
-            >
-              ¿Estas seguro que quieres modificar tus datos?
-            </Text>
-            <View style={{ marginTop: 0 }}>
+      {Platform.OS === "web" ? (
+        <>
+          <Modal
+            visible={modalVisible}
+            animationType="slide"
+            transparent={true}
+          >
+            <View style={style.modalContainerCenterWeb}>
+              <View style={style.modalViewWeb}>
+                <Text
+                  style={{
+                    fontFamily: "Chewy",
+                    fontSize: 22,
+                    paddingBottom: 20,
+                  }}
+                >
+                  ¿Estas seguro que quieres modificar tus datos?
+                </Text>
+                <View style={{ marginTop: 0 }}>
+                  <BtnCuenta
+                    name="Confirmar"
+                    icon="check-circle-outline"
+                    bgColor="#006400"
+                    color="#fff"
+                    onPress={() => {
+                      actualizarCuenta();
+                      toggleModalVisible();
+                    }}
+                  />
+                  <BtnCuenta
+                    name="Cancelar"
+                    icon="emoticon-poop"
+                    bgColor="#8b0000"
+                    color="#fff"
+                    onPress={() => toggleModalVisible()}
+                  />
+                </View>
+              </View>
+            </View>
+          </Modal>
+
+          <View style={style.containerWeb}>
+            <View style={{ marginBottom: 10 }}>
+              <Text style={style.textWeb}>Nombres</Text>
+              <TextInput
+                placeholder={user.nombres}
+                style={style.textInputWeb}
+                onChangeText={setNombre}
+                value={nombre}
+                placeholderTextColor={"darkgrey"}
+              />
+            </View>
+            <View style={{ marginBottom: 10 }}>
+              <Text style={style.textWeb}>Apellidos</Text>
+              <TextInput
+                placeholder={user.apellidos}
+                style={style.textInputWeb}
+                onChangeText={setApellido}
+                value={apellido}
+                placeholderTextColor={"darkgrey"}
+              />
+            </View>
+            <View style={style.rowContainer}>
+              <View style={{ marginBottom: 10 }}>
+                <Text style={style.textWeb}>Edad</Text>
+                <TextInput
+                  placeholder={user.edad}
+                  style={style.textInputWeb}
+                  onChangeText={setEdad}
+                  value={edad}
+                  placeholderTextColor={"darkgrey"}
+                />
+              </View>
+              <View style={{ marginBottom: 10 }}>
+                <Text style={style.textWeb}>Celular</Text>
+                <TextInput
+                  placeholder={user.telefono}
+                  style={style.textInputWeb}
+                  onChangeText={setCelular}
+                  value={celular}
+                  placeholderTextColor={"darkgrey"}
+                />
+              </View>
+            </View>
+            <View style={{ marginBottom: 10 }}>
+              <Text style={style.textWeb}>Preferencia</Text>
+              <Picker
+                selectedValue={pref}
+                onValueChange={(iValor, iIndex) => setPref(iValor)}
+                style={style.pickerContainer}
+              >
+                <Picker.Item label="Perros" value={"Perros"} />
+                <Picker.Item label="Gatos" value={"Gatos"} />
+              </Picker>
+            </View>
+            <View style={{ marginTop: 10 }}>
               <BtnCuenta
-                name="Confirmar"
-                icon="check-circle-outline"
-                bgColor="#006400"
+                name="Guardar"
+                icon="content-save-all"
+                bgColor="#007f00"
                 color="#fff"
-                onPress={() => {
-                  actualizarCuenta();
-                  toggleModalVisible();
-                }}
+                onPress={toggleModalVisible}
               />
               <BtnCuenta
                 name="Cancelar"
-                icon="emoticon-poop"
+                icon="delete-empty"
                 bgColor="#8b0000"
                 color="#fff"
-                onPress={() => toggleModalVisible()}
+                onPress={() => navigator.navigate("Cuenta")}
               />
             </View>
           </View>
-        </View>
-      </Modal>
-
-      <View style={styles.container}>
-        <View style={{ marginBottom: 10 }}>
-          <Text style={styles.text}>Nombres</Text>
-          <TextInput
-            placeholder={user.nombres}
-            style={styles.textInput}
-            onChangeText={setNombre}
-            value={nombre}
-          />
-        </View>
-        <View style={{ marginBottom: 10 }}>
-          <Text style={styles.text}>Apellidos</Text>
-          <TextInput
-            placeholder={user.apellidos}
-            style={styles.textInput}
-            onChangeText={setApellido}
-            value={apellido}
-          />
-        </View>
-        <View style={{ marginBottom: 10 }}>
-          <Text style={styles.text}>Edad</Text>
-          <TextInput
-            placeholder={user.edad}
-            style={styles.textInput}
-            onChangeText={setEdad}
-            value={edad}
-          />
-        </View>
-        <View style={{ marginBottom: 10 }}>
-          <Text style={styles.text}>Celular</Text>
-          <TextInput
-            placeholder={user.telefono}
-            style={styles.textInput}
-            onChangeText={setCelular}
-            value={celular}
-          />
-        </View>
-        <View style={{ marginBottom: 10 }}>
-          <Text style={styles.text}>Preferencia</Text>
-          <Picker
-            selectedValue={pref}
-            onValueChange={(iValor, iIndex) => setPref(iValor)}
+        </>
+      ) : (
+        <>
+          <Modal
+            visible={modalVisible}
+            animationType="slide"
+            transparent={true}
           >
-            <Picker.Item label="Perros" value={"Perros"} />
-            <Picker.Item label="Gatos" value={"Gatos"} />
-          </Picker>
-        </View>
-        <View style={{ marginTop: 35 }}>
-          <BtnCuenta
-            name="Guardar"
-            icon="content-save-all"
-            bgColor="#007f00"
-            color="#fff"
-            onPress={toggleModalVisible}
-          />
-          <BtnCuenta
-            name="Cancelar"
-            icon="delete-empty"
-            bgColor="#8b0000"
-            color="#fff"
-            onPress={() => navigator.navigate("Cuenta")}
-          />
-        </View>
-      </View>
+            <View style={styles.modalContainerCenter}>
+              <View style={styles.modalView}>
+                <Text
+                  style={{
+                    fontFamily: "Chewy",
+                    fontSize: 18,
+                    paddingBottom: 20,
+                  }}
+                >
+                  ¿Estas seguro que quieres modificar tus datos?
+                </Text>
+                <View style={{ marginTop: 0 }}>
+                  <BtnCuenta
+                    name="Confirmar"
+                    icon="check-circle-outline"
+                    bgColor="#006400"
+                    color="#fff"
+                    onPress={() => {
+                      actualizarCuenta();
+                      toggleModalVisible();
+                    }}
+                  />
+                  <BtnCuenta
+                    name="Cancelar"
+                    icon="emoticon-poop"
+                    bgColor="#8b0000"
+                    color="#fff"
+                    onPress={() => toggleModalVisible()}
+                  />
+                </View>
+              </View>
+            </View>
+          </Modal>
+
+          <View style={styles.container}>
+            <View style={{ marginBottom: 10 }}>
+              <Text style={styles.text}>Nombres</Text>
+              <TextInput
+                placeholder={user.nombres}
+                style={styles.textInput}
+                onChangeText={setNombre}
+                value={nombre}
+              />
+            </View>
+            <View style={{ marginBottom: 10 }}>
+              <Text style={styles.text}>Apellidos</Text>
+              <TextInput
+                placeholder={user.apellidos}
+                style={styles.textInput}
+                onChangeText={setApellido}
+                value={apellido}
+              />
+            </View>
+            <View style={{ marginBottom: 10 }}>
+              <Text style={styles.text}>Edad</Text>
+              <TextInput
+                placeholder={user.edad}
+                style={styles.textInput}
+                onChangeText={setEdad}
+                value={edad}
+              />
+            </View>
+            <View style={{ marginBottom: 10 }}>
+              <Text style={styles.text}>Celular</Text>
+              <TextInput
+                placeholder={user.telefono}
+                style={styles.textInput}
+                onChangeText={setCelular}
+                value={celular}
+              />
+            </View>
+            <View style={{ marginBottom: 10 }}>
+              <Text style={styles.text}>Preferencia</Text>
+              <Picker
+                selectedValue={pref}
+                onValueChange={(iValor, iIndex) => setPref(iValor)}
+              >
+                <Picker.Item label="Perros" value={"Perros"} />
+                <Picker.Item label="Gatos" value={"Gatos"} />
+              </Picker>
+            </View>
+            <View style={{ marginTop: 35 }}>
+              <BtnCuenta
+                name="Guardar"
+                icon="content-save-all"
+                bgColor="#007f00"
+                color="#fff"
+                onPress={toggleModalVisible}
+              />
+              <BtnCuenta
+                name="Cancelar"
+                icon="delete-empty"
+                bgColor="#8b0000"
+                color="#fff"
+                onPress={() => navigator.navigate("Cuenta")}
+              />
+            </View>
+          </View>
+        </>
+      )}
       {/*  <ContenidoActualizarCuenta toggleModalVisible={toggleModalVisible} /> */}
     </ScrollView>
   );
@@ -252,6 +385,61 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 10,
     fontSize: 16,
+    fontFamily: "Chewy",
+  },
+});
+
+const style = StyleSheet.create({
+  containerWeb: {
+    backgroundColor: "rgba(0, 0, 0, 0.01)",
+    padding: 20,
+    width: "50%",
+  },
+  modalContainerCenterWeb: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  modalViewWeb: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    marginBottom: 22,
+    width: "40%",
+  },
+  rowContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    justifyContent: "space-evenly",
+  },
+  textWeb: {
+    fontFamily: "Chewy",
+    fontSize: 22,
+  },
+  textInputWeb: {
+    height: 50,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "rgba(0, 0, 0, 0.3)",
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    marginTop: 10,
+    fontSize: 20,
+    fontFamily: "Chewy",
+  },
+  pickerContainer: {
+    marginTop: 15,
+    padding: 10,
+    fontSize: 20,
     fontFamily: "Chewy",
   },
 });
