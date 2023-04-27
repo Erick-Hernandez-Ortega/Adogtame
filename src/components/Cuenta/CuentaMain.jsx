@@ -148,19 +148,20 @@ const CuentaMain = (navigator) => {
             </Modal>
             <View
               style={{
+                flexDirection: "row",
                 flex: 1,
-                justifyContent: "flex-end",
-                width: "90%",
-                marginTop: 20,
+                marginTop: 15,
               }}
             >
-              <BtnCuenta
-                name="Actualizar Cuenta"
-                icon="account-reactivate"
-                bgColor="#007f00"
-                color="#fff"
-                onPress={() => navigator.navigate("ActualizarCuenta")}
-              />
+              <View style={{ marginEnd: "5%" }}>
+                <BtnCuenta
+                  name="Actualizar Cuenta"
+                  icon="account-reactivate"
+                  bgColor="#007f00"
+                  color="#fff"
+                  onPress={() => navigator.navigate("ActualizarCuenta")}
+                />
+              </View>
               <BtnCuenta
                 name="Borrar Cuenta"
                 icon="account-remove"
