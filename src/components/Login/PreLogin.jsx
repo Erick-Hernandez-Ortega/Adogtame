@@ -155,8 +155,8 @@ const style = StyleSheet.create({
     height: "45%",
   },
   img: {
-    width: "90%",
-    height: "45%",
+    width: "100%",
+    height: "50%",
     alignItems: "center",
     justifyContent: "center",
   },

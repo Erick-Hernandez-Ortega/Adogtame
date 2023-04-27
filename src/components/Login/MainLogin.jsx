@@ -195,7 +195,11 @@ const MainLogin = (navigator) => {
             }}
           />
         </View>
-        <View style={style.containerBtn}>
+        <View
+          style={
+            Platform.OS === "web" ? style.containerBtnWeb : style.containerBtn
+          }
+        >
           <TouchableOpacity
             onPress={() => {
               handlerLogin(navigator);
@@ -204,7 +208,11 @@ const MainLogin = (navigator) => {
             <Text style={style.btn}>Iniciar Sesión 🐈</Text>
           </TouchableOpacity>
         </View>
-        <View style={style.containerBtn2}>
+        <View
+          style={
+            Platform.OS === "web" ? style.containerBtn2Web : style.containerBtn2
+          }
+        >
           <TouchableOpacity
             onPress={() => {
               handlerVolver();
@@ -332,6 +340,34 @@ const style = StyleSheet.create({
     backgroundColor: "#f4c272",
     borderRadius: 10,
     width: "70%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 3.65,
+    elevation: 6,
+  },
+  containerBtnWeb: {
+    marginTop: 40,
+    backgroundColor: "#f4c272",
+    borderRadius: 10,
+    width: "40%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 3.65,
+    elevation: 6,
+  },
+  containerBtn2Web: {
+    marginTop: 20,
+    backgroundColor: "#f4c272",
+    borderRadius: 10,
+    width: "40%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
