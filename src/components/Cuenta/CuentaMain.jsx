@@ -92,7 +92,7 @@ const CuentaMain = (navigator) => {
     <View
       style={{
         ...styles.centrar,
-        backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#fff",
+        backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#f7f7f8",
       }}
     >
       {Platform.OS === "web" ? (
@@ -250,6 +250,7 @@ const styles = StyleSheet.create({
   centrar: {
     justifyContent: "center",
     alignItems: "center",
+    height: "100%"
   },
   container: {
     width: "100%",
