@@ -100,7 +100,6 @@ const CuentaMain = (navigator) => {
           <View
             style={{
               ...style.containerWeb,
-              backgroundColor: modalVisible ? "rgba(0, 0, 0, 0.2)" : "#f7f7f8",
             }}
           >
             <View
