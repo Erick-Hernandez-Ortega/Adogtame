@@ -5,10 +5,11 @@ import ContenidoAdopciones from "./ContenidoAdopciones";
 import { useNavigation } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 
-const MainAdopciones = (navigator) => {
+const MainAdopciones = () => {
   const auth = getAuth();
   const usuario = auth.currentUser;
-  navigator = useNavigation();
+
+  let navigator = useNavigation();
 
   if (usuario == null)
     return (

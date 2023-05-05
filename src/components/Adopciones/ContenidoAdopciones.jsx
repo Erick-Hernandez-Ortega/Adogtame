@@ -26,13 +26,8 @@ const ContenidoAdopciones = React.memo(({ navigator }) => {
   }
 
   useEffect(() => {
-    const unsubscribe = request();
-
-    // Limpia los efectos secundarios cuando se desmonta el componente
-    return () => {
-      unsubscribe();
-      setIds([]);
-    };
+    request();
+    setIds([]);
   }, []);
 
   return (

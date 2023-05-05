@@ -10,13 +10,14 @@ import BtnCuenta from "../Cuenta/BtnCuenta";
 import { ScrollView } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth";
 import BotonFlotanteBorrar from "../BotonFlotante/BotonFlotanteBorrar";
+import { useNavigation } from "@react-navigation/native";
 
 const MascotaMain = React.memo(({ route }) => {
   const [mascotaData, setMascotaData] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
   const { id } = route.params;
-  const { navigator } = route.params;
+  navigator = useNavigation();
   const auth = getAuth();
   const usuario = auth.currentUser;
 
