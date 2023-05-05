@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import firebase from "../../DataBase/firebase";
 import MisPublicaciones from "./MisPublicaciones";
 
-const ContenidoPublicaciones = () => {
+const ContenidoPublicaciones = ({navigator}) => {
   navigator = useNavigation();
   const auth = getAuth();
   const usuario = auth.currentUser;
@@ -34,24 +34,19 @@ const ContenidoPublicaciones = () => {
     );
 
   useEffect(() => {
-    const unsubscribe = request();
-
-    // Limpia los efectos secundarios cuando se desmonta el componente
-    return () => {
-      unsubscribe();
-      setIds([]);
-    };
+    request();
+    setIds([]);
   }, []);
 
   return (
     <View>
       {ids.map((e) => (
-          <MisPublicaciones
-            key={e}
-            id={e}
-            onPress={() => navigator.navigate("Mascota", { id: e })}
-          />
-        ))}
+        <MisPublicaciones
+          key={e}
+          id={e}
+          onPress={() => navigator.navigate("Mascota", { id: e })}
+        />
+      ))}
     </View>
   );
 };

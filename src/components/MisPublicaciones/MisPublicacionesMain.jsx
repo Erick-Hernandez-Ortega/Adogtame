@@ -8,12 +8,12 @@ import ContenidoPublicaciones from "./ContenidoPublicaciones";
 const MisPublicacionesMain = () => {
   const auth = getAuth();
   const usuario = auth.currentUser;
-  navigator = useNavigation();
+  // let navigator = useNavigation();
 
   if (usuario == null)
     return (
-      Alert.alert("Error", "Inicia sesión para poder ver tus publicatciones"),
-      navigator.navigate("Login")
+      Alert.alert("Error", "Inicia sesión para poder ver tus publicatciones")
+      // navigator.navigate("Login")
     );
 
   return (
@@ -22,7 +22,7 @@ const MisPublicacionesMain = () => {
       style={{ backgroundColor: "#f7f7f8" }}
       showsVerticalScrollIndicator={false}
     >
-      <ContenidoPublicaciones/>
+      <ContenidoPublicaciones {...navigator}/>
     </ScrollView>
   );
 };
