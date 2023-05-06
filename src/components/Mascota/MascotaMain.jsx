@@ -112,7 +112,7 @@ const MascotaMain = React.memo(({ route }) => {
   } = mascotaData;
 
   return (
-    <View>
+    <View style={{height: "100vh"}}>
       <MascotaBarraMenu
         name={nombre}
         tipo={tipo}

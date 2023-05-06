@@ -69,10 +69,9 @@ export default MascotaContenido;
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   card: {
-    backgroundColor: "#fff",
     padding: 20,
     width: "100%",
     height: "100%",

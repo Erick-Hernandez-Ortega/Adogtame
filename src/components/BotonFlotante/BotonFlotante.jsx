@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     right: 20,
-    bottom: Platform.OS === "web" ? 0 : 150,
+    bottom: Platform.OS === "web" ? 5 : 150,
     backgroundColor: "#009c7a",
     borderRadius: 40,
   },
