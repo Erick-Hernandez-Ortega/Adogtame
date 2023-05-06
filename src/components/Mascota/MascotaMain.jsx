@@ -17,7 +17,7 @@ const MascotaMain = React.memo(({ route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
   const { id } = route.params;
-  navigator = useNavigation();
+  let navigator = useNavigation();
   const auth = getAuth();
   const usuario = auth.currentUser;
 
