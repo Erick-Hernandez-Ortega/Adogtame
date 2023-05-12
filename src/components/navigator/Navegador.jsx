@@ -4,7 +4,7 @@ import {
   DrawerContentScrollView,
 } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, StyleSheet, View, Image, Alert } from "react-native";
 import logo from "./../../../assets/adogtame-logo.png";
 import Principal from "../../Principal";
 import CuentaMain from "../Cuenta/CuentaMain";
@@ -25,6 +25,8 @@ import MisPublicacionesMain from "../MisPublicaciones/MisPublicacionesMain";
 import BarraMenuPublicaciones from "../MisPublicaciones/BarraMenuPublicaciones";
 import BarraSubirMascota from "../SubirMascota/BarraSubirMascota";
 import SubirMascotaMain from "../SubirMascota/SubirMascotaMain";
+import { getAuth } from "firebase/auth";
+import firebase from "../../DataBase/firebase";
 
 const Nav = createDrawerNavigator();
 
@@ -78,21 +80,6 @@ const Navegador = React.memo(() => {
         options={{ headerBackground: BarraSubirMacotas }}
       />
       <Nav.Screen
-        name="PreLogin"
-        component={PreLogin}
-        options={{ headerShown: false }}
-      />
-      <Nav.Screen
-        name="Login"
-        component={MainLogin}
-        options={{ headerShown: false }}
-      />
-      <Nav.Screen
-        name="Registro"
-        component={Registro}
-        options={{ headerShown: false }}
-      />
-      <Nav.Screen
         name="MascotaResultado"
         component={MascotaResultado}
         options={{ headerShown: false }}
@@ -101,6 +88,21 @@ const Navegador = React.memo(() => {
         name="MisPublicaciones"
         component={MisPublicacionesMain}
         options={{ headerBackground: BarraMenuPublicaciones }}
+      />
+      <Nav.Screen
+        name="Registro"
+        component={Registro}
+        options={{ headerShown: false }}
+      />
+      <Nav.Screen
+        name="Login"
+        component={MainLogin}
+        options={{ headerShown: false }}
+      />
+      <Nav.Screen
+        name="PreLogin"
+        component={PreLogin}
+        options={{ headerShown: false }}
       />
     </Nav.Navigator>
   );
@@ -147,6 +149,11 @@ const MenuLateralContenido = React.memo(({ navigator }) => {
         text="Mi Adogcuenta"
         onPress={() => navigator.navigate("Cuenta")}
       />
+      <MenuBtn
+        icon="logout-variant"
+        text="Cerrar Sesion"
+        onPress={() => logOut(navigator)}
+      />
     </DrawerContentScrollView>
   );
 });
@@ -169,6 +176,19 @@ function BarraCentral() {
 
 function BarraSubirMacotas() {
   return <BarraSubirMascota />;
+}
+
+function logOut(navigator) {
+  firebase
+    .getAuth()
+    .signOut()
+    .then(() => {
+      Alert.alert("Sesion cerrada con extito :)");
+      navigator.navigate("PreLogin");
+    })
+    .catch((e) => {
+      Alert.alert("Error al cerrar sesion :(");
+    });
 }
 
 const style = StyleSheet.create({
