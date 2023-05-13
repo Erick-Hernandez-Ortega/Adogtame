@@ -20,7 +20,7 @@ const ContenidoAdoptado = ({
   return (
     <View
       style={{
-        padding: 20,
+        padding: Platform.OS === "web" ? 80 : 20,
         width: "100%",
         height: "100%",
         paddingBottom: Platform.OS === "web" ? null : "35%",

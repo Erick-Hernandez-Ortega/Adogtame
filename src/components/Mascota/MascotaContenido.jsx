@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   card: {
-    padding: 20,
+    padding: Platform.OS === "web" ? 80 : 20,
     width: "100%",
     height: "100%",
     shadowColor: "#000",
