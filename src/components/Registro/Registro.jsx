@@ -56,6 +56,10 @@ const Registro = (navigator) => {
   const animCelular = useRef();
   const animContra = useRef();
   const animConfirmContra = useRef();
+  // Validar que sean solo letras
+  const regex = /^[A-Za-z]+$/;
+  // Validar que sea un correo
+  //const emailRegex = /^[A-zA-z0-90]+@[a-z]+.[a-z]+$/;
   // Funcion para limpiar inputs
   function limpiarInputs() {
     setNombre("");
@@ -91,38 +95,91 @@ const Registro = (navigator) => {
   const handleRadio = (rValor) => {
     setRadio(rValor);
   };
+  // Validar inputs
+  const handleNombre = (text) => {
+    if (regex.test(text) || text === " ") {
+      setNombre(text);
+    }
+  };
+
+  const handleApellido = (text) => {
+    if (regex.test(text) || text === " ") {
+      setApellido(text);
+    }
+  };
+
+  /* const handleCorreo = (text) => {
+    if (emailRegex.test(text) || text === " ") {
+      setCorreo(text);
+    }
+  };
+*/
+  const handleEdad = (text) => {
+    if (!isNaN(text)) {
+      setEdad(text);
+    }
+  };
+
+  const handleCelualr = (text) => {
+    if (!isNaN(text)) {
+      setCelular(text);
+    }
+  };
   // Funcion al dar clic en Crear Cuenta
   const handlerCrearCuenta = (navigator) => {
-    if (nombre === "" || nombre.length < 6) {
+    if (nombre === "" || nombre.length < 4) {
       animNombre.current.bounce();
       setErrorNombre(true);
-    } else if (apellido === "" || apellido.length < 6) {
+      Platform.OS === "web"
+        ? window.alert("El nombre debe contener minimo 4 letras")
+        : null;
+    } else if (apellido === "" || apellido.length < 4) {
       setErrorNombre(false);
       animApellido.current.bounce();
       setErrorApellido(true);
-    } else if (edad === "" || parseInt(edad) > 99) {
+      Platform.OS === "web"
+        ? window.alert("El apellido debe contener minimo 4 letras")
+        : null;
+    } else if (edad === "" || parseInt(edad) > 99 || parseInt(edad) < 12) {
       setErrorApellido(false);
       animEdad.current.bounce();
       setErrorEdad(true);
-    } else if (radio === "") {
-      setErrorEdad(false);
-      animRadio.current.bounce();
+      Platform.OS === "web"
+        ? window.alert("Ingrese una edad entre 12 y 99 años")
+        : null;
     } else if (correo === "") {
       setErrorApellido(false);
       animCorreo.current.bounce();
       setErrorCorreo(true);
+      Platform.OS === "web"
+        ? window.alert(
+            "Ingrese un formato de correo valido" + "\nejemplo@gmail.com"
+          )
+        : null;
     } else if (celular === "" || celular.length != 10) {
       setErrorCorreo(false);
       animCelular.current.bounce();
       setErrorCelular(true);
+      Platform.OS === "web"
+        ? window.alert("El numero de celular debe tener minimo 10 caracteres")
+        : null;
     } else if (contrasena === "" || contrasena.length < 6) {
       setErrorCelular(false);
       animContra.current.bounce();
       setErrorContra(true);
+      Platform.OS === "web"
+        ? window.alert("Para la contraseña solo ingrese 8 caracteres")
+        : null;
     } else if (confirmContrasena === "" || confirmContrasena != contrasena) {
       setErrorContra(false);
       animConfirmContra.current.bounce();
       setErrorCContra(true);
+      Platform.OS === "web"
+        ? window.alert("Las contraseñas no coinciden")
+        : null;
+    } else if (radio === "") {
+      setErrorEdad(false);
+      animRadio.current.bounce();
     } else {
       setErrorCContra(false);
       setIsLoading(true);
@@ -187,7 +244,7 @@ const Registro = (navigator) => {
                     placeholderTextColor={"darkgray"}
                     maxLength={30}
                     style={styleWeb.input}
-                    onChangeText={setNombre}
+                    onChangeText={(value) => handleNombre(value)}
                     value={nombre}
                     onFocus={() => {
                       setClicN(true);
@@ -213,7 +270,7 @@ const Registro = (navigator) => {
                     placeholder="Apellidos"
                     placeholderTextColor={"darkgray"}
                     style={styleWeb.input}
-                    onChangeText={setApellido}
+                    onChangeText={(value) => handleApellido(value)}
                     value={apellido}
                     onFocus={() => {
                       setClicAp(true);
@@ -240,7 +297,7 @@ const Registro = (navigator) => {
                   placeholder="Edad"
                   style={styleWeb.input}
                   placeholderTextColor={"darkgray"}
-                  onChangeText={setEdad}
+                  onChangeText={(value) => handleEdad(value)}
                   value={edad}
                   onFocus={() => {
                     setClicE(true);
@@ -295,7 +352,7 @@ const Registro = (navigator) => {
                     placeholder="Numero de celular"
                     placeholderTextColor={"darkgray"}
                     style={styleWeb.input}
-                    onChangeText={setCelular}
+                    onChangeText={(value) => handleCelualr(value)}
                     value={celular}
                     onFocus={() => {
                       setClicT(true);
@@ -760,7 +817,6 @@ const styleWeb = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     backgroundColor: "#f2f2f2",
-    
   },
   label: {
     fontSize: 22,
