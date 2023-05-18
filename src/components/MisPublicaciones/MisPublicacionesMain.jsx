@@ -1,4 +1,4 @@
-import { Alert, StyleSheet} from "react-native";
+import { Alert, Platform, StyleSheet} from "react-native";
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth";
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#f7f7f8",
     width: "100%",
-    alignItems: "center",
-    paddingTop: "5%",
+    paddingTop: Platform.OS === "web" ? null: "5%",
   },
 });
