@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Modal, Alert } from "react-native";
+import { StyleSheet, View, Text, Modal, Alert, Platform } from "react-native";
 import React from "react";
 import MascotaBarraMenu from "./MascotaBarraMenu";
 import MascotaContenido from "./MascotaContenido";
@@ -112,7 +112,7 @@ const MascotaMain = React.memo(({ route }) => {
   } = mascotaData;
 
   return (
-    <View style={{height: "100vh"}}>
+    <View style={{height: Platform.OS === "web" ? "100vh" : null}}>
       <MascotaBarraMenu
         name={nombre}
         tipo={tipo}
